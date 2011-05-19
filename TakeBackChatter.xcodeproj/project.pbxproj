@@ -1,0 +1,288 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
+		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
+		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
+		F48AB8711384C66400BC9EF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F48AB86F1384C66400BC9EF6 /* Credits.rtf */; };
+		F48AB8741384C66400BC9EF6 /* TakeBackChatterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */; };
+		F48AB8771384C66400BC9EF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8751384C66400BC9EF6 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F48AB8641384C66400BC9EF6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F48AB8651384C66400BC9EF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F48AB8681384C66400BC9EF6 /* TakeBackChatter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TakeBackChatter-Info.plist"; sourceTree = "<group>"; };
+		F48AB86A1384C66400BC9EF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F48AB86C1384C66400BC9EF6 /* TakeBackChatter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TakeBackChatter-Prefix.pch"; sourceTree = "<group>"; };
+		F48AB86D1384C66400BC9EF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F48AB8701384C66400BC9EF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F48AB8721384C66400BC9EF6 /* TakeBackChatterAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeBackChatterAppDelegate.h; sourceTree = "<group>"; };
+		F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeBackChatterAppDelegate.m; sourceTree = "<group>"; };
+		F48AB8761384C66400BC9EF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F48AB8591384C66400BC9EF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F48AB8511384C66400BC9EF6 = {
+			isa = PBXGroup;
+			children = (
+				F48AB8661384C66400BC9EF6 /* TakeBackChatter */,
+				F48AB85F1384C66400BC9EF6 /* Frameworks */,
+				F48AB85D1384C66400BC9EF6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F48AB85D1384C66400BC9EF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F48AB85F1384C66400BC9EF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F48AB8601384C66400BC9EF6 /* Cocoa.framework */,
+				F48AB8621384C66400BC9EF6 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F48AB8621384C66400BC9EF6 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F48AB8631384C66400BC9EF6 /* AppKit.framework */,
+				F48AB8641384C66400BC9EF6 /* CoreData.framework */,
+				F48AB8651384C66400BC9EF6 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		F48AB8661384C66400BC9EF6 /* TakeBackChatter */ = {
+			isa = PBXGroup;
+			children = (
+				F48AB8721384C66400BC9EF6 /* TakeBackChatterAppDelegate.h */,
+				F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */,
+				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
+				F48AB8671384C66400BC9EF6 /* Supporting Files */,
+			);
+			path = TakeBackChatter;
+			sourceTree = "<group>";
+		};
+		F48AB8671384C66400BC9EF6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F48AB8681384C66400BC9EF6 /* TakeBackChatter-Info.plist */,
+				F48AB8691384C66400BC9EF6 /* InfoPlist.strings */,
+				F48AB86C1384C66400BC9EF6 /* TakeBackChatter-Prefix.pch */,
+				F48AB86D1384C66400BC9EF6 /* main.m */,
+				F48AB86F1384C66400BC9EF6 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F48AB85B1384C66400BC9EF6 /* TakeBackChatter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F48AB87A1384C66400BC9EF6 /* Build configuration list for PBXNativeTarget "TakeBackChatter" */;
+			buildPhases = (
+				F48AB8581384C66400BC9EF6 /* Sources */,
+				F48AB8591384C66400BC9EF6 /* Frameworks */,
+				F48AB85A1384C66400BC9EF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TakeBackChatter;
+			productName = TakeBackChatter;
+			productReference = F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F48AB8531384C66400BC9EF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Salesforce.com;
+			};
+			buildConfigurationList = F48AB8561384C66400BC9EF6 /* Build configuration list for PBXProject "TakeBackChatter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F48AB8511384C66400BC9EF6;
+			productRefGroup = F48AB85D1384C66400BC9EF6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F48AB85B1384C66400BC9EF6 /* TakeBackChatter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F48AB85A1384C66400BC9EF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */,
+				F48AB8711384C66400BC9EF6 /* Credits.rtf in Resources */,
+				F48AB8771384C66400BC9EF6 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F48AB8581384C66400BC9EF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F48AB86E1384C66400BC9EF6 /* main.m in Sources */,
+				F48AB8741384C66400BC9EF6 /* TakeBackChatterAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F48AB8691384C66400BC9EF6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F48AB86A1384C66400BC9EF6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F48AB86F1384C66400BC9EF6 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F48AB8701384C66400BC9EF6 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F48AB8751384C66400BC9EF6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F48AB8761384C66400BC9EF6 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F48AB8781384C66400BC9EF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F48AB8791384C66400BC9EF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F48AB87B1384C66400BC9EF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TakeBackChatter/TakeBackChatter-Prefix.pch";
+				INFOPLIST_FILE = "TakeBackChatter/TakeBackChatter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F48AB87C1384C66400BC9EF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TakeBackChatter/TakeBackChatter-Prefix.pch";
+				INFOPLIST_FILE = "TakeBackChatter/TakeBackChatter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F48AB8561384C66400BC9EF6 /* Build configuration list for PBXProject "TakeBackChatter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F48AB8781384C66400BC9EF6 /* Debug */,
+				F48AB8791384C66400BC9EF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F48AB87A1384C66400BC9EF6 /* Build configuration list for PBXNativeTarget "TakeBackChatter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F48AB87B1384C66400BC9EF6 /* Debug */,
+				F48AB87C1384C66400BC9EF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F48AB8531384C66400BC9EF6 /* Project object */;
+}
