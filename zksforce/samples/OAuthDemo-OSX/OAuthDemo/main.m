@@ -1,8 +1,8 @@
 //
 //  main.m
-//  TakeBackChatter
+//  OAuthDemo
 //
-//  Created by Simon Fell on 5/18/11.
+//  Created by Simon Fell on 4/23/11.
 //
 
 #import <Cocoa/Cocoa.h>
