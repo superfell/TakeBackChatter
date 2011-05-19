@@ -7,6 +7,7 @@
 
 #import "FeedController.h"
 #import "zkSforce.h"
+#import "FeedItem.h"
 
 @implementation FeedController
 
@@ -21,11 +22,12 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         ZKQueryResult *qr = [self.sforce query:soql];
-        NSLog(@"results : %@", qr);
+        NSMutableArray *res = [NSMutableArray arrayWithCapacity:[[qr records] count]];
+        for (ZKSObject *r in [qr records])
+            [res addObject:[FeedItem feedItemFrom:r]];
+        
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            self.feedItems = [qr records];
-            for (ZKSObject *f in self.feedItems)
-                NSLog(@"%@ %@ %@", f.id, [f fieldValue:@"Type"], [[f fieldValue:@"Parent"] fieldValue:@"Name"]);
+            self.feedItems = res;
         });
     });
 }

@@ -51,6 +51,7 @@
 		F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */; };
 		F48AB9181384DC1700BC9EF6 /* credential.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9171384DC1700BC9EF6 /* credential.m */; };
 		F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB9191384DC5900BC9EF6 /* Security.framework */; };
+		F48AB9231384E09C00BC9EF6 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9221384E09C00BC9EF6 /* FeedItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,8 @@
 		F48AB9161384DC1700BC9EF6 /* credential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = credential.h; sourceTree = "<group>"; };
 		F48AB9171384DC1700BC9EF6 /* credential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = credential.m; sourceTree = "<group>"; };
 		F48AB9191384DC5900BC9EF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F48AB9211384E09B00BC9EF6 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
+		F48AB9221384E09C00BC9EF6 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +209,8 @@
 				F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */,
 				F48AB8F31384D0B800BC9EF6 /* FeedController.h */,
 				F48AB8F41384D0B800BC9EF6 /* FeedController.m */,
+				F48AB9211384E09B00BC9EF6 /* FeedItem.h */,
+				F48AB9221384E09C00BC9EF6 /* FeedItem.m */,
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
 				F48AB8671384C66400BC9EF6 /* Supporting Files */,
 				F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */,
@@ -401,6 +406,7 @@
 				F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */,
 				F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */,
 				F48AB9181384DC1700BC9EF6 /* credential.m in Sources */,
+				F48AB9231384E09C00BC9EF6 /* FeedItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
