@@ -8,6 +8,7 @@
 #import "TakeBackChatterAppDelegate.h"
 #import "FeedController.h"
 #import "zkSforceClient.h"
+#import "credential.h"
 
 @implementation TakeBackChatterAppDelegate
 
@@ -34,6 +35,18 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
                                                        andSelector:@selector(getUrl:withReplyEvent:) 
                                                      forEventClass:kInternetEventClass 
                                                         andEventID:kAEGetURL];
+    
+    NSArray *creds = [Credential credentialsForServer:@"https://login.salesforce.com"];
+    for (Credential *c in creds) {
+        if ([[c username] isEqualToString:@"chatter"]) {
+            NSString *refreshToken = [c password];
+            NSURL *authHost = [NSURL URLWithString:[c server]];
+            ZKSforceClient *client = [[ZKSforceClient alloc] init];
+            [client loginWithRefreshToken:refreshToken authUrl:authHost oAuthConsumerKey:OAUTH_CLIENTID];
+            self.feedController.sforce = client;
+            [client release];
+        }
+    }
 }
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
@@ -47,7 +60,12 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     // in a real app, you'd save the refresh_token & auth host to the keychain, and on
     // relaunch, try and intialize your client from that first, so that you can skip
     // the login step.
-    //
+    
+    ZKOAuthInfo *oauth = (ZKOAuthInfo *)[client authenticationInfo];
+    NSString *refreshToken = [oauth refreshToken];
+    NSURL *authHost = [oauth authHostUrl];
+    [Credential createCredentialForServer:[authHost absoluteString] username:@"chatter" password:refreshToken];
+    
     NSLog(@"got auth callback");
     self.feedController.sforce = client;
 }

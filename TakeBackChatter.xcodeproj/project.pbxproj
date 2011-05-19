@@ -49,6 +49,8 @@
 		F48AB8EC1384CB7200BC9EF6 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */; };
 		F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8F41384D0B800BC9EF6 /* FeedController.m */; };
 		F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */; };
+		F48AB9181384DC1700BC9EF6 /* credential.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9171384DC1700BC9EF6 /* credential.m */; };
+		F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB9191384DC5900BC9EF6 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +139,9 @@
 		F48AB8F41384D0B800BC9EF6 /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
 		F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKSObject_KVO.h; sourceTree = "<group>"; };
 		F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSObject_KVO.m; sourceTree = "<group>"; };
+		F48AB9161384DC1700BC9EF6 /* credential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = credential.h; sourceTree = "<group>"; };
+		F48AB9171384DC1700BC9EF6 /* credential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = credential.m; sourceTree = "<group>"; };
+		F48AB9191384DC5900BC9EF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */,
 				F48AB8EC1384CB7200BC9EF6 /* libxml2.2.dylib in Frameworks */,
 				F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */,
 			);
@@ -155,6 +161,7 @@
 		F48AB8511384C66400BC9EF6 = {
 			isa = PBXGroup;
 			children = (
+				F48AB9191384DC5900BC9EF6 /* Security.framework */,
 				F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */,
 				F48AB8851384CB2700BC9EF6 /* zkSforce */,
 				F48AB8661384C66400BC9EF6 /* TakeBackChatter */,
@@ -193,6 +200,8 @@
 		F48AB8661384C66400BC9EF6 /* TakeBackChatter */ = {
 			isa = PBXGroup;
 			children = (
+				F48AB9161384DC1700BC9EF6 /* credential.h */,
+				F48AB9171384DC1700BC9EF6 /* credential.m */,
 				F48AB8721384C66400BC9EF6 /* TakeBackChatterAppDelegate.h */,
 				F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */,
 				F48AB8F31384D0B800BC9EF6 /* FeedController.h */,
@@ -391,6 +400,7 @@
 				F48AB8EA1384CB3C00BC9EF6 /* zkXmlDeserializer.m in Sources */,
 				F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */,
 				F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */,
+				F48AB9181384DC1700BC9EF6 /* credential.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
