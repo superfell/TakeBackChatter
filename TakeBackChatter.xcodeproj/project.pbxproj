@@ -48,6 +48,7 @@
 		F48AB8EA1384CB3C00BC9EF6 /* zkXmlDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8C91384CB3C00BC9EF6 /* zkXmlDeserializer.m */; };
 		F48AB8EC1384CB7200BC9EF6 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */; };
 		F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8F41384D0B800BC9EF6 /* FeedController.m */; };
+		F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +135,8 @@
 		F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		F48AB8F31384D0B800BC9EF6 /* FeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedController.h; sourceTree = "<group>"; };
 		F48AB8F41384D0B800BC9EF6 /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
+		F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKSObject_KVO.h; sourceTree = "<group>"; };
+		F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSObject_KVO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +199,8 @@
 				F48AB8F41384D0B800BC9EF6 /* FeedController.m */,
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
 				F48AB8671384C66400BC9EF6 /* Supporting Files */,
+				F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */,
+				F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */,
 			);
 			path = TakeBackChatter;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				F48AB8E91384CB3C00BC9EF6 /* zkUserInfo.m in Sources */,
 				F48AB8EA1384CB3C00BC9EF6 /* zkXmlDeserializer.m in Sources */,
 				F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */,
+				F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
