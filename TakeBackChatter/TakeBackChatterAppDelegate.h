@@ -14,4 +14,6 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
+@property (retain) NSArray *feedItems;
+
 @end
