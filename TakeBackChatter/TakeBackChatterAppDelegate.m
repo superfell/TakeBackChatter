@@ -6,11 +6,12 @@
 //
 
 #import "TakeBackChatterAppDelegate.h"
+#import "FeedController.h"
 #import "zkSforceClient.h"
 
 @implementation TakeBackChatterAppDelegate
 
-@synthesize window, feedItems=_feedItems;
+@synthesize window, feedController=_feedController;
 
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
@@ -47,13 +48,12 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     // relaunch, try and intialize your client from that first, so that you can skip
     // the login step.
     //
-    // [controller setClient:client];
-    self.feedItems = [NSArray arrayWithObjects:@"one", @"two", nil];
     NSLog(@"got auth callback");
+    self.feedController.sforce = client;
 }
 
 -(void)dealloc {
-    [_feedItems release];
+    [_feedController release];
     [super dealloc];
 }
 
