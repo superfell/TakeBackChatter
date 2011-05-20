@@ -51,6 +51,16 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     }
 }
 
+-(void)logout:(id)sender {
+    NSArray *creds = [Credential credentialsForServer:@"https://login.salesforce.com"];
+    for (Credential *c in creds) {
+        if ([[c username] isEqualToString:@"chatter"]) {
+            [c removeFromKeychain];
+        }
+    }
+    self.feedController.sforce = nil;
+}
+
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
 	NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
     

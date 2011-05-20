@@ -17,5 +17,7 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet FeedController *feedController;
 
+-(IBAction)startLogin:(id)sender;
+-(IBAction)logout:(id)sender;
 
 @end

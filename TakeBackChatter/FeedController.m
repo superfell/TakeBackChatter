@@ -67,7 +67,10 @@
 -(void)setSforce:(ZKSforceClient *)c {
     [_sforce autorelease];
     _sforce = [c retain];
-    [self startQuery];
+    if (_sforce != nil)
+        [self startQuery];
+    else
+        self.feedItems = [NSArray array];
 }
 
 -(void)dealloc {
