@@ -259,7 +259,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="478475784">
+								<object class="NSMenuItem" id="527239979">
 									<reference key="NSMenu" ref="720053764"/>
 									<string key="NSTitle">Login</string>
 									<string key="NSKeyEquiv"/>
@@ -267,7 +267,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="370873758">
+								<object class="NSMenuItem" id="1043285772">
 									<reference key="NSMenu" ref="720053764"/>
 									<string key="NSTitle">Logout</string>
 									<string key="NSKeyEquiv"/>
@@ -1487,7 +1487,7 @@
 							<int key="NSCellFlags">130560</int>
 							<int key="NSCellFlags2">33554432</int>
 							<int key="NSAlign">0</int>
-							<int key="NSScale">0</int>
+							<int key="NSScale">3</int>
 							<int key="NSStyle">0</int>
 							<bool key="NSAnimates">NO</bool>
 						</object>
@@ -1495,7 +1495,7 @@
 					</object>
 					<object class="NSTextField" id="579147869">
 						<reference key="NSNextResponder" ref="857442349"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{70, 86}, {241, 17}}</string>
 						<reference key="NSSuperview" ref="857442349"/>
 						<reference key="NSWindow"/>
@@ -2483,7 +2483,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">startLogin:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="478475784"/>
+						<reference key="destination" ref="527239979"/>
 					</object>
 					<int key="connectionID">593</int>
 				</object>
@@ -2491,7 +2491,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">logout:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="370873758"/>
+						<reference key="destination" ref="1043285772"/>
 					</object>
 					<int key="connectionID">594</int>
 				</object>
@@ -2590,8 +2590,8 @@
 							<reference ref="425164168"/>
 							<reference ref="579971712"/>
 							<reference ref="1010469920"/>
-							<reference ref="478475784"/>
-							<reference ref="370873758"/>
+							<reference ref="527239979"/>
+							<reference ref="1043285772"/>
 						</object>
 						<reference key="parent" ref="379814623"/>
 					</object>
@@ -3676,12 +3676,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">591</int>
-						<reference key="object" ref="478475784"/>
+						<reference key="object" ref="527239979"/>
 						<reference key="parent" ref="720053764"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">592</int>
-						<reference key="object" ref="370873758"/>
+						<reference key="object" ref="1043285772"/>
 						<reference key="parent" ref="720053764"/>
 					</object>
 				</object>
