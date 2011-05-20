@@ -36,6 +36,8 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
                                                      forEventClass:kInternetEventClass 
                                                         andEventID:kAEGetURL];
     
+    [window setContentBorderThickness:38.0 forEdge:NSMinYEdge];
+    
     NSArray *creds = [Credential credentialsForServer:@"https://login.salesforce.com"];
     for (Credential *c in creds) {
         if ([[c username] isEqualToString:@"chatter"]) {
