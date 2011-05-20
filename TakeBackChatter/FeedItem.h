@@ -9,13 +9,35 @@
 
 @class ZKSObject;
 
+typedef enum {
+    FeedTypeUserStatus,
+    FeedTypeTextPost,
+    FeedTypeLinkPost,
+    FeedTypeContentPost,
+    FeedTypeTrackedChange
+} FeedItemType;
+
 @interface FeedItem : NSObject {
     ZKSObject  *row;
 }
 
 +(id)feedItemFrom:(ZKSObject *)row;
 
+@property (readonly) NSString *type;
+@property (readonly) FeedItemType feedItemType;
+
+@property (readonly) NSString *actor;
+@property (readonly) NSString *actorId;
+@property (readonly) NSImage *actorPhoto;
+@property (retain) NSURL *actorPhotoUrl;
+
 @property (readonly) NSString *title;
 @property (readonly) NSString *body;
+@property (readonly) NSString *age;             // "5m", "10d", "1h" etc.
+@property (readonly) NSString *commentsLabel;   // "3 comments", etc.
+
+
+@property (readonly) int commentCount;
+@property (readonly) NSArray *comments;
 
 @end
