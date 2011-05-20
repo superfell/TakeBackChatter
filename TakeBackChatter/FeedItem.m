@@ -69,6 +69,11 @@
     return [[[NSImage alloc] initWithContentsOfURL:self.actorPhotoUrl] autorelease];
 }
 
+
+-(NSDate *)createdDate {
+    return [row dateTimeValue:@"CreatedDate"];
+}
+
 -(NSString *)type {
     return [row valueForKey:@"Type"];
 }

@@ -36,6 +36,7 @@ typedef enum {
 @property (readonly) NSString *age;             // "5m", "10d", "1h" etc.
 @property (readonly) NSString *commentsLabel;   // "3 comments", etc.
 
+@property (readonly) NSDate *createdDate;
 
 @property (readonly) int commentCount;
 @property (readonly) NSArray *comments;

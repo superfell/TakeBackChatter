@@ -13,6 +13,11 @@
         
 }
 
-@property (retain) NSArray *feedItems;
+@property (nonatomic, retain) NSArray *feedItems;
+@property (nonatomic, assign) BOOL hasMore;
+
 @property (nonatomic, retain) ZKSforceClient *sforce;
+
+-(IBAction)loadNextPage:(id)sender;
+
 @end

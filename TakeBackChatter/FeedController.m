@@ -8,10 +8,14 @@
 #import "FeedController.h"
 #import "zkSforce.h"
 #import "FeedItem.h"
+#import "NSDate_iso8601.h"
+
+static int FEED_PAGE_SIZE = 25;
 
 @implementation FeedController
 
-@synthesize feedItems=_feedItems, sforce=_sforce;
+@synthesize feedItems=_feedItems, sforce=_sforce, hasMore=_hasMore;
+
 
 -(void)startActorFetch:(NSArray *)items {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -43,12 +47,20 @@
     });
 }
 
--(void)startQuery {
-    NSString *soql = @"SELECT Id, Type, CreatedDate, CreatedById, CreatedBy.Name, " \
+-(NSString *)buildFeedQuery:(NSDate *)before {
+    NSMutableString *soql = [NSMutableString stringWithString:@"SELECT Id, Type, CreatedDate, CreatedById, CreatedBy.Name, " \
         "ParentId, Parent.Name, FeedPostId, FeedPost.Body, FeedPost.Title, FeedPost.LinkUrl, " \
-           "(SELECT Id, FieldName, OldValue, NewValue FROM FeedTrackedChanges), " \
-           "(SELECT Id, CreatedDate, CreatedById, CreatedBy.Name, CommentBody FROM FeedComments ORDER BY CreatedDate DESC) " \
-        "FROM NewsFeed ORDER BY CreatedDate DESC, Id DESC LIMIT 10";
+            "(SELECT Id, FieldName, OldValue, NewValue FROM FeedTrackedChanges), " \
+            "(SELECT Id, CreatedDate, CreatedById, CreatedBy.Name, CommentBody FROM FeedComments ORDER BY CreatedDate DESC) " \
+        "FROM NewsFeed "];
+    if (before != nil)
+        [soql appendFormat:@" where CreatedDate < %@ ", [before iso8601formatted]];
+    [soql appendFormat:@"ORDER BY CreatedDate DESC, Id DESC LIMIT %d", FEED_PAGE_SIZE];
+    return soql;
+}
+
+-(void)startQuery:(NSDate *)before {
+    NSString *soql = [self buildFeedQuery:before];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         ZKQueryResult *qr = [self.sforce query:soql];
@@ -59,9 +71,25 @@
         [self startActorFetch:res];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            self.feedItems = res;
+            NSArray *feed = before == nil ? res : [self.feedItems arrayByAddingObjectsFromArray:res];
+            self.feedItems = feed;
         });
     });
+}
+
+-(void)startQuery {
+    [self startQuery:nil];
+}
+
+-(IBAction)loadNextPage:(id)sender {
+    FeedItem *last = [self.feedItems lastObject];
+    [self startQuery:[last createdDate]];
+}
+
+-(void)setFeedItems:(NSArray *)items {
+    [_feedItems autorelease];
+    _feedItems = [items retain];
+    self.hasMore = ((_feedItems.count % FEED_PAGE_SIZE) == 0) && (_feedItems.count > 0);
 }
 
 -(void)setSforce:(ZKSforceClient *)c {
