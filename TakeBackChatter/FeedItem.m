@@ -11,7 +11,7 @@
 
 @implementation FeedItem
 
-@synthesize feedItemType = _feedItemType, actorPhotoUrl=_actorPhotoUrl;
+@synthesize feedItemType = _feedItemType, actorPhotoUrl=_actorPhotoUrl, actorPhoto=_actorPhoto;
 
 // This tells KVO (and theirfore the UI binding), that the 'ActorPhoto' property value is affected by changes to the 'ActorPhotoUrl' property
 +(NSSet *)keyPathsForValuesAffectingActorPhoto {
@@ -44,6 +44,7 @@
 - (void)dealloc {
     [row release];
     [_actorPhotoUrl release];
+    [_actorPhoto release];
     [super dealloc];
 }
 
@@ -62,13 +63,6 @@
 -(NSString *)actorId {
     return [row valueForKey:@"CreatedById"];
 }
-
--(NSImage *)actorPhoto {
-    NSLog(@"actorPhoto called, url=%@", self.actorPhotoUrl);
-    if (self.actorPhotoUrl == nil) return nil;
-    return [[[NSImage alloc] initWithContentsOfURL:self.actorPhotoUrl] autorelease];
-}
-
 
 -(NSDate *)createdDate {
     return [row dateTimeValue:@"CreatedDate"];

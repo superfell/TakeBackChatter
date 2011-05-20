@@ -30,20 +30,17 @@ static int FEED_PAGE_SIZE = 25;
         [soql deleteCharactersInRange:NSMakeRange([soql length]-1,1)];
         [soql appendString:@")"];
         
-        NSLog(@"actor soql : %@", soql);
         ZKQueryResult *qr = [self.sforce query:soql];
         NSString *sid = [self.sforce.sessionId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSMutableDictionary *urls = [NSMutableDictionary dictionary];
-        for (ZKSObject *r in [qr records]) 
-            [urls setObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@?oauth_token=%@",
-                             [r fieldValue:@"SmallPhotoUrl"], sid]] forKey:[r id]];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
+        for (ZKSObject *r in [qr records]) {
+            NSURL *imgUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?oauth_token=%@", [r fieldValue:@"SmallPhotoUrl"], sid]];
+            NSImage *img = [[[NSImage alloc] initWithContentsOfURL:imgUrl] autorelease];
+            NSString *userId = [r id];
             for (FeedItem *i in items) {
-                [i setActorPhotoUrl:[urls objectForKey:[i actorId]]];
-//                NSLog(@"photoUrl %@", [i actorPhotoUrl]);
+                if ([userId isEqualToString:[i actorId]])
+                    i.actorPhoto = img;
             }
-        });
+        }
     });
 }
 
