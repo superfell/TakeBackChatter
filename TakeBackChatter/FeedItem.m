@@ -51,6 +51,10 @@
     return [[[FeedItem alloc] initWithRow:row] autorelease];
 }
 
+-(NSString *)quantity:(int)q singluar:(NSString *)s plural:(NSString *)p {
+    return [NSString stringWithFormat:@"%d %@", q, q == 1 ? s : p];
+}
+
 -(NSString *)actor {
     return [row valueForKeyPath:@"CreatedBy.Name"];
 }
@@ -70,7 +74,16 @@
 }
 
 -(NSString *)title {
-    return [row valueForKeyPath:@"Parent.Name"];
+    NSString *actor = [self actor];
+    NSString *name = [row valueForKeyPath:@"Parent.Name"];
+    switch (self.feedItemType) {
+        case FeedTypeUserStatus: return name;
+        case FeedTypeTextPost:
+        case FeedTypeLinkPost:
+        case FeedTypeContentPost: return [actor isEqualToString:name] ? actor : [NSString stringWithFormat:@"%@ to %@", actor, name];
+        case FeedTypeTrackedChange: return [NSString stringWithFormat:@"%@ - %@", name, actor];
+    }
+    return name;
 }
 
 -(NSString *)body {
@@ -81,7 +94,7 @@
         case FeedTypeContentPost:
             return [row valueForKeyPath:@"FeedPost.Body"];
         case FeedTypeTrackedChange:
-            return [NSString stringWithFormat:@"made %d changes", [[row queryResultValue:@"FeedTrackedChanges"] size]];
+            return [NSString stringWithFormat:@"made %@", [self quantity:[[row queryResultValue:@"FeedTrackedChanges"] size] singluar:@"change" plural:@"changes"]];
     }
 }
 
@@ -96,18 +109,16 @@
 -(NSString *)commentsLabel {
     int count = self.commentCount;
     if (count == 0) return @"";
-    if (count == 1) return @"1 comment";
-    return [NSString stringWithFormat:@"%d comments", count];
+    return [self quantity:count singluar:@"comment" plural:@"comments"];
 }
 
 -(NSString *)age {
     NSDate *created = [row dateTimeValue:@"CreatedDate"];
     NSTimeInterval age = abs([created timeIntervalSinceNow]);
-    if (age < 60) return @"1m";
-    if (age < 3600) return [NSString stringWithFormat:@"%dm", (int)(age / 60)];
+    if (age < 3600) return [self quantity:(int)(age/60) singluar:@"min" plural:@"mins"];
     age = age / 3600;
-    if (age < 24) return [NSString stringWithFormat:@"%dh", (int)age];
-    return [NSString stringWithFormat:@"%dd", (int)(age / 24)];
+    if (age < 24) return [self quantity:(int)age singluar:@"hour" plural:@"hours"];
+    return [self quantity:(int)(age/24) singluar:@"day" plural:@"days"];
 }
 
 @end
