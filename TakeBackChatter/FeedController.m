@@ -66,7 +66,7 @@ static int FEED_PAGE_SIZE = 25;
         for (ZKSObject *r in [qr records])
             [res addObject:[FeedItem feedItemFrom:r]];
         
-        //[self startActorFetch:res];
+        [self startActorFetch:res];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             NSArray *feed = before == nil ? res : [self.feedItems arrayByAddingObjectsFromArray:res];

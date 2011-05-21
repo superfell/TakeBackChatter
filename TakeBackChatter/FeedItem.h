@@ -17,7 +17,7 @@ typedef enum {
     FeedTypeTrackedChange
 } FeedItemType;
 
-@interface FeedItem : NSObject <NSCopying> {
+@interface FeedItem : NSObject {
     ZKSObject  *row;
 }
 

@@ -52,10 +52,6 @@
     return [[[FeedItem alloc] initWithRow:row] autorelease];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-    return [[FeedItem allocWithZone:zone] initWithRow:row];
-}
-
 -(NSString *)quantity:(int)q singluar:(NSString *)s plural:(NSString *)p {
     return [NSString stringWithFormat:@"%d %@", q, q == 1 ? s : p];
 }
