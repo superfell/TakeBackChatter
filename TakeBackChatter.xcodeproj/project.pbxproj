@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F40C81CA13887A2F00B6C525 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = F40C81C913887A2F00B6C525 /* Credits.html */; };
+		F40C81CE13887FE300B6C525 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = F40C81CC13887FE300B6C525 /* happy.png */; };
+		F40C81CF13887FE300B6C525 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = F40C81CD13887FE300B6C525 /* sad.png */; };
 		F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */ = {isa = PBXBuildFile; fileRef = F426C02413861DCC00004388 /* NSDate_iso8601.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
@@ -62,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		F40C81C913887A2F00B6C525 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		F40C81CC13887FE300B6C525 /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happy.png; sourceTree = "<group>"; };
+		F40C81CD13887FE300B6C525 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sad.png; sourceTree = "<group>"; };
 		F426C02313861DCC00004388 /* NSDate_iso8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_iso8601.h; sourceTree = "<group>"; };
 		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_iso8601.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +252,8 @@
 		F48AB8671384C66400BC9EF6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F40C81CC13887FE300B6C525 /* happy.png */,
+				F40C81CD13887FE300B6C525 /* sad.png */,
 				F48AB8681384C66400BC9EF6 /* TakeBackChatter-Info.plist */,
 				F48AB8691384C66400BC9EF6 /* InfoPlist.strings */,
 				F48AB86C1384C66400BC9EF6 /* TakeBackChatter-Prefix.pch */,
@@ -397,6 +403,8 @@
 				F48AB8771384C66400BC9EF6 /* MainMenu.xib in Resources */,
 				F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */,
 				F40C81CA13887A2F00B6C525 /* Credits.html in Resources */,
+				F40C81CE13887FE300B6C525 /* happy.png in Resources */,
+				F40C81CF13887FE300B6C525 /* sad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

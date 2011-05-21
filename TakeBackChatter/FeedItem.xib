@@ -49,8 +49,9 @@
 					<object class="NSTextField" id="1006671034">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">289</int>
-						<string key="NSFrame">{{226, 6}, {89, 14}}</string>
+						<string key="NSFrame">{{226, 5}, {89, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="527082428">
 							<int key="NSCellFlags">68288064</int>
@@ -80,7 +81,7 @@
 					<object class="NSTextField" id="509913265">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{6, 6}, {153, 14}}</string>
+						<string key="NSFrame">{{3, 5}, {153, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSNextKeyView" ref="1006671034"/>
 						<bool key="NSEnabled">YES</bool>
@@ -128,7 +129,7 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{72, 83}, {241, 17}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSNextKeyView" ref="20630340"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="543633709">
 							<int key="NSCellFlags">68288064</int>
@@ -174,7 +175,7 @@
 						<bool key="NSEditable">YES</bool>
 					</object>
 				</object>
-				<string key="NSFrameSize">{321, 105}</string>
+				<string key="NSFrameSize">{319, 105}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="253802122"/>
 				<string key="NSClassName">NSView</string>
@@ -315,8 +316,8 @@
 							<reference ref="253802122"/>
 							<reference ref="1012153632"/>
 							<reference ref="20630340"/>
-							<reference ref="509913265"/>
 							<reference ref="1006671034"/>
+							<reference ref="509913265"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -445,7 +446,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
