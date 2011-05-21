@@ -53,6 +53,11 @@
 		F48AB9181384DC1700BC9EF6 /* credential.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9171384DC1700BC9EF6 /* credential.m */; };
 		F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB9191384DC5900BC9EF6 /* Security.framework */; };
 		F48AB9231384E09C00BC9EF6 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9221384E09C00BC9EF6 /* FeedItem.m */; };
+		F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BE913883F0300A4C273 /* AMCollectionView.m */; };
+		F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */; };
+		F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D08BEF13883FCA00A4C273 /* FeedItem.xib */; };
+		F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */; };
+		F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF51388428100A4C273 /* CollectionViewFeed.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +153,16 @@
 		F48AB9191384DC5900BC9EF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F48AB9211384E09B00BC9EF6 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		F48AB9221384E09C00BC9EF6 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
+		F4D08BE813883F0300A4C273 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionView.h; path = TakeBackChatter/AMCollectionView.h; sourceTree = "<group>"; };
+		F4D08BE913883F0300A4C273 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionView.m; path = TakeBackChatter/AMCollectionView.m; sourceTree = "<group>"; };
+		F4D08BEA13883F0300A4C273 /* AMCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionViewItem.h; path = TakeBackChatter/AMCollectionViewItem.h; sourceTree = "<group>"; };
+		F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionViewItem.m; path = TakeBackChatter/AMCollectionViewItem.m; sourceTree = "<group>"; };
+		F4D08BEC13883F0300A4C273 /* AMCollectionViewItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionViewItemProtocol.h; path = TakeBackChatter/AMCollectionViewItemProtocol.h; sourceTree = "<group>"; };
+		F4D08BEF13883FCA00A4C273 /* FeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedItem.xib; sourceTree = "<group>"; };
+		F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFeedItem.h; sourceTree = "<group>"; };
+		F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeedItem.m; sourceTree = "<group>"; };
+		F4D08BF41388428100A4C273 /* CollectionViewFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFeed.h; sourceTree = "<group>"; };
+		F4D08BF51388428100A4C273 /* CollectionViewFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeed.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +182,7 @@
 		F48AB8511384C66400BC9EF6 = {
 			isa = PBXGroup;
 			children = (
-				F48AB9191384DC5900BC9EF6 /* Security.framework */,
-				F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */,
+				F4D08BE013883EA400A4C273 /* AMCollectionView */,
 				F48AB8851384CB2700BC9EF6 /* zkSforce */,
 				F48AB8661384C66400BC9EF6 /* TakeBackChatter */,
 				F48AB85F1384C66400BC9EF6 /* Frameworks */,
@@ -196,6 +210,8 @@
 		F48AB8621384C66400BC9EF6 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F48AB9191384DC5900BC9EF6 /* Security.framework */,
+				F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */,
 				F48AB8631384C66400BC9EF6 /* AppKit.framework */,
 				F48AB8641384C66400BC9EF6 /* CoreData.framework */,
 				F48AB8651384C66400BC9EF6 /* Foundation.framework */,
@@ -214,7 +230,12 @@
 				F48AB8F41384D0B800BC9EF6 /* FeedController.m */,
 				F48AB9211384E09B00BC9EF6 /* FeedItem.h */,
 				F48AB9221384E09C00BC9EF6 /* FeedItem.m */,
+				F4D08BEF13883FCA00A4C273 /* FeedItem.xib */,
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
+				F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */,
+				F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */,
+				F4D08BF41388428100A4C273 /* CollectionViewFeed.h */,
+				F4D08BF51388428100A4C273 /* CollectionViewFeed.m */,
 				F48AB8671384C66400BC9EF6 /* Supporting Files */,
 				F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */,
 				F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */,
@@ -310,6 +331,18 @@
 			name = zkSforce;
 			sourceTree = "<group>";
 		};
+		F4D08BE013883EA400A4C273 /* AMCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				F4D08BE813883F0300A4C273 /* AMCollectionView.h */,
+				F4D08BE913883F0300A4C273 /* AMCollectionView.m */,
+				F4D08BEA13883F0300A4C273 /* AMCollectionViewItem.h */,
+				F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */,
+				F4D08BEC13883F0300A4C273 /* AMCollectionViewItemProtocol.h */,
+			);
+			name = AMCollectionView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -363,6 +396,7 @@
 				F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */,
 				F48AB8711384C66400BC9EF6 /* Credits.rtf in Resources */,
 				F48AB8771384C66400BC9EF6 /* MainMenu.xib in Resources */,
+				F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +447,10 @@
 				F48AB9181384DC1700BC9EF6 /* credential.m in Sources */,
 				F48AB9231384E09C00BC9EF6 /* FeedItem.m in Sources */,
 				F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */,
+				F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */,
+				F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */,
+				F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */,
+				F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,10 +8,12 @@
 #import <Foundation/Foundation.h>
 
 @class ZKSforceClient;
+@class CollectionViewFeed;
 
 @interface FeedController : NSObject {
-        
 }
+
+@property (retain) IBOutlet CollectionViewFeed *collectionView;
 
 @property (nonatomic, retain) NSArray *feedItems;
 @property (nonatomic, assign) BOOL hasMore;

@@ -9,13 +9,14 @@
 #import "zkSforce.h"
 #import "FeedItem.h"
 #import "NSDate_iso8601.h"
+#import "CollectionViewFeed.h"
 
 static int FEED_PAGE_SIZE = 25;
 
 @implementation FeedController
 
 @synthesize feedItems=_feedItems, sforce=_sforce, hasMore=_hasMore;
-
+@synthesize collectionView=_collectionView;
 
 -(void)startActorFetch:(NSArray *)items {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -65,7 +66,7 @@ static int FEED_PAGE_SIZE = 25;
         for (ZKSObject *r in [qr records])
             [res addObject:[FeedItem feedItemFrom:r]];
         
-        [self startActorFetch:res];
+        //[self startActorFetch:res];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             NSArray *feed = before == nil ? res : [self.feedItems arrayByAddingObjectsFromArray:res];
@@ -84,9 +85,14 @@ static int FEED_PAGE_SIZE = 25;
 }
 
 -(void)setFeedItems:(NSArray *)items {
+    NSLog(@"setFeedItems %@ thread %@", items, [[NSThread currentThread] isMainThread] ? @"main" : @"other");
     [_feedItems autorelease];
     _feedItems = [items retain];
     self.hasMore = ((_feedItems.count % FEED_PAGE_SIZE) == 0) && (_feedItems.count > 0);
+	[self.collectionView setAllowsMultipleSelection:YES];
+	[self.collectionView setRowHeight:105];
+	[self.collectionView setDrawsBackground:YES];
+    [self.collectionView setContent:_feedItems];
 }
 
 -(void)setSforce:(ZKSforceClient *)c {
@@ -101,6 +107,7 @@ static int FEED_PAGE_SIZE = 25;
 -(void)dealloc {
     [_feedItems release];
     [_sforce release];
+    [_collectionView release];
     [super dealloc];
 }
 
