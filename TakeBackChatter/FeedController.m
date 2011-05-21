@@ -85,10 +85,10 @@ static int FEED_PAGE_SIZE = 25;
 }
 
 -(void)setFeedItems:(NSArray *)items {
-    NSLog(@"setFeedItems %@ thread %@", items, [[NSThread currentThread] isMainThread] ? @"main" : @"other");
     [_feedItems autorelease];
     _feedItems = [items retain];
     self.hasMore = ((_feedItems.count % FEED_PAGE_SIZE) == 0) && (_feedItems.count > 0);
+
 	[self.collectionView setAllowsMultipleSelection:YES];
 	[self.collectionView setRowHeight:105];
 	[self.collectionView setDrawsBackground:YES];
