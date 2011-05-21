@@ -9,7 +9,7 @@
 #import "AMCollectionViewItem.h"
 
 @interface CollectionViewFeedItem : AMCollectionViewItem {
-    
+    IBOutlet NSTextField *bodyTextField;
 }
 
 
