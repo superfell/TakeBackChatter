@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F40C81CA13887A2F00B6C525 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = F40C81C913887A2F00B6C525 /* Credits.html */; };
 		F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */ = {isa = PBXBuildFile; fileRef = F426C02413861DCC00004388 /* NSDate_iso8601.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
-		F48AB8711384C66400BC9EF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F48AB86F1384C66400BC9EF6 /* Credits.rtf */; };
 		F48AB8741384C66400BC9EF6 /* TakeBackChatterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */; };
 		F48AB8771384C66400BC9EF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8751384C66400BC9EF6 /* MainMenu.xib */; };
 		F48AB8CA1384CB3C00BC9EF6 /* zkAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8881384CB3C00BC9EF6 /* zkAuthentication.m */; };
@@ -61,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F40C81C913887A2F00B6C525 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		F426C02313861DCC00004388 /* NSDate_iso8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_iso8601.h; sourceTree = "<group>"; };
 		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_iso8601.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,7 +73,6 @@
 		F48AB86A1384C66400BC9EF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F48AB86C1384C66400BC9EF6 /* TakeBackChatter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TakeBackChatter-Prefix.pch"; sourceTree = "<group>"; };
 		F48AB86D1384C66400BC9EF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F48AB8701384C66400BC9EF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		F48AB8721384C66400BC9EF6 /* TakeBackChatterAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TakeBackChatterAppDelegate.h; sourceTree = "<group>"; };
 		F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TakeBackChatterAppDelegate.m; sourceTree = "<group>"; };
 		F48AB8761384C66400BC9EF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				F48AB8691384C66400BC9EF6 /* InfoPlist.strings */,
 				F48AB86C1384C66400BC9EF6 /* TakeBackChatter-Prefix.pch */,
 				F48AB86D1384C66400BC9EF6 /* main.m */,
-				F48AB86F1384C66400BC9EF6 /* Credits.rtf */,
+				F40C81C913887A2F00B6C525 /* Credits.html */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -394,9 +394,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */,
-				F48AB8711384C66400BC9EF6 /* Credits.rtf in Resources */,
 				F48AB8771384C66400BC9EF6 /* MainMenu.xib in Resources */,
 				F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */,
+				F40C81CA13887A2F00B6C525 /* Credits.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,14 +463,6 @@
 				F48AB86A1384C66400BC9EF6 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F48AB86F1384C66400BC9EF6 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F48AB8701384C66400BC9EF6 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		F48AB8751384C66400BC9EF6 /* MainMenu.xib */ = {

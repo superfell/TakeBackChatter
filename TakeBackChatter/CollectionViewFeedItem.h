@@ -12,5 +12,4 @@
     IBOutlet NSTextField *bodyTextField;
 }
 
-
 @end
