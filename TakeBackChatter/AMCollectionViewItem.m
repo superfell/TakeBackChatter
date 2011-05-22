@@ -103,7 +103,7 @@
 	id theFirstResponder = [[[self view] window] firstResponder];
 	if (!(result = (theFirstResponder == self))) {
 		if ([theFirstResponder isKindOfClass:[NSView class]]) {
-			while (theFirstResponder = [theFirstResponder superview]) {
+			while ((theFirstResponder = [theFirstResponder superview])) {
 				if (theFirstResponder == self) {
 					result = YES;
 					break;

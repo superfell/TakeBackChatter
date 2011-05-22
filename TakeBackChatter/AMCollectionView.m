@@ -174,7 +174,7 @@
 	NSEnumerator *enumerator = [content objectEnumerator];
 	id object;
 	AMCollectionViewItem *item;
-	while (object = [enumerator nextObject]) {
+	while ((object = [enumerator nextObject])) {
 		item = [am_itemsForObjects objectForKey:[NSValue valueWithNonretainedObject:object]];
 		if ([item isSelected]) {
 			[result addIndex:index];
@@ -191,7 +191,7 @@
 	int index = 0;
 	NSEnumerator *enumerator = [content objectEnumerator];
 	id object;
-	while (object = [enumerator nextObject]) {
+	while ((object = [enumerator nextObject])) {
 		item = [am_itemsForObjects objectForKey:[NSValue valueWithNonretainedObject:object]];
 		[item setSelected:[indexSet containsIndex:index]];
 		index++;
@@ -366,9 +366,9 @@
 		[[bgColors objectAtIndex:0] set];
 		NSRectFill(rect);
 		
-		int colorCount = [bgColors count];
-		int colorIndex;
-		int index = 0;
+		NSUInteger colorCount = [bgColors count];
+		NSUInteger colorIndex;
+		NSUInteger index = 0;
 		id object;
 		AMCollectionViewItem *item;
 		NSRect itemFrame;
