@@ -8,11 +8,15 @@
 #import <Cocoa/Cocoa.h>
 
 @class FeedController;
+@class BKClassifier;
 
 @interface TakeBackChatterAppDelegate : NSObject <NSApplicationDelegate> {
 @private
-    NSWindow *window;
+    NSWindow     *window;
+    BKClassifier *classifier;
 }
+
+@property (readonly) BKClassifier *classifier;
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet FeedController *feedController;

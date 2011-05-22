@@ -10,6 +10,8 @@
 #import "FeedItem.h"
 #import "NSDate_iso8601.h"
 #import "CollectionViewFeed.h"
+#import "TakeBackChatterAppDelegate.h"
+#import <BayesianKit/BayesianKit.h>
 
 static int FEED_PAGE_SIZE = 25;
 
@@ -102,6 +104,27 @@ static int FEED_PAGE_SIZE = 25;
         [self startQuery];
     else
         self.feedItems = [NSArray array];
+}
+
+-(void)catorgorizeSelectedPostsAs:(NSString *)poolName {
+    NSArray *selection = [self.collectionView selectedObjects];
+    NSMutableString *text = [NSMutableString string];
+    for (FeedItem *item in selection)
+        [text appendString:[item classificationText]];
+    
+    BKClassifier *classifier = [[NSApp delegate] classifier];
+    [classifier trainWithString:text forPoolNamed:poolName];
+}
+
+static NSString *POOL_NAME_GOOD = @"Good";
+static NSString *POOL_NAME_JUNK = @"Junk";
+
+-(IBAction)markSelectedPostsAsJunk:(id)sender {
+    [self catorgorizeSelectedPostsAs:POOL_NAME_JUNK];
+}
+
+-(IBAction)markSelectedPostsAsNotJunk:(id)sender {
+    [self catorgorizeSelectedPostsAs:POOL_NAME_GOOD];
 }
 
 -(void)dealloc {

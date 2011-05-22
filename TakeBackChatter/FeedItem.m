@@ -120,4 +120,8 @@
     return [self quantity:(int)(age/24) singluar:@"day" plural:@"days"];
 }
 
+-(NSString *)classificationText {
+    return [NSString stringWithFormat:@"%@ %@", self.title, self.body];
+}
+
 @end

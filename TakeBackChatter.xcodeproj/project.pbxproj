@@ -10,6 +10,7 @@
 		F40C81CA13887A2F00B6C525 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = F40C81C913887A2F00B6C525 /* Credits.html */; };
 		F40C81CE13887FE300B6C525 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = F40C81CC13887FE300B6C525 /* happy.png */; };
 		F40C81CF13887FE300B6C525 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = F40C81CD13887FE300B6C525 /* sad.png */; };
+		F40C829413888FE200B6C525 /* BayesianKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40C829313888FE200B6C525 /* BayesianKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */ = {isa = PBXBuildFile; fileRef = F426C02413861DCC00004388 /* NSDate_iso8601.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
@@ -62,10 +63,36 @@
 		F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF51388428100A4C273 /* CollectionViewFeed.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F40C828513888FBA00B6C525 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = BayesianKit;
+		};
+		F40C828713888FBA00B6C525 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E26C14C5115E817B00CFCCF1;
+			remoteInfo = Bayes;
+		};
+		F40C82C71388904B00B6C525 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = BayesianKit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		F40C81C913887A2F00B6C525 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		F40C81CC13887FE300B6C525 /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happy.png; sourceTree = "<group>"; };
 		F40C81CD13887FE300B6C525 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sad.png; sourceTree = "<group>"; };
+		F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BayesianKit.xcodeproj; path = BayesianKit/BayesianKit.xcodeproj; sourceTree = "<group>"; };
+		F40C829313888FE200B6C525 /* BayesianKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BayesianKit.framework; sourceTree = SOURCE_ROOT; };
 		F426C02313861DCC00004388 /* NSDate_iso8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_iso8601.h; sourceTree = "<group>"; };
 		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_iso8601.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40C829413888FE200B6C525 /* BayesianKit.framework in Frameworks */,
 				F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */,
 				F48AB8EC1384CB7200BC9EF6 /* libxml2.2.dylib in Frameworks */,
 				F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */,
@@ -183,9 +211,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40C827013888FBA00B6C525 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F40C828613888FBA00B6C525 /* BayesianKit.framework */,
+				F40C828813888FBA00B6C525 /* bayes */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F48AB8511384C66400BC9EF6 = {
 			isa = PBXGroup;
 			children = (
+				F40C829313888FE200B6C525 /* BayesianKit.framework */,
+				F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */,
 				F4D08BE013883EA400A4C273 /* AMCollectionView */,
 				F48AB8851384CB2700BC9EF6 /* zkSforce */,
 				F48AB8661384C66400BC9EF6 /* TakeBackChatter */,
@@ -363,6 +402,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F40C82C81388904B00B6C525 /* PBXTargetDependency */,
 			);
 			name = TakeBackChatter;
 			productName = TakeBackChatter;
@@ -387,12 +427,35 @@
 			mainGroup = F48AB8511384C66400BC9EF6;
 			productRefGroup = F48AB85D1384C66400BC9EF6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F40C827013888FBA00B6C525 /* Products */;
+					ProjectRef = F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F48AB85B1384C66400BC9EF6 /* TakeBackChatter */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F40C828613888FBA00B6C525 /* BayesianKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BayesianKit.framework;
+			remoteRef = F40C828513888FBA00B6C525 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F40C828813888FBA00B6C525 /* bayes */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = bayes;
+			remoteRef = F40C828713888FBA00B6C525 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F48AB85A1384C66400BC9EF6 /* Resources */ = {
@@ -464,6 +527,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F40C82C81388904B00B6C525 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BayesianKit;
+			targetProxy = F40C82C71388904B00B6C525 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F48AB8691384C66400BC9EF6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -521,6 +592,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -538,6 +613,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TakeBackChatter/TakeBackChatter-Prefix.pch";

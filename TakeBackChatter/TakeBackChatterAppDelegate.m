@@ -9,6 +9,7 @@
 #import "FeedController.h"
 #import "zkSforceClient.h"
 #import "credential.h"
+#import <BayesianKit/BayesianKit.h>
 
 @implementation TakeBackChatterAppDelegate
 
@@ -80,8 +81,35 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     self.feedController.sforce = client;
 }
 
+-(NSString *)classifierFilename {
+    NSArray * dirs = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *corpusFile = [[dirs objectAtIndex:0] stringByAppendingPathComponent:@"corpus.bks"];
+    return corpusFile;
+}
+
+-(BKClassifier *)classifier {
+    if (classifier == nil) {
+        NSString *corpusFile = [self classifierFilename];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:corpusFile])
+            classifier = [[BKClassifier alloc] initWithContentsOfFile:corpusFile];
+        else
+            classifier = [[BKClassifier alloc] init];
+    }
+    return classifier;
+}
+
+-(void)applicationWillTerminate:(NSNotification *)notification {
+    if (classifier != nil)
+        [classifier writeToFile:[self classifierFilename]];
+}
+
+-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    return YES;
+}
+
 -(void)dealloc {
     [_feedController release];
+    [classifier release];
     [super dealloc];
 }
 

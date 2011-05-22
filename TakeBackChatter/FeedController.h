@@ -22,4 +22,7 @@
 
 -(IBAction)loadNextPage:(id)sender;
 
+-(IBAction)markSelectedPostsAsJunk:(id)sender;
+-(IBAction)markSelectedPostsAsNotJunk:(id)sender;
+
 @end
