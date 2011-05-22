@@ -42,4 +42,7 @@ typedef enum {
 @property (readonly) NSArray *comments;
 
 @property (readonly) NSString *classificationText;  // all text for this item that should be classifier (as junk/good)
+
+@property (readonly) int chanceIsJunk;
+
 @end

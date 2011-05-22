@@ -8,6 +8,8 @@
 #import "FeedItem.h"
 #import "ZKSObject.h"
 #import "zkQueryResult.h"
+#import "TakeBackChatterAppDelegate.h"
+#import <BayesianKit/BayesianKit.h>
 
 @implementation FeedItem
 
@@ -122,6 +124,12 @@
 
 -(NSString *)classificationText {
     return [NSString stringWithFormat:@"%@ %@", self.title, self.body];
+}
+
+-(int)chanceIsJunk {
+    NSDictionary *cl = [[[NSApp delegate] classifier] guessWithString:self.classificationText];
+    NSNumber *g = [cl objectForKey:@"Junk"];
+    return [g floatValue] *100;
 }
 
 @end
