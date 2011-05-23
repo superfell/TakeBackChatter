@@ -12,13 +12,18 @@
 
 @interface TakeBackChatterAppDelegate : NSObject <NSApplicationDelegate> {
 @private
-    NSWindow     *window;
-    BKClassifier *classifier;
+    BKClassifier    *classifier;
+    NSWindow        *window;
+    NSMenuItem      *loginMenu, *logoutMenu;
+    FeedController  *feedController;
 }
 
 @property (readonly) BKClassifier *classifier;
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSMenuItem *loginMenu;
+@property (assign) IBOutlet NSMenuItem *logoutMenu;
+
 @property (assign) IBOutlet FeedController *feedController;
 
 -(IBAction)startLogin:(id)sender;

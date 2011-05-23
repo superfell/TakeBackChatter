@@ -13,20 +13,37 @@
 
 @implementation TakeBackChatterAppDelegate
 
-@synthesize window, feedController=_feedController;
+@synthesize window, feedController, loginMenu, logoutMenu;
 
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 
 -(IBAction)startLogin:(id)sender {
     // build the URL to the oauth page with our client_id & callback URL set.
-    NSString *login = [NSString stringWithFormat:@"https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=%@&redirect_uri=%@",
+    NSString *login = [NSString stringWithFormat:@"%@/services/oauth2/authorize?response_type=token&client_id=%@&redirect_uri=%@",
+                       [sender representedObject],
                        [OAUTH_CLIENTID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                        [OAUTH_CALLBACK stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURL *url = [NSURL URLWithString:login];
     
     // ask the OS to open browser to the URL
     [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+-(void)registerDefaults {
+    NSArray *servers = [NSArray arrayWithObjects:@"https://login.salesforce.com", @"https://test.salesforce.com", nil];
+    NSDictionary *defaults = [NSDictionary dictionaryWithObject:servers forKey:@"servers"];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+}
+
+-(void)setupLoginMenu {
+    NSMenu *subMenu = [[[NSMenu alloc] initWithTitle:[loginMenu title]] autorelease];
+    for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"]) {
+        NSMenuItem *i = [[[NSMenuItem alloc] initWithTitle:server action:@selector(startLogin:) keyEquivalent:@""] autorelease];
+        [i setRepresentedObject:server];
+        [subMenu addItem:i];
+    }
+    [loginMenu setSubmenu:subMenu];
 }
 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -36,6 +53,9 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
                                                        andSelector:@selector(getUrl:withReplyEvent:) 
                                                      forEventClass:kInternetEventClass 
                                                         andEventID:kAEGetURL];
+
+    [self registerDefaults];
+    [self setupLoginMenu];
     
     NSArray *creds = [Credential credentialsForServer:@"https://login.salesforce.com"];
     for (Credential *c in creds) {
@@ -71,7 +91,7 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     // in a real app, you'd save the refresh_token & auth host to the keychain, and on
     // relaunch, try and intialize your client from that first, so that you can skip
     // the login step.
-    
+
     ZKOAuthInfo *oauth = (ZKOAuthInfo *)[client authenticationInfo];
     NSString *refreshToken = [oauth refreshToken];
     NSURL *authHost = [oauth authHostUrl];
@@ -83,7 +103,10 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 
 -(NSString *)classifierFilename {
     NSArray * dirs = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *corpusFile = [[dirs objectAtIndex:0] stringByAppendingPathComponent:@"corpus.bks"];
+    NSString *appDir = [[dirs objectAtIndex:0] stringByAppendingPathComponent:@"TakeBackChatter"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:appDir])
+        [[NSFileManager defaultManager] createDirectoryAtPath:appDir withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *corpusFile = [appDir stringByAppendingPathComponent:@"corpus.bks"];
     return corpusFile;
 }
 
@@ -108,7 +131,7 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 }
 
 -(void)dealloc {
-    [_feedController release];
+    [feedController release];
     [classifier release];
     [super dealloc];
 }

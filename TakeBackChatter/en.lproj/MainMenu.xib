@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1050</int>
+		<int key="IBDocument.SystemTarget">1060</int>
 		<string key="IBDocument.SystemVersion">10J869</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
@@ -266,6 +266,13 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<string key="NSAction">submenuAction:</string>
+									<object class="NSMenu" key="NSSubmenu" id="703708053">
+										<string key="NSTitle"/>
+										<object class="NSMutableArray" key="NSMenuItems">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+										</object>
+									</object>
 								</object>
 								<object class="NSMenuItem" id="1043285772">
 									<reference key="NSMenu" ref="720053764"/>
@@ -1550,6 +1557,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{20, 7}, {106, 23}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="298361601">
 								<int key="NSCellFlags">-2080244224</int>
@@ -1584,7 +1592,7 @@
 											<int key="NSvFlags">298</int>
 											<string key="NSFrameSize">{443, 300}</string>
 											<reference key="NSSuperview" ref="719126836"/>
-											<reference key="NSNextKeyView" ref="79047084"/>
+											<reference key="NSNextKeyView" ref="849801594"/>
 											<string key="NSClassName">CollectionViewFeed</string>
 										</object>
 									</object>
@@ -1627,7 +1635,7 @@
 							</object>
 							<string key="NSFrame">{{0, 37}, {460, 660}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSNextKeyView" ref="719126836"/>
+							<reference key="NSNextKeyView" ref="79047084"/>
 							<int key="NSsFlags">18</int>
 							<reference key="NSVScroller" ref="849801594"/>
 							<reference key="NSHScroller" ref="79047084"/>
@@ -2346,22 +2354,6 @@
 					<int key="connectionID">551</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">startLogin:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="527239979"/>
-					</object>
-					<int key="connectionID">593</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">logout:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="1043285772"/>
-					</object>
-					<int key="connectionID">594</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">hidden: hasMore</string>
 						<reference key="source" ref="8369497"/>
@@ -2412,6 +2404,22 @@
 						<reference key="destination" ref="751317087"/>
 					</object>
 					<int key="connectionID">663</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">loginMenu</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="527239979"/>
+					</object>
+					<int key="connectionID">664</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">logoutMenu</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1043285772"/>
+					</object>
+					<int key="connectionID">665</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3318,6 +3326,7 @@
 						<int key="objectID">494</int>
 						<reference key="object" ref="976324537"/>
 						<reference key="parent" ref="0"/>
+						<string key="objectName">Take Back Chatter App Delegate</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">496</int>
@@ -3471,12 +3480,20 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">591</int>
 						<reference key="object" ref="527239979"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="703708053"/>
+						</object>
 						<reference key="parent" ref="720053764"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">592</int>
 						<reference key="object" ref="1043285772"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
 						<reference key="parent" ref="720053764"/>
+						<string key="objectName">Menu Item - Logout</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">595</int>
@@ -3562,6 +3579,14 @@
 						<int key="objectID">661</int>
 						<reference key="object" ref="751317087"/>
 						<reference key="parent" ref="570741200"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">666</int>
+						<reference key="object" ref="703708053"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
+						<reference key="parent" ref="527239979"/>
 					</object>
 				</object>
 			</object>
@@ -3812,6 +3837,7 @@
 					<string>659.IBPluginDependency</string>
 					<string>660.IBPluginDependency</string>
 					<string>661.IBPluginDependency</string>
+					<string>666.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -4085,6 +4111,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4124,14 +4151,14 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">663</int>
+			<int key="maxID">670</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1050" key="NS.object.0"/>
+			<real value="1060" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
