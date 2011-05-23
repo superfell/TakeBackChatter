@@ -7,7 +7,7 @@
 
 #import "TakeBackChatterAppDelegate.h"
 #import "FeedController.h"
-#import "zkSforceClient.h"
+#import "zkSforce.h"
 #import "credential.h"
 #import <BayesianKit/BayesianKit.h>
 
@@ -95,7 +95,7 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     ZKOAuthInfo *oauth = (ZKOAuthInfo *)[client authenticationInfo];
     NSString *refreshToken = [oauth refreshToken];
     NSURL *authHost = [oauth authHostUrl];
-    [Credential createCredentialForServer:[authHost absoluteString] username:@"chatter" password:refreshToken];
+    [Credential createCredentialForServer:[authHost absoluteString] username:[[client currentUserInfo] userName] password:refreshToken];
     
     NSLog(@"got auth callback");
     self.feedController.sforce = client;
