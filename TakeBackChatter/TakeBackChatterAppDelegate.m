@@ -18,6 +18,8 @@
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 
+static NSString *PREFS_SERVER_KEY = @"servers";
+
 -(IBAction)startLogin:(id)sender {
     // build the URL to the oauth page with our client_id & callback URL set.
     NSString *login = [NSString stringWithFormat:@"%@/services/oauth2/authorize?response_type=token&client_id=%@&redirect_uri=%@",
@@ -32,18 +34,27 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 
 -(void)registerDefaults {
     NSArray *servers = [NSArray arrayWithObjects:@"https://login.salesforce.com", @"https://test.salesforce.com", nil];
-    NSDictionary *defaults = [NSDictionary dictionaryWithObject:servers forKey:@"servers"];
+    NSDictionary *defaults = [NSDictionary dictionaryWithObject:servers forKey:PREFS_SERVER_KEY];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 -(void)setupLoginMenu {
     NSMenu *subMenu = [[[NSMenu alloc] initWithTitle:[loginMenu title]] autorelease];
-    for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:@"servers"]) {
+    for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:PREFS_SERVER_KEY]) {
         NSMenuItem *i = [[[NSMenuItem alloc] initWithTitle:server action:@selector(startLogin:) keyEquivalent:@""] autorelease];
         [i setRepresentedObject:server];
         [subMenu addItem:i];
     }
     [loginMenu setSubmenu:subMenu];
+}
+
+-(void)addLogoutMenuItem:(Credential *)c {
+    if ([logoutMenu submenu] == nil)
+        [logoutMenu setSubmenu:[[[NSMenu alloc] initWithTitle:@"Logout"] autorelease]];
+    
+    NSMenuItem *i = [[[NSMenuItem alloc] initWithTitle:[c username] action:@selector(logout:) keyEquivalent:@""] autorelease];
+    [i setRepresentedObject:c];
+    [[logoutMenu submenu] addItem:i];
 }
 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -57,26 +68,23 @@ static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
     [self registerDefaults];
     [self setupLoginMenu];
     
-    NSArray *creds = [Credential credentialsForServer:@"https://login.salesforce.com"];
-    for (Credential *c in creds) {
-        if ([[c username] isEqualToString:@"chatter"]) {
+    for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:PREFS_SERVER_KEY]) {
+        for (Credential *c in [Credential credentialsForServer:server]) {
+            [self addLogoutMenuItem:c];
+            
             NSString *refreshToken = [c password];
             NSURL *authHost = [NSURL URLWithString:[c server]];
             ZKSforceClient *client = [[ZKSforceClient alloc] init];
             [client loginWithRefreshToken:refreshToken authUrl:authHost oAuthConsumerKey:OAUTH_CLIENTID];
             self.feedController.sforce = client;
             [client release];
+            return; // stop at the first one for now.
         }
     }
 }
 
 -(void)logout:(id)sender {
-    NSArray *creds = [Credential credentialsForServer:@"https://login.salesforce.com"];
-    for (Credential *c in creds) {
-        if ([[c username] isEqualToString:@"chatter"]) {
-            [c removeFromKeychain];
-        }
-    }
+    [[sender representedObject] removeFromKeychain];
     self.feedController.sforce = nil;
 }
 
