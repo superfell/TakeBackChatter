@@ -11,7 +11,9 @@
 		F40C81CE13887FE300B6C525 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = F40C81CC13887FE300B6C525 /* happy.png */; };
 		F40C81CF13887FE300B6C525 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = F40C81CD13887FE300B6C525 /* sad.png */; };
 		F40C829413888FE200B6C525 /* BayesianKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F40C829313888FE200B6C525 /* BayesianKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		F40CA5E2138A287F009B8160 /* FeedList.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40CA5E1138A287E009B8160 /* FeedList.xib */; };
 		F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */ = {isa = PBXBuildFile; fileRef = F426C02413861DCC00004388 /* NSDate_iso8601.m */; };
+		F454E218138B56F500CC8158 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E217138B56F500CC8158 /* FeedViewController.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
@@ -51,7 +53,7 @@
 		F48AB8E91384CB3C00BC9EF6 /* zkUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8C71384CB3C00BC9EF6 /* zkUserInfo.m */; };
 		F48AB8EA1384CB3C00BC9EF6 /* zkXmlDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8C91384CB3C00BC9EF6 /* zkXmlDeserializer.m */; };
 		F48AB8EC1384CB7200BC9EF6 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */; };
-		F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8F41384D0B800BC9EF6 /* FeedController.m */; };
+		F48AB8F51384D0B800BC9EF6 /* FeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB8F41384D0B800BC9EF6 /* FeedDataSource.m */; };
 		F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */; };
 		F48AB9181384DC1700BC9EF6 /* credential.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9171384DC1700BC9EF6 /* credential.m */; };
 		F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB9191384DC5900BC9EF6 /* Security.framework */; };
@@ -93,8 +95,11 @@
 		F40C81CD13887FE300B6C525 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sad.png; sourceTree = "<group>"; };
 		F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BayesianKit.xcodeproj; path = BayesianKit/BayesianKit.xcodeproj; sourceTree = "<group>"; };
 		F40C829313888FE200B6C525 /* BayesianKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BayesianKit.framework; sourceTree = SOURCE_ROOT; };
+		F40CA5E1138A287E009B8160 /* FeedList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedList.xib; sourceTree = "<group>"; };
 		F426C02313861DCC00004388 /* NSDate_iso8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_iso8601.h; sourceTree = "<group>"; };
 		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_iso8601.m; sourceTree = "<group>"; };
+		F454E216138B56F500CC8158 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		F454E217138B56F500CC8158 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -175,8 +180,8 @@
 		F48AB8C81384CB3C00BC9EF6 /* zkXmlDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zkXmlDeserializer.h; path = zksforce/zkSforce/zkXmlDeserializer.h; sourceTree = "<group>"; };
 		F48AB8C91384CB3C00BC9EF6 /* zkXmlDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = zkXmlDeserializer.m; path = zksforce/zkSforce/zkXmlDeserializer.m; sourceTree = "<group>"; };
 		F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
-		F48AB8F31384D0B800BC9EF6 /* FeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedController.h; sourceTree = "<group>"; };
-		F48AB8F41384D0B800BC9EF6 /* FeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedController.m; sourceTree = "<group>"; };
+		F48AB8F31384D0B800BC9EF6 /* FeedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDataSource.h; sourceTree = "<group>"; };
+		F48AB8F41384D0B800BC9EF6 /* FeedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDataSource.m; sourceTree = "<group>"; };
 		F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKSObject_KVO.h; sourceTree = "<group>"; };
 		F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSObject_KVO.m; sourceTree = "<group>"; };
 		F48AB9161384DC1700BC9EF6 /* credential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = credential.h; sourceTree = "<group>"; };
@@ -269,12 +274,15 @@
 				F48AB9171384DC1700BC9EF6 /* credential.m */,
 				F48AB8721384C66400BC9EF6 /* TakeBackChatterAppDelegate.h */,
 				F48AB8731384C66400BC9EF6 /* TakeBackChatterAppDelegate.m */,
-				F48AB8F31384D0B800BC9EF6 /* FeedController.h */,
-				F48AB8F41384D0B800BC9EF6 /* FeedController.m */,
+				F48AB8F31384D0B800BC9EF6 /* FeedDataSource.h */,
+				F48AB8F41384D0B800BC9EF6 /* FeedDataSource.m */,
 				F48AB9211384E09B00BC9EF6 /* FeedItem.h */,
 				F48AB9221384E09C00BC9EF6 /* FeedItem.m */,
+				F40CA5E1138A287E009B8160 /* FeedList.xib */,
 				F4D08BEF13883FCA00A4C273 /* FeedItem.xib */,
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
+				F454E216138B56F500CC8158 /* FeedViewController.h */,
+				F454E217138B56F500CC8158 /* FeedViewController.m */,
 				F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */,
 				F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */,
 				F4D08BF41388428100A4C273 /* CollectionViewFeed.h */,
@@ -468,6 +476,7 @@
 				F40C81CA13887A2F00B6C525 /* Credits.html in Resources */,
 				F40C81CE13887FE300B6C525 /* happy.png in Resources */,
 				F40C81CF13887FE300B6C525 /* sad.png in Resources */,
+				F40CA5E2138A287F009B8160 /* FeedList.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +522,7 @@
 				F48AB8E81384CB3C00BC9EF6 /* zkSObject.m in Sources */,
 				F48AB8E91384CB3C00BC9EF6 /* zkUserInfo.m in Sources */,
 				F48AB8EA1384CB3C00BC9EF6 /* zkXmlDeserializer.m in Sources */,
-				F48AB8F51384D0B800BC9EF6 /* FeedController.m in Sources */,
+				F48AB8F51384D0B800BC9EF6 /* FeedDataSource.m in Sources */,
 				F48AB9141384D71300BC9EF6 /* ZKSObject_KVO.m in Sources */,
 				F48AB9181384DC1700BC9EF6 /* credential.m in Sources */,
 				F48AB9231384E09C00BC9EF6 /* FeedItem.m in Sources */,
@@ -522,6 +531,7 @@
 				F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */,
 				F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */,
 				F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */,
+				F454E218138B56F500CC8158 /* FeedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

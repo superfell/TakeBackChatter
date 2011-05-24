@@ -1,24 +1,22 @@
 //
-//  FeedController.m
+//  FeedDataSource.m
 //  TakeBackChatter
 //
 //  Created by Simon Fell on 5/18/11.
 //
 
-#import "FeedController.h"
+#import "FeedDataSource.h"
 #import "zkSforce.h"
 #import "FeedItem.h"
 #import "NSDate_iso8601.h"
-#import "CollectionViewFeed.h"
 #import "TakeBackChatterAppDelegate.h"
 #import <BayesianKit/BayesianKit.h>
 
 static int FEED_PAGE_SIZE = 25;
 
-@implementation FeedController
+@implementation FeedDataSource
 
 @synthesize feedItems=_feedItems, sforce=_sforce, hasMore=_hasMore;
-@synthesize collectionView=_collectionView;
 
 -(void)startActorFetch:(NSArray *)items {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
@@ -81,7 +79,11 @@ static int FEED_PAGE_SIZE = 25;
     [self startQuery:nil];
 }
 
--(IBAction)loadNextPage:(id)sender {
+-(IBAction)loadNewPage:(id)sender {
+    // TODO
+}
+
+-(IBAction)loadOldPage:(id)sender {
     FeedItem *last = [self.feedItems lastObject];
     [self startQuery:[last createdDate]];
 }
@@ -90,11 +92,6 @@ static int FEED_PAGE_SIZE = 25;
     [_feedItems autorelease];
     _feedItems = [items retain];
     self.hasMore = ((_feedItems.count % FEED_PAGE_SIZE) == 0) && (_feedItems.count > 0);
-
-	[self.collectionView setAllowsMultipleSelection:YES];
-	[self.collectionView setRowHeight:105];
-	[self.collectionView setDrawsBackground:YES];
-    [self.collectionView setContent:_feedItems];
 }
 
 -(void)setSforce:(ZKSforceClient *)c {
@@ -106,31 +103,9 @@ static int FEED_PAGE_SIZE = 25;
         self.feedItems = [NSArray array];
 }
 
--(void)catorgorizeSelectedPostsAs:(NSString *)poolName {
-    NSArray *selection = [self.collectionView selectedObjects];
-    NSMutableString *text = [NSMutableString string];
-    for (FeedItem *item in selection)
-        [text appendString:[item classificationText]];
-    
-    BKClassifier *classifier = [[NSApp delegate] classifier];
-    [classifier trainWithString:text forPoolNamed:poolName];
-}
-
-static NSString *POOL_NAME_GOOD = @"Good";
-static NSString *POOL_NAME_JUNK = @"Junk";
-
--(IBAction)markSelectedPostsAsJunk:(id)sender {
-    [self catorgorizeSelectedPostsAs:POOL_NAME_JUNK];
-}
-
--(IBAction)markSelectedPostsAsNotJunk:(id)sender {
-    [self catorgorizeSelectedPostsAs:POOL_NAME_GOOD];
-}
-
 -(void)dealloc {
     [_feedItems release];
     [_sforce release];
-    [_collectionView release];
     [super dealloc];
 }
 

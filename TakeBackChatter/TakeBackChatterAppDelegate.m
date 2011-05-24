@@ -6,14 +6,15 @@
 //
 
 #import "TakeBackChatterAppDelegate.h"
-#import "FeedController.h"
+#import "FeedViewController.h"
+#import "FeedDataSource.h"
 #import "zkSforce.h"
 #import "credential.h"
 #import <BayesianKit/BayesianKit.h>
 
 @implementation TakeBackChatterAppDelegate
 
-@synthesize window, feedController, loginMenu, logoutMenu;
+@synthesize loginMenu, logoutMenu;
 
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
@@ -57,6 +58,14 @@ static NSString *PREFS_SERVER_KEY = @"servers";
     [[logoutMenu submenu] addItem:i];
 }
 
+-(void)showFeedForClient:(ZKSforceClient *)client {
+    FeedDataSource *src = [[[FeedDataSource alloc] init] autorelease];
+    FeedViewController *ctrl = [[FeedViewController alloc] initWithDataSource:src];
+    [src setSforce:client];
+    [feedControllers addObject:ctrl];
+    [ctrl release];
+}
+
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // tell the event manager what to do when it gets asked to open a URL (the oauth completion callback) 
     // this callback URL is registered to this app in the info.plist file
@@ -65,6 +74,7 @@ static NSString *PREFS_SERVER_KEY = @"servers";
                                                      forEventClass:kInternetEventClass 
                                                         andEventID:kAEGetURL];
 
+    feedControllers = [[NSMutableArray alloc] init];
     [self registerDefaults];
     [self setupLoginMenu];
     
@@ -76,7 +86,9 @@ static NSString *PREFS_SERVER_KEY = @"servers";
             NSURL *authHost = [NSURL URLWithString:[c server]];
             ZKSforceClient *client = [[ZKSforceClient alloc] init];
             [client loginWithRefreshToken:refreshToken authUrl:authHost oAuthConsumerKey:OAUTH_CLIENTID];
-            self.feedController.sforce = client;
+
+            [self showFeedForClient:client];
+            
             [client release];
             return; // stop at the first one for now.
         }
@@ -85,7 +97,7 @@ static NSString *PREFS_SERVER_KEY = @"servers";
 
 -(void)logout:(id)sender {
     [[sender representedObject] removeFromKeychain];
-    self.feedController.sforce = nil;
+    // TODO, close feedController and remove it from feedControllers.
 }
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
@@ -106,7 +118,7 @@ static NSString *PREFS_SERVER_KEY = @"servers";
     [Credential createCredentialForServer:[authHost absoluteString] username:[[client currentUserInfo] userName] password:refreshToken];
     
     NSLog(@"got auth callback");
-    self.feedController.sforce = client;
+    [self showFeedForClient:client];
 }
 
 -(NSString *)classifierFilename {
@@ -139,7 +151,7 @@ static NSString *PREFS_SERVER_KEY = @"servers";
 }
 
 -(void)dealloc {
-    [feedController release];
+    [feedControllers release];
     [classifier release];
     [super dealloc];
 }
