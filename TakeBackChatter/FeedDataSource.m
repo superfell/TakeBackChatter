@@ -9,6 +9,7 @@
 #import "zkSforce.h"
 #import "FeedItem.h"
 #import "NSDate_iso8601.h"
+#import "NSArray_extras.h"
 #import "TakeBackChatterAppDelegate.h"
 #import <BayesianKit/BayesianKit.h>
 
@@ -19,6 +20,7 @@ static int FEED_PAGE_SIZE = 25;
 @property (nonatomic,retain) NSArray *feedItems;
 @property (nonatomic,retain) NSArray *filteredFeedItems;
 @property (nonatomic,retain) NSArray *junkFeedItems;
+-(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore;
 @end
 
 @implementation FeedDataSource
@@ -65,23 +67,25 @@ static int FEED_PAGE_SIZE = 25;
     });
 }
 
--(NSString *)buildFeedQuery:(NSDate *)before {
+-(NSString *)buildQueryWithDate:(NSDate *)date newer:(BOOL)newer {
     NSMutableString *soql = [NSMutableString stringWithString:@"SELECT Id, Type, CreatedDate, CreatedById, CreatedBy.Name, " \
         "ParentId, Parent.Name, FeedPostId, FeedPost.Body, FeedPost.Title, FeedPost.LinkUrl, " \
             "(SELECT Id, FieldName, OldValue, NewValue FROM FeedTrackedChanges), " \
             "(SELECT Id, CreatedDate, CreatedById, CreatedBy.Name, CommentBody FROM FeedComments ORDER BY CreatedDate DESC) " \
         "FROM NewsFeed "];
-    if (before != nil)
-        [soql appendFormat:@" where CreatedDate < %@ ", [before iso8601formatted]];
+    if (date != nil)
+        [soql appendFormat:@" where CreatedDate %@ %@ ", newer ? @">" : @"<",  [date iso8601formatted]];
+    
     [soql appendFormat:@"ORDER BY CreatedDate DESC, Id DESC LIMIT %d", FEED_PAGE_SIZE];
     return soql;
 }
 
--(void)startQuery:(NSDate *)before {
-    NSString *soql = [self buildFeedQuery:before];
+-(void)startQueryWithDate:(NSDate *)date newer:(BOOL)newer {
+    NSString *soql = [self buildQueryWithDate:date newer:newer];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         ZKQueryResult *qr = [self.sforce query:soql];
+        if ([qr size] == 0) return;
         NSMutableArray *res = [NSMutableArray arrayWithCapacity:[[qr records] count]];
         for (ZKSObject *r in [qr records])
             [res addObject:[FeedItem feedItemFrom:r]];
@@ -89,27 +93,34 @@ static int FEED_PAGE_SIZE = 25;
         [self startActorFetch:res];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            NSArray *feed = before == nil ? res : [self.feedItems arrayByAddingObjectsFromArray:res];
-            self.feedItems = feed;
+            NSArray *newFeed = res;
+            if (date != nil) {
+                if (newer) 
+                    newFeed = [res arrayByAddingObjectsFromArray:self.feedItems];
+                else
+                    newFeed = [self.feedItems arrayByAddingObjectsFromArray:res];
+            }
+            [self setFeedItems:newFeed updateHasMore:((date == nil) || (!newer))];
+            self.feedItems = newFeed;
         });
     });
 }
 
 -(IBAction)loadNewerRows:(id)sender {
-    // TODO
-    [self startQuery:nil];
+    FeedItem *first = [self.feedItems firstObject];
+    [self startQueryWithDate:[first createdDate] newer:YES];
 }
 
 -(IBAction)loadOlderRows:(id)sender {
     FeedItem *last = [self.feedItems lastObject];
-    [self startQuery:[last createdDate]];
+    [self startQueryWithDate:[last createdDate] newer:NO];
 }
 
--(void)setFeedItems:(NSArray *)items {
-    [feedItems autorelease];
-    feedItems = [items retain];
-    self.hasMore = ((feedItems.count % FEED_PAGE_SIZE) == 0) && (feedItems.count > 0);
+-(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore {
+    self.feedItems = items;
     [self filterFeed];
+    if (updateMore)
+        self.hasMore = ((items.count % FEED_PAGE_SIZE) == 0) && (items.count > 0);
 }
 
 -(void)filterFeed {

@@ -14,6 +14,7 @@
 		F40CA5E2138A287F009B8160 /* FeedList.xib in Resources */ = {isa = PBXBuildFile; fileRef = F40CA5E1138A287E009B8160 /* FeedList.xib */; };
 		F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */ = {isa = PBXBuildFile; fileRef = F426C02413861DCC00004388 /* NSDate_iso8601.m */; };
 		F454E218138B56F500CC8158 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E217138B56F500CC8158 /* FeedViewController.m */; };
+		F454E21B138CC06C00CC8158 /* NSArray_extras.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E21A138CC06C00CC8158 /* NSArray_extras.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
@@ -100,6 +101,8 @@
 		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_iso8601.m; sourceTree = "<group>"; };
 		F454E216138B56F500CC8158 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		F454E217138B56F500CC8158 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		F454E219138CC06C00CC8158 /* NSArray_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArray_extras.h; sourceTree = "<group>"; };
+		F454E21A138CC06C00CC8158 /* NSArray_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArray_extras.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -292,6 +295,8 @@
 				F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */,
 				F426C02313861DCC00004388 /* NSDate_iso8601.h */,
 				F426C02413861DCC00004388 /* NSDate_iso8601.m */,
+				F454E219138CC06C00CC8158 /* NSArray_extras.h */,
+				F454E21A138CC06C00CC8158 /* NSArray_extras.m */,
 			);
 			path = TakeBackChatter;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */,
 				F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */,
 				F454E218138B56F500CC8158 /* FeedViewController.m in Sources */,
+				F454E21B138CC06C00CC8158 /* NSArray_extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
