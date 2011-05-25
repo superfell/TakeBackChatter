@@ -18,7 +18,10 @@ typedef enum {
 } FeedItemType;
 
 @interface FeedItem : NSObject {
-    ZKSObject  *row;
+    ZKSObject       *row;
+    NSURL           *actorPhotoUrl;
+    NSImage         *actorPhoto;
+    FeedItemType    feedItemType;
 }
 
 +(id)feedItemFrom:(ZKSObject *)row;

@@ -13,7 +13,7 @@
 
 @implementation FeedItem
 
-@synthesize feedItemType = _feedItemType, actorPhotoUrl=_actorPhotoUrl, actorPhoto=_actorPhoto;
+@synthesize feedItemType, actorPhotoUrl, actorPhoto;
 
 // This tells KVO (and theirfore the UI binding), that the 'ActorPhoto' property value is affected by changes to the 'ActorPhotoUrl' property
 +(NSSet *)keyPathsForValuesAffectingActorPhoto {
@@ -39,14 +39,14 @@
 - (id)initWithRow:(ZKSObject *)r {
     self = [super init];
     row = [r retain];
-    _feedItemType = [self resolveType];
+    feedItemType = [self resolveType];
     return self;
 }
 
 - (void)dealloc {
     [row release];
-    [_actorPhotoUrl release];
-    [_actorPhoto release];
+    [actorPhotoUrl release];
+    [actorPhoto release];
     [super dealloc];
 }
 
