@@ -15,7 +15,7 @@
 static NSString *POOL_NAME_GOOD = @"Good";
 static NSString *POOL_NAME_JUNK = @"Junk";
 
-@synthesize collectionView=_collectionView, feedDataSource=_feedDataSource, feedItems=_feedItems;
+@synthesize collectionView=_collectionView, feedDataSource=_dataSource, feedItems=_feedItems;
 
 +(void)initialize {
     [self exposeBinding:@"feedItems"];
@@ -23,7 +23,7 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 
 -(id)initWithDataSource:(FeedDataSource *)src {
     self = [super init];
-    _feedDataSource = [src retain];
+    _dataSource = [src retain];
     [self bind:@"feedItems" toObject:src withKeyPath:@"feedItems" options:nil];
     
     [NSBundle loadNibNamed:@"FeedList" owner:self];
@@ -36,7 +36,7 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 
 - (void)dealloc {
     [self unbind:@"feedItems"];
-    [_feedDataSource release];
+    [_dataSource release];
     [_collectionView release];
     [super dealloc];
 }
