@@ -18,7 +18,7 @@ static NSString *POOL_NAME_GOOD = @"Good";
 static NSString *POOL_NAME_JUNK = @"Junk";
 
 @synthesize collectionView, feedDataSource, feedItems;
-@synthesize windowTitle;
+@synthesize window;
 
 +(void)initialize {
     [self exposeBinding:@"feedItems"];
@@ -30,12 +30,14 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [self bind:@"feedItems" toObject:src withKeyPath:@"feedItems" options:nil];
     
     ZKSforceClient *c = feedDataSource.sforce;
-    windowTitle = [[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userName], [[c serverUrl] host]] retain];
     [NSBundle loadNibNamed:@"FeedList" owner:self];
-
+    [window setTitle:[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userName], [[c serverUrl] host]]];
+    [window setFrameAutosaveName:[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userId], [[c serverUrl] host]]];
+    
     [self.collectionView setAllowsMultipleSelection:YES];
 	[self.collectionView setRowHeight:105];
 	[self.collectionView setDrawsBackground:YES];
+    [window makeKeyAndOrderFront:self];
     return self;
 }
 
@@ -43,7 +45,7 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [self unbind:@"feedItems"];
     [feedDataSource release];
     [collectionView release];
-    [windowTitle release];
+    [window release];
     [super dealloc];
 }
 
