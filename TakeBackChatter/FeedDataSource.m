@@ -109,10 +109,14 @@ static int FEED_PAGE_SIZE = 25;
     [feedItems autorelease];
     feedItems = [items retain];
     self.hasMore = ((feedItems.count % FEED_PAGE_SIZE) == 0) && (feedItems.count > 0);
+    [self filterFeed];
+}
+
+-(void)filterFeed {
     NSPredicate *junkp = [NSPredicate predicateWithFormat:@"chanceIsJunk > 90"];
-    NSArray *junk = [items filteredArrayUsingPredicate:junkp];
+    NSArray *junk = [feedItems filteredArrayUsingPredicate:junkp];
     NSPredicate *goodp = [NSPredicate predicateWithFormat:@"chanceIsJunk <= 90"];
-    NSArray *filtered = [items filteredArrayUsingPredicate:goodp];
+    NSArray *filtered = [feedItems filteredArrayUsingPredicate:goodp];
     self.junkFeedItems = junk;
     self.filteredFeedItems = filtered;
 }

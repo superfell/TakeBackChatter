@@ -63,6 +63,7 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     
     BKClassifier *classifier = [[NSApp delegate] classifier];
     [classifier trainWithString:text forPoolNamed:poolName];
+    [feedDataSource filterFeed];
 }
 
 -(IBAction)markSelectedPostsAsJunk:(id)sender {

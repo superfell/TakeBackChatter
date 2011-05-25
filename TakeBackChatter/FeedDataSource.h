@@ -26,6 +26,8 @@
 @property (readonly) BOOL hasMore;
 @property (readonly) ZKSforceClient *sforce;
 
+-(void)filterFeed;  // recalculated the filtered feed list.
+
 -(IBAction)loadNewerRows:(id)sender;
 -(IBAction)loadOlderRows:(id)sender;
 
