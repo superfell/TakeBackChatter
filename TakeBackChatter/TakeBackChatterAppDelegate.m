@@ -59,9 +59,9 @@ static NSString *PREFS_SERVER_KEY = @"servers";
 }
 
 -(void)showFeedForClient:(ZKSforceClient *)client {
-    FeedDataSource *src = [[[FeedDataSource alloc] init] autorelease];
+    FeedDataSource *src = [[[FeedDataSource alloc] initWithSforceClient:client] autorelease];
     FeedViewController *ctrl = [[FeedViewController alloc] initWithDataSource:src];
-    [src setSforce:client];
+    [src loadNewerRows:self];
     [feedControllers addObject:ctrl];
     [ctrl release];
 }

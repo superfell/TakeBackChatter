@@ -18,6 +18,12 @@ static int FEED_PAGE_SIZE = 25;
 
 @synthesize feedItems=_feedItems, sforce=_sforce, hasMore=_hasMore;
 
+-(id)initWithSforceClient:(ZKSforceClient *)c {
+    self = [super init];
+    _sforce = [c retain];
+    return self;
+}
+
 -(void)startActorFetch:(NSArray *)items {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         NSMutableSet *actors = [NSMutableSet set];
@@ -75,12 +81,9 @@ static int FEED_PAGE_SIZE = 25;
     });
 }
 
--(void)startQuery {
-    [self startQuery:nil];
-}
-
 -(IBAction)loadNewerRows:(id)sender {
     // TODO
+    [self startQuery:nil];
 }
 
 -(IBAction)loadOlderRows:(id)sender {
@@ -92,15 +95,6 @@ static int FEED_PAGE_SIZE = 25;
     [_feedItems autorelease];
     _feedItems = [items retain];
     self.hasMore = ((_feedItems.count % FEED_PAGE_SIZE) == 0) && (_feedItems.count > 0);
-}
-
--(void)setSforce:(ZKSforceClient *)c {
-    [_sforce autorelease];
-    _sforce = [c retain];
-    if (_sforce != nil)
-        [self startQuery];
-    else
-        self.feedItems = [NSArray array];
 }
 
 -(void)dealloc {

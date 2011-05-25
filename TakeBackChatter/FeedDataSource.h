@@ -16,9 +16,11 @@
     ZKSforceClient *_sforce;
 }
 
+-(id)initWithSforceClient:(ZKSforceClient *)c;
+
 @property (nonatomic, retain) NSArray *feedItems;
 @property (nonatomic, assign) BOOL hasMore;
-@property (nonatomic, retain) ZKSforceClient *sforce;
+@property (readonly) ZKSforceClient *sforce;
 
 -(IBAction)loadNewerRows:(id)sender;
 -(IBAction)loadOlderRows:(id)sender;

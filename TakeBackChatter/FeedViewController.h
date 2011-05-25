@@ -14,6 +14,7 @@
     CollectionViewFeed *_collectionView;
     FeedDataSource     *_dataSource;
     NSArray            *_feedItems;
+    NSString           *_windowTitle;
 }
 
 -(id)initWithDataSource:(FeedDataSource *)src;
@@ -21,6 +22,8 @@
 @property (nonatomic, retain)  IBOutlet CollectionViewFeed *collectionView;
 @property (readonly)                        FeedDataSource *feedDataSource;
 @property (nonatomic, retain)                      NSArray *feedItems;
+
+@property (readonly) NSString *windowTitle;
 
 -(IBAction)markSelectedPostsAsJunk:(id)sender;
 -(IBAction)markSelectedPostsAsNotJunk:(id)sender;
