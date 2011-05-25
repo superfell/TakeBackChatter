@@ -17,8 +17,8 @@
 static NSString *POOL_NAME_GOOD = @"Good";
 static NSString *POOL_NAME_JUNK = @"Junk";
 
-@synthesize collectionView=_collectionView, feedDataSource=_dataSource, feedItems=_feedItems;
-@synthesize windowTitle=_windowTitle;
+@synthesize collectionView, feedDataSource, feedItems;
+@synthesize windowTitle;
 
 +(void)initialize {
     [self exposeBinding:@"feedItems"];
@@ -26,11 +26,11 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 
 -(id)initWithDataSource:(FeedDataSource *)src {
     self = [super init];
-    _dataSource = [src retain];
+    feedDataSource = [src retain];
     [self bind:@"feedItems" toObject:src withKeyPath:@"feedItems" options:nil];
     
-    ZKSforceClient *c = _dataSource.sforce;
-    _windowTitle = [[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userName], [[c serverUrl] host]] retain];
+    ZKSforceClient *c = feedDataSource.sforce;
+    windowTitle = [[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userName], [[c serverUrl] host]] retain];
     [NSBundle loadNibNamed:@"FeedList" owner:self];
 
     [self.collectionView setAllowsMultipleSelection:YES];
@@ -41,16 +41,16 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 
 - (void)dealloc {
     [self unbind:@"feedItems"];
-    [_dataSource release];
-    [_collectionView release];
-    [_windowTitle release];
+    [feedDataSource release];
+    [collectionView release];
+    [windowTitle release];
     [super dealloc];
 }
 
--(void)setFeedItems:(NSArray *)feedItems {
-    [_feedItems autorelease];
-    _feedItems = [feedItems retain];
-    [self.collectionView setContent:_feedItems];
+-(void)setFeedItems:(NSArray *)items {
+    [feedItems autorelease];
+    feedItems = [items retain];
+    [self.collectionView setContent:feedItems];
 }
 
 -(void)catorgorizeSelectedPostsAs:(NSString *)poolName {
@@ -72,10 +72,10 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 }
 
 -(IBAction)loadOlderRows:(id)sender {
-    [_dataSource loadOlderRows:sender];
+    [feedDataSource loadOlderRows:sender];
 }
 
 -(IBAction)loadNewerRows:(id)sender {
-    [_dataSource loadNewerRows:sender];
+    [feedDataSource loadNewerRows:sender];
 }
 @end

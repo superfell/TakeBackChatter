@@ -11,10 +11,10 @@
 @class FeedDataSource;
 
 @interface FeedViewController : NSObject {
-    CollectionViewFeed *_collectionView;
-    FeedDataSource     *_dataSource;
-    NSArray            *_feedItems;
-    NSString           *_windowTitle;
+    CollectionViewFeed *collectionView;
+    FeedDataSource     *feedDataSource;
+    NSArray            *feedItems;
+    NSString           *windowTitle;
 }
 
 -(id)initWithDataSource:(FeedDataSource *)src;
