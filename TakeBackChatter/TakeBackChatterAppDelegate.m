@@ -20,6 +20,7 @@ static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 
 static NSString *PREFS_SERVER_KEY = @"servers";
+static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 
 -(IBAction)startLogin:(id)sender {
     // build the URL to the oauth page with our client_id & callback URL set.
@@ -80,17 +81,20 @@ static NSString *PREFS_SERVER_KEY = @"servers";
     
     for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:PREFS_SERVER_KEY]) {
         for (Credential *c in [Credential credentialsForServer:server]) {
-            [self addLogoutMenuItem:c];
-            
-            NSString *refreshToken = [c password];
-            NSURL *authHost = [NSURL URLWithString:[c server]];
-            ZKSforceClient *client = [[ZKSforceClient alloc] init];
-            [client loginWithRefreshToken:refreshToken authUrl:authHost oAuthConsumerKey:OAUTH_CLIENTID];
+            if (![[c comment] isEqualToString:KEYCHAIN_CRED_COMMENT]) continue;
 
-            [self showFeedForClient:client];
+            NSString *refreshToken = [c password];
+            if ([refreshToken length] < 20) continue;
             
-            [client release];
-            return; // stop at the first one for now.
+            NSURL *authHost = [NSURL URLWithString:[c server]];
+            ZKSforceClient *client = [[[ZKSforceClient alloc] init] autorelease];
+            @try {
+                [client loginWithRefreshToken:refreshToken authUrl:authHost oAuthConsumerKey:OAUTH_CLIENTID];
+                [self addLogoutMenuItem:c];
+                [self showFeedForClient:client];
+            } @catch (NSException *ex) {
+                NSLog(@"error with refresh token %@", [ex reason]);
+            }
         }
     }
 }
@@ -115,9 +119,11 @@ static NSString *PREFS_SERVER_KEY = @"servers";
     ZKOAuthInfo *oauth = (ZKOAuthInfo *)[client authenticationInfo];
     NSString *refreshToken = [oauth refreshToken];
     NSURL *authHost = [oauth authHostUrl];
-    [Credential createCredentialForServer:[authHost absoluteString] username:[[client currentUserInfo] userName] password:refreshToken];
+
+    Credential *cred = [Credential createCredentialForServer:[authHost absoluteString] username:[[client currentUserInfo] userName] password:refreshToken];
+    [cred setComment:KEYCHAIN_CRED_COMMENT];
     
-    NSLog(@"got auth callback");
+    [self addLogoutMenuItem:cred];
     [self showFeedForClient:client];
 }
 
