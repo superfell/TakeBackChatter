@@ -14,13 +14,21 @@
 
 static int FEED_PAGE_SIZE = 25;
 
+@interface FeedDataSource ()
+@property (assign) BOOL hasMore;
+@property (nonatomic,retain) NSArray *feedItems;
+@property (nonatomic,retain) NSArray *filteredFeedItems;
+@property (nonatomic,retain) NSArray *junkFeedItems;
+@end
+
 @implementation FeedDataSource
 
-@synthesize feedItems=_feedItems, sforce=_sforce, hasMore=_hasMore;
+@synthesize sforce, hasMore;
+@synthesize feedItems, filteredFeedItems, junkFeedItems;
 
 -(id)initWithSforceClient:(ZKSforceClient *)c {
     self = [super init];
-    _sforce = [c retain];
+    sforce = [c retain];
     return self;
 }
 
@@ -92,14 +100,22 @@ static int FEED_PAGE_SIZE = 25;
 }
 
 -(void)setFeedItems:(NSArray *)items {
-    [_feedItems autorelease];
-    _feedItems = [items retain];
-    self.hasMore = ((_feedItems.count % FEED_PAGE_SIZE) == 0) && (_feedItems.count > 0);
+    [feedItems autorelease];
+    feedItems = [items retain];
+    self.hasMore = ((feedItems.count % FEED_PAGE_SIZE) == 0) && (feedItems.count > 0);
+    NSPredicate *junkp = [NSPredicate predicateWithFormat:@"chanceIsJunk > 90"];
+    NSArray *junk = [items filteredArrayUsingPredicate:junkp];
+    NSPredicate *goodp = [NSPredicate predicateWithFormat:@"chanceIsJunk <= 90"];
+    NSArray *filtered = [items filteredArrayUsingPredicate:goodp];
+    self.junkFeedItems = junk;
+    self.filteredFeedItems = filtered;
 }
 
 -(void)dealloc {
-    [_feedItems release];
-    [_sforce release];
+    [feedItems release];
+    [filteredFeedItems release];
+    [junkFeedItems release];
+    [sforce release];
     [super dealloc];
 }
 

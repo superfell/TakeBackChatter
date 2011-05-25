@@ -27,7 +27,7 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 -(id)initWithDataSource:(FeedDataSource *)src {
     self = [super init];
     feedDataSource = [src retain];
-    [self bind:@"feedItems" toObject:src withKeyPath:@"feedItems" options:nil];
+    [self bind:@"feedItems" toObject:src withKeyPath:@"filteredFeedItems" options:nil];
     
     ZKSforceClient *c = feedDataSource.sforce;
     [NSBundle loadNibNamed:@"FeedList" owner:self];

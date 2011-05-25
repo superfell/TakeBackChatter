@@ -11,15 +11,18 @@
 @class CollectionViewFeed;
 
 @interface FeedDataSource : NSObject {
-    NSArray         *_feedItems;
-    BOOL            _hasMore;
-    ZKSforceClient *_sforce;
+    NSArray         *feedItems, *filteredFeedItems, *junkFeedItems;
+    BOOL            hasMore;
+    ZKSforceClient *sforce;
 }
 
 -(id)initWithSforceClient:(ZKSforceClient *)c;
 
-@property (nonatomic, retain) NSArray *feedItems;
-@property (nonatomic, assign) BOOL hasMore;
+-(NSArray *)feedItems;
+-(NSArray *)filteredFeedItems;
+-(NSArray *)junkFeedItems;
+
+@property (readonly) BOOL hasMore;
 @property (readonly) ZKSforceClient *sforce;
 
 -(IBAction)loadNewerRows:(id)sender;
