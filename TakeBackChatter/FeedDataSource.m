@@ -79,11 +79,11 @@ static int FEED_PAGE_SIZE = 25;
     [self startQuery:nil];
 }
 
--(IBAction)loadNewPage:(id)sender {
+-(IBAction)loadNewerRows:(id)sender {
     // TODO
 }
 
--(IBAction)loadOldPage:(id)sender {
+-(IBAction)loadOlderRows:(id)sender {
     FeedItem *last = [self.feedItems lastObject];
     [self startQuery:[last createdDate]];
 }

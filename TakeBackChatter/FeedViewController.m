@@ -65,4 +65,11 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [self catorgorizeSelectedPostsAs:POOL_NAME_GOOD];
 }
 
+-(IBAction)loadOlderRows:(id)sender {
+    [_dataSource loadOlderRows:sender];
+}
+
+-(IBAction)loadNewerRows:(id)sender {
+    [_dataSource loadNewerRows:sender];
+}
 @end

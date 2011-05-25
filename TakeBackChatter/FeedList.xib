@@ -262,6 +262,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{20, 7}, {106, 23}}</string>
 							<reference key="NSSuperview" ref="784581011"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="406583199">
@@ -297,12 +298,14 @@
 											<int key="NSvFlags">298</int>
 											<string key="NSFrameSize">{443, 300}</string>
 											<reference key="NSSuperview" ref="94366454"/>
+											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="844766246"/>
 											<string key="NSClassName">CollectionViewFeed</string>
 										</object>
 									</object>
 									<string key="NSFrame">{{1, 1}, {443, 658}}</string>
 									<reference key="NSSuperview" ref="375869219"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="355248523"/>
 									<reference key="NSDocView" ref="355248523"/>
 									<object class="NSColor" key="NSBGColor">
@@ -321,6 +324,7 @@
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{444, 1}, {15, 658}}</string>
 									<reference key="NSSuperview" ref="375869219"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="321266218"/>
 									<reference key="NSTarget" ref="375869219"/>
 									<string key="NSAction">_doScroller:</string>
@@ -331,6 +335,7 @@
 									<int key="NSvFlags">-2147483392</int>
 									<string key="NSFrame">{{-100, -100}, {426, 15}}</string>
 									<reference key="NSSuperview" ref="375869219"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="94366454"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="375869219"/>
@@ -340,6 +345,7 @@
 							</object>
 							<string key="NSFrame">{{0, 37}, {460, 660}}</string>
 							<reference key="NSSuperview" ref="784581011"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="38972514"/>
 							<int key="NSsFlags">18</int>
 							<reference key="NSVScroller" ref="844766246"/>
@@ -349,6 +355,7 @@
 					</object>
 					<string key="NSFrame">{{7, 11}, {458, 696}}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="375869219"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {2560, 1578}}</string>
@@ -361,26 +368,6 @@
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">hidden: dataSource.hasMore</string>
-						<reference key="source" ref="321266218"/>
-						<reference key="destination" ref="1001"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="321266218"/>
-							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">hidden: dataSource.hasMore</string>
-							<string key="NSBinding">hidden</string>
-							<string key="NSKeyPath">dataSource.hasMore</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValueTransformerName</string>
-								<string key="NS.object.0">NSNegateBoolean</string>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">20</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">markSelectedPostsAsJunk:</string>
@@ -404,6 +391,34 @@
 						<reference key="destination" ref="355248523"/>
 					</object>
 					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">hidden: feedDataSource.hasMore</string>
+						<reference key="source" ref="321266218"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="321266218"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">hidden: feedDataSource.hasMore</string>
+							<string key="NSBinding">hidden</string>
+							<string key="NSKeyPath">feedDataSource.hasMore</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSNegateBoolean</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">32</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">loadOlderRows:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="321266218"/>
+					</object>
+					<int key="connectionID">33</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -605,7 +620,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">33</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -684,11 +699,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>loadNewerRows:</string>
+							<string>loadOlderRows:</string>
 							<string>markSelectedPostsAsJunk:</string>
 							<string>markSelectedPostsAsNotJunk:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -697,11 +716,21 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>loadNewerRows:</string>
+							<string>loadOlderRows:</string>
 							<string>markSelectedPostsAsJunk:</string>
 							<string>markSelectedPostsAsNotJunk:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">loadNewerRows:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">loadOlderRows:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">markSelectedPostsAsJunk:</string>
 								<string key="candidateClassName">id</string>

@@ -20,7 +20,7 @@
 @property (nonatomic, assign) BOOL hasMore;
 @property (nonatomic, retain) ZKSforceClient *sforce;
 
--(IBAction)loadNewPage:(id)sender;
--(IBAction)loadOldPage:(id)sender;
+-(IBAction)loadNewerRows:(id)sender;
+-(IBAction)loadOlderRows:(id)sender;
 
 @end
