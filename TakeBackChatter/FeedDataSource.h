@@ -18,9 +18,10 @@
 
 -(id)initWithSforceClient:(ZKSforceClient *)c;
 
--(NSArray *)feedItems;
--(NSArray *)filteredFeedItems;
--(NSArray *)junkFeedItems;
+-(NSArray *)feedItems;              // all items fetched
+-(NSArray *)filteredFeedItems;      // all items not considered junk
+-(NSArray *)junkFeedItems;          // all junk items
+-(NSUInteger)junkCount;
 
 @property (readonly) BOOL hasMore;
 @property (readonly) ZKSforceClient *sforce;

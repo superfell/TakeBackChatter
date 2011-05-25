@@ -26,6 +26,12 @@ static int FEED_PAGE_SIZE = 25;
 @synthesize sforce, hasMore;
 @synthesize feedItems, filteredFeedItems, junkFeedItems;
 
+// This tells KVO (and theirfore the UI binding), that the 'junkCount' property value is affected by changes to the 'junkFeedItems' property
+// We only have the junkCount property because it doesn't appear possible to bind to the count property of NSArray (which seems odd)
++(NSSet *)keyPathsForValuesAffectingJunkCount {
+    return [NSSet setWithObject:@"junkFeedItems"];
+}
+
 -(id)initWithSforceClient:(ZKSforceClient *)c {
     self = [super init];
     sforce = [c retain];
@@ -109,6 +115,10 @@ static int FEED_PAGE_SIZE = 25;
     NSArray *filtered = [items filteredArrayUsingPredicate:goodp];
     self.junkFeedItems = junk;
     self.filteredFeedItems = filtered;
+}
+
+-(NSUInteger)junkCount {
+    return self.junkFeedItems.count;
 }
 
 -(void)dealloc {
