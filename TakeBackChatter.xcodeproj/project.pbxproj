@@ -15,6 +15,7 @@
 		F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */ = {isa = PBXBuildFile; fileRef = F426C02413861DCC00004388 /* NSDate_iso8601.m */; };
 		F454E218138B56F500CC8158 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E217138B56F500CC8158 /* FeedViewController.m */; };
 		F454E21B138CC06C00CC8158 /* NSArray_extras.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E21A138CC06C00CC8158 /* NSArray_extras.m */; };
+		F454E21D138EB47600CC8158 /* MoreNewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F454E21C138EB47600CC8158 /* MoreNewer.xib */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
@@ -59,6 +60,7 @@
 		F48AB9181384DC1700BC9EF6 /* credential.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9171384DC1700BC9EF6 /* credential.m */; };
 		F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB9191384DC5900BC9EF6 /* Security.framework */; };
 		F48AB9231384E09C00BC9EF6 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB9221384E09C00BC9EF6 /* FeedItem.m */; };
+		F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A29DE7138EC0870037CD5E /* MoreOlder.xib */; };
 		F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BE913883F0300A4C273 /* AMCollectionView.m */; };
 		F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */; };
 		F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D08BEF13883FCA00A4C273 /* FeedItem.xib */; };
@@ -103,6 +105,7 @@
 		F454E217138B56F500CC8158 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		F454E219138CC06C00CC8158 /* NSArray_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArray_extras.h; sourceTree = "<group>"; };
 		F454E21A138CC06C00CC8158 /* NSArray_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArray_extras.m; sourceTree = "<group>"; };
+		F454E21C138EB47600CC8158 /* MoreNewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreNewer.xib; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -192,6 +195,7 @@
 		F48AB9191384DC5900BC9EF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F48AB9211384E09B00BC9EF6 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		F48AB9221384E09C00BC9EF6 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
+		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
 		F4D08BE813883F0300A4C273 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionView.h; path = TakeBackChatter/AMCollectionView.h; sourceTree = "<group>"; };
 		F4D08BE913883F0300A4C273 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionView.m; path = TakeBackChatter/AMCollectionView.m; sourceTree = "<group>"; };
 		F4D08BEA13883F0300A4C273 /* AMCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionViewItem.h; path = TakeBackChatter/AMCollectionViewItem.h; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				F40CA5E1138A287E009B8160 /* FeedList.xib */,
 				F4D08BEF13883FCA00A4C273 /* FeedItem.xib */,
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
+				F454E21C138EB47600CC8158 /* MoreNewer.xib */,
+				F4A29DE7138EC0870037CD5E /* MoreOlder.xib */,
 				F454E216138B56F500CC8158 /* FeedViewController.h */,
 				F454E217138B56F500CC8158 /* FeedViewController.m */,
 				F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */,
@@ -482,6 +488,8 @@
 				F40C81CE13887FE300B6C525 /* happy.png in Resources */,
 				F40C81CF13887FE300B6C525 /* sad.png in Resources */,
 				F40CA5E2138A287F009B8160 /* FeedList.xib in Resources */,
+				F454E21D138EB47600CC8158 /* MoreNewer.xib in Resources */,
+				F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

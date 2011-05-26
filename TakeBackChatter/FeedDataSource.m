@@ -117,10 +117,10 @@ static int FEED_PAGE_SIZE = 25;
 }
 
 -(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore {
-    self.feedItems = items;
-    [self filterFeed];
     if (updateMore)
         self.hasMore = ((items.count % FEED_PAGE_SIZE) == 0) && (items.count > 0);
+    self.feedItems = items;
+    [self filterFeed];
 }
 
 -(void)filterFeed {

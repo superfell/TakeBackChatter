@@ -6,8 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CollectionViewFeed.h"
 
-@class CollectionViewFeed;
 @class FeedDataSource;
 
 @interface FeedViewController : NSObject {
@@ -15,6 +15,8 @@
     FeedDataSource     *feedDataSource;
     NSArray            *feedItems;
     NSWindow           *window;
+    NSArray            *feedViewItems;
+    NSObject           *loadNewer, *loadOlder;
 }
 
 -(id)initWithDataSource:(FeedDataSource *)src;
@@ -31,4 +33,15 @@
 -(IBAction)loadOlderRows:(id)sender;
 -(IBAction)loadNewerRows:(id)sender;
 
+@end
+
+@interface LoadNewer : NSObject<CollectionViewItemType> {
+    FeedViewController *controller; // weak ref
+}
+-(id)initWithController:(FeedViewController *)c;
+-(FeedViewController *)controller;
+@end
+
+@interface LoadOlder : LoadNewer {
+}
 @end

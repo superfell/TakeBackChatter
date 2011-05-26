@@ -13,3 +13,16 @@
 }
 
 @end
+
+
+@interface CollectionViewLoadNewerItem : AMCollectionViewItem {
+}
+
+-(IBAction)loadNewer:(id)sender;
+@end
+
+@interface CollectionViewLoadOlderItem : AMCollectionViewItem {
+}
+
+-(IBAction)loadOlder:(id)sender;
+@end

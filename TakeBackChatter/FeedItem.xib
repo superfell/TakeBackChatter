@@ -85,7 +85,6 @@
 						<string key="NSFrame">{{226, 5}, {89, 14}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="527082428">
 							<int key="NSCellFlags">68288064</int>
@@ -380,6 +379,7 @@
 							<reference ref="1040202007"/>
 						</object>
 						<reference key="parent" ref="0"/>
+						<string key="objectName">Custom View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2</int>

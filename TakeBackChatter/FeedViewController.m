@@ -10,7 +10,12 @@
 #import "TakeBackChatterAppDelegate.h"
 #import "FeedDataSource.h"
 #import "zkSforce.h"
+#import "CollectionViewFeedItem.h"
 #import <BayesianKit/BayesianKit.h>
+
+@interface FeedViewController ()
+@property (retain) NSArray *feedViewItems;  // this are the items that drive the list view, it includes the objects for the load more... rows
+@end
 
 @implementation FeedViewController
 
@@ -18,6 +23,7 @@ static NSString *POOL_NAME_GOOD = @"Good";
 static NSString *POOL_NAME_JUNK = @"Junk";
 
 @synthesize collectionView, feedDataSource, feedItems;
+@synthesize feedViewItems;
 @synthesize window;
 
 +(void)initialize {
@@ -26,6 +32,9 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 
 -(id)initWithDataSource:(FeedDataSource *)src {
     self = [super init];
+    loadNewer = [[LoadNewer alloc] initWithController:self];
+    loadOlder = [[LoadOlder alloc] initWithController:self];
+    
     feedDataSource = [src retain];
     [self bind:@"feedItems" toObject:src withKeyPath:@"filteredFeedItems" options:nil];
     
@@ -46,13 +55,23 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [feedDataSource release];
     [collectionView release];
     [window release];
+    [loadNewer release];
+    [feedViewItems release];
     [super dealloc];
 }
 
 -(void)setFeedItems:(NSArray *)items {
     [feedItems autorelease];
     feedItems = [items retain];
-    [self.collectionView setContent:feedItems];
+    
+    NSMutableArray *fv = [NSMutableArray arrayWithCapacity:[feedItems count] + 2];
+    [fv addObject:loadNewer];
+    [fv addObjectsFromArray:feedItems];
+    if ([feedDataSource hasMore])
+        [fv addObject:loadOlder];
+    
+    self.feedViewItems = fv;
+    [self.collectionView setContent:fv];
 }
 
 -(void)catorgorizeSelectedPostsAs:(NSString *)poolName {
@@ -81,4 +100,30 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 -(IBAction)loadNewerRows:(id)sender {
     [feedDataSource loadNewerRows:sender];
 }
+@end
+
+@implementation LoadNewer
+
+-(id)initWithController:(FeedViewController *)c {
+    self = [super init];
+    controller = c;
+    return self;
+}
+
+-(FeedViewController *)controller {
+    return controller;
+}
+
+-(Class)classOfItemForCollectionView:(CollectionViewFeed *)cv {
+    return [CollectionViewLoadNewerItem class];
+}
+
+@end
+
+@implementation LoadOlder
+
+-(Class)classOfItemForCollectionView:(CollectionViewFeed *)cv {
+    return [CollectionViewLoadOlderItem class];
+}
+
 @end

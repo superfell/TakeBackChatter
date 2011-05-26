@@ -6,6 +6,7 @@
 //
 
 #import "CollectionViewFeedItem.h"
+#import "FeedViewController.h"
 
 @implementation CollectionViewFeedItem
 
@@ -25,6 +26,34 @@
     
     float bodyHeight = [[bodyTextField cell] cellSizeForBounds:NSMakeRect(0, 0, propBodyWidth, 100000)].height;
     return NSMakeSize(newSize.width, fmaxf(min_height, bodyHeight + (105 - 56)));
+}
+
+@end
+
+@implementation CollectionViewLoadNewerItem
+
+- (id)initWithCollectionView:(AMCollectionView *)theCollectionView representedObject:(id)theObject {
+	self = [super initWithCollectionView:theCollectionView representedObject:theObject];
+    [NSBundle loadNibNamed:@"MoreNewer" owner:self];
+	return self;
+}
+
+-(IBAction)loadNewer:(id)sender {
+    [[representedObject controller] loadNewerRows:sender];
+}
+
+@end
+
+@implementation CollectionViewLoadOlderItem
+
+- (id)initWithCollectionView:(AMCollectionView *)theCollectionView representedObject:(id)theObject {
+	self = [super initWithCollectionView:theCollectionView representedObject:theObject];
+    [NSBundle loadNibNamed:@"MoreOlder" owner:self];
+	return self;
+}
+
+-(IBAction)loadOlder:(id)sender {
+    [[representedObject controller] loadOlderRows:sender];
 }
 
 @end
