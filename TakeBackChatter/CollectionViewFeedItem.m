@@ -13,6 +13,12 @@
 - (id)initWithCollectionView:(AMCollectionView *)theCollectionView representedObject:(id)theObject {
 	self = [super initWithCollectionView:theCollectionView representedObject:theObject];
     [NSBundle loadNibNamed:@"FeedItem" owner:self];
+    actorPhoto.layer.borderWidth = 1.0;
+    CGColorRef gray = CGColorCreateGenericGray(0.7,0.7);
+    actorPhoto.layer.borderColor = gray;
+    CGColorRelease(gray);
+    actorPhoto.layer.cornerRadius = 10.0;
+    actorPhoto.layer.masksToBounds = YES;
 	return self;
 }
 

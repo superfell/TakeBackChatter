@@ -10,6 +10,7 @@
 
 @interface CollectionViewFeedItem : AMCollectionViewItem {
     IBOutlet NSTextField *bodyTextField;
+    IBOutlet NSImageView *actorPhoto;
 }
 
 @end
