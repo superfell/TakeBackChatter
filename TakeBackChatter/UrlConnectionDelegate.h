@@ -22,12 +22,16 @@ typedef void (^UrlCompletionBlock)(NSUInteger httpStatusCode, NSHTTPURLResponse 
 
 @interface UrlConnectionDelegateWithBlock : UrlConnectionDelegate {
     UrlCompletionBlock  completionBlock;
-    BOOL                runBlockOnMainThread;
+    dispatch_queue_t    queueToRunBlock;
 }
 
+// will run the completion block on the specified queue
++(id)urlDelegateWithBlock:(UrlCompletionBlock)doneBlock queue:(dispatch_queue_t)queue;
+
+// if useMain is false, the block will be run on the queue that makes this call,
+// if useMain is true, the block will always be run on the main queue
 +(id)urlDelegateWithBlock:(UrlCompletionBlock)doneBlock runOnMainThread:(BOOL)useMain;
 
 @property (copy) UrlCompletionBlock  completionBlock;
-@property (assign) BOOL              runBlockOnMainThread;
 
 @end

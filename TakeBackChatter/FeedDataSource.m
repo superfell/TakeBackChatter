@@ -75,6 +75,8 @@ static int FEED_PAGE_SIZE = 25;
         ZKQueryResult *qr = [self.sforce query:soql];
         NSString *sid = [self.sforce.sessionId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
+        // Note that we run this entire block on the main thread because the NSURLConnections need to be started from the main thread
+        // (because they need a runloop)
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             for (ZKSObject *r in [qr records]) {
                 NSLog(@"fetching image for %@", [r fieldValue:@"SmallPhotoUrl"]);

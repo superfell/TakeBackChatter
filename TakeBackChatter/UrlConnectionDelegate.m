@@ -40,13 +40,18 @@
 
 @implementation UrlConnectionDelegateWithBlock
 
-@synthesize completionBlock, runBlockOnMainThread;
+@synthesize completionBlock;
 
-+(id)urlDelegateWithBlock:(UrlCompletionBlock) doneBlock runOnMainThread:(BOOL)useMain {
++(id)urlDelegateWithBlock:(UrlCompletionBlock)doneBlock queue:(dispatch_queue_t)queue {
     UrlConnectionDelegateWithBlock *d = [[UrlConnectionDelegateWithBlock alloc] init];
     d.completionBlock = doneBlock;
-    d.runBlockOnMainThread = useMain;
+    d->queueToRunBlock = queue;
     return [d autorelease];
+}
+
++(id)urlDelegateWithBlock:(UrlCompletionBlock) doneBlock runOnMainThread:(BOOL)useMain {
+    dispatch_queue_t q = useMain ? dispatch_get_main_queue() : dispatch_get_current_queue();
+    return [self urlDelegateWithBlock:doneBlock queue:q];
 }
 
 -(void)dealloc {
@@ -56,10 +61,7 @@
 
 // we've gotten all the response data, run the completion block.
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // which thread/queue do we want to run the completion block on.
-    dispatch_queue_t queue = self.runBlockOnMainThread ? dispatch_get_main_queue() : dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    
-    dispatch_async(queue, ^(void) {
+    dispatch_async(queueToRunBlock, ^(void) {
         self.completionBlock(self.httpStatusCode, self.response, self.data, nil);
     });
 }
