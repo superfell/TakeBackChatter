@@ -26,6 +26,22 @@ static int FEED_PAGE_SIZE = 25;
 
 @end
 
+@interface CachingUrlConnectionDelegate : UrlConnectionDelegateWithBlock {
+}
+@end
+
+@implementation CachingUrlConnectionDelegate
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cr {
+    // indicate that this response can be cached on disk.
+    return [[[NSCachedURLResponse alloc] initWithResponse:[cr response] 
+                                                     data:[cr data] 
+                                                 userInfo:[cr userInfo] 
+                                            storagePolicy:NSURLCacheStorageAllowed] autorelease];
+}
+
+@end
+
 @implementation FeedDataSource
 
 @synthesize sforce, hasMore;
@@ -66,7 +82,7 @@ static int FEED_PAGE_SIZE = 25;
                 NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
                 [req setValue:[NSString stringWithFormat:@"OAuth %@", sid] forHTTPHeaderField:@"Authorization"];
 
-                UrlConnectionDelegateWithBlock *delegate = [UrlConnectionDelegateWithBlock 
+                CachingUrlConnectionDelegate *delegate = [CachingUrlConnectionDelegate 
                     urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *data, NSError *err) {
                     
                     NSImage *img = [[[NSImage alloc] initWithData:data] autorelease];

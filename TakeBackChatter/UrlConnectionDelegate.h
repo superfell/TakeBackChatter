@@ -7,23 +7,27 @@
 
 #import <Foundation/Foundation.h>
 
+@interface UrlConnectionDelegate : NSObject {
+    NSMutableData       *data;
+    NSHTTPURLResponse   *response;
+}
+
+@property (retain) NSMutableData     *data;
+@property (retain) NSHTTPURLResponse *response;
+@property (readonly) NSUInteger      httpStatusCode;
+
+@end
 
 typedef void (^UrlCompletionBlock)(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err);
 
-@interface UrlConnectionDelegateWithBlock : NSObject {
+@interface UrlConnectionDelegateWithBlock : UrlConnectionDelegate {
     UrlCompletionBlock  completionBlock;
-    NSMutableData       *data;
-    NSHTTPURLResponse   *response;
     BOOL                runBlockOnMainThread;
-    NSUInteger          httpStatusCode;
 }
 
 +(id)urlDelegateWithBlock:(UrlCompletionBlock)doneBlock runOnMainThread:(BOOL)useMain;
 
 @property (copy) UrlCompletionBlock  completionBlock;
-@property (retain) NSMutableData     *data;
-@property (retain) NSHTTPURLResponse *response;
 @property (assign) BOOL              runBlockOnMainThread;
-@property (assign) NSUInteger        httpStatusCode;
 
 @end

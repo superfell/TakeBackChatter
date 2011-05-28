@@ -7,10 +7,40 @@
 
 #import "UrlConnectionDelegate.h"
 
+@implementation UrlConnectionDelegate
+
+@synthesize data, response;
+
+-(void)dealloc {
+    [response release];
+    [data release];
+    [super dealloc];
+}
+
+-(NSUInteger)httpStatusCode {
+    return [self.response statusCode];
+}
+
+// start collecting up the response data.
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)urlResponse {
+    self.response = (NSHTTPURLResponse *)urlResponse;
+    self.data = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
+    [self.data appendData:d];
+}
+
+// we've gotten all the response data, run the completion block.
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // subclasses should implmement
+}
+
+@end
+
 @implementation UrlConnectionDelegateWithBlock
 
-@synthesize completionBlock, data, response;
-@synthesize runBlockOnMainThread, httpStatusCode;
+@synthesize completionBlock, runBlockOnMainThread;
 
 +(id)urlDelegateWithBlock:(UrlCompletionBlock) doneBlock runOnMainThread:(BOOL)useMain {
     UrlConnectionDelegateWithBlock *d = [[UrlConnectionDelegateWithBlock alloc] init];
@@ -21,29 +51,7 @@
 
 -(void)dealloc {
     [completionBlock release];
-    [data release];
-    [response release];
     [super dealloc];
-}
-
-// start collecting up the response data.
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)urlResponse {
-    self.response = (NSHTTPURLResponse *)urlResponse;
-    self.httpStatusCode = [self.response statusCode];
-    self.data = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-    [self.data appendData:d];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cr {
-    // indicate that this response can be cached on disk.
-    NSCachedURLResponse *r = [[[NSCachedURLResponse alloc] initWithResponse:[cr response] 
-                                                                       data:[cr data] 
-                                                                   userInfo:[cr userInfo] 
-                                                              storagePolicy:NSURLCacheStorageAllowed] autorelease];
-    return r;
 }
 
 // we've gotten all the response data, run the completion block.
@@ -51,7 +59,6 @@
     // which thread/queue do we want to run the completion block on.
     dispatch_queue_t queue = self.runBlockOnMainThread ? dispatch_get_main_queue() : dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
-    // once we've called the block, we're all done, so we can release ourselves and cleanup.
     dispatch_async(queue, ^(void) {
         self.completionBlock(self.httpStatusCode, self.response, self.data, nil);
     });
