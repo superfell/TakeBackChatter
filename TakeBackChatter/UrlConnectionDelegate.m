@@ -7,13 +7,13 @@
 
 #import "UrlConnectionDelegate.h"
 
-@implementation UrlConnectionDelegate
+@implementation UrlConnectionDelegateWithBlock
 
 @synthesize completionBlock, data, response;
 @synthesize runBlockOnMainThread, httpStatusCode;
 
 +(id)urlDelegateWithBlock:(UrlCompletionBlock) doneBlock runOnMainThread:(BOOL)useMain {
-    UrlConnectionDelegate *d = [[UrlConnectionDelegate alloc] init];
+    UrlConnectionDelegateWithBlock *d = [[UrlConnectionDelegateWithBlock alloc] init];
     d.completionBlock = doneBlock;
     d.runBlockOnMainThread = useMain;
     return [d autorelease];

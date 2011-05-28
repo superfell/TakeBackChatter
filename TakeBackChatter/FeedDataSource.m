@@ -66,7 +66,7 @@ static int FEED_PAGE_SIZE = 25;
                 NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
                 [req setValue:[NSString stringWithFormat:@"OAuth %@", sid] forHTTPHeaderField:@"Authorization"];
 
-                UrlConnectionDelegate *delegate = [UrlConnectionDelegate 
+                UrlConnectionDelegateWithBlock *delegate = [UrlConnectionDelegateWithBlock 
                     urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *data, NSError *err) {
                     
                     NSImage *img = [[[NSImage alloc] initWithData:data] autorelease];

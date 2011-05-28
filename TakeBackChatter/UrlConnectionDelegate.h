@@ -10,7 +10,7 @@
 
 typedef void (^UrlCompletionBlock)(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err);
 
-@interface UrlConnectionDelegate : NSObject {
+@interface UrlConnectionDelegateWithBlock : NSObject {
     UrlCompletionBlock  completionBlock;
     NSMutableData       *data;
     NSHTTPURLResponse   *response;
