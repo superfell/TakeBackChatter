@@ -11,16 +11,19 @@
 #import "NSDate_iso8601.h"
 #import "NSArray_extras.h"
 #import "TakeBackChatterAppDelegate.h"
+#import "UrlConnectionDelegate.h"
 #import <BayesianKit/BayesianKit.h>
 
 static int FEED_PAGE_SIZE = 25;
 
 @interface FeedDataSource ()
+
 @property (assign) BOOL hasMore;
 @property (nonatomic,retain) NSArray *feedItems;
 @property (nonatomic,retain) NSArray *filteredFeedItems;
 @property (nonatomic,retain) NSArray *junkFeedItems;
 -(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore;
+
 @end
 
 @implementation FeedDataSource
@@ -55,15 +58,27 @@ static int FEED_PAGE_SIZE = 25;
         
         ZKQueryResult *qr = [self.sforce query:soql];
         NSString *sid = [self.sforce.sessionId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        for (ZKSObject *r in [qr records]) {
-            NSURL *imgUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?oauth_token=%@", [r fieldValue:@"SmallPhotoUrl"], sid]];
-            NSImage *img = [[[NSImage alloc] initWithContentsOfURL:imgUrl] autorelease];
-            NSString *userId = [r id];
-            for (FeedItem *i in items) {
-                if ([userId isEqualToString:[i actorId]])
-                    i.actorPhoto = img;
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            for (ZKSObject *r in [qr records]) {
+                NSLog(@"fetching image for %@", [r fieldValue:@"SmallPhotoUrl"]);
+                NSURL *imgUrl = [NSURL URLWithString:[r fieldValue:@"SmallPhotoUrl"]];
+                NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+                [req setValue:[NSString stringWithFormat:@"OAuth %@", sid] forHTTPHeaderField:@"Authorization"];
+
+                UrlConnectionDelegate *delegate = [UrlConnectionDelegate 
+                    urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *data, NSError *err) {
+                    
+                    NSImage *img = [[[NSImage alloc] initWithData:data] autorelease];
+                    NSString *userId = [r id];
+                    for (FeedItem *i in items) {
+                        if ([userId isEqualToString:[i actorId]])
+                            i.actorPhoto = img;
+                    }
+                } runOnMainThread:YES];
+                [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
             }
-        }
+        });
     });
 }
 

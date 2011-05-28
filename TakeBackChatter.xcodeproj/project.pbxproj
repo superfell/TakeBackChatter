@@ -62,6 +62,7 @@
 		F48EA9FA138F255A005C0601 /* BayesianKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48EA9F9138F255A005C0601 /* BayesianKit.framework */; };
 		F48EA9FB138F261B005C0601 /* BayesianKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F48EA9F9138F255A005C0601 /* BayesianKit.framework */; };
 		F48EA9FD138F2632005C0601 /* ParseKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F48EA9FC138F2632005C0601 /* ParseKit.framework */; };
+		F48EAA6813916037005C0601 /* UrlConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F48EAA6713916036005C0601 /* UrlConnectionDelegate.m */; };
 		F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A29DE7138EC0870037CD5E /* MoreOlder.xib */; };
 		F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BE913883F0300A4C273 /* AMCollectionView.m */; };
 		F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */; };
@@ -212,6 +213,8 @@
 		F48AB9221384E09C00BC9EF6 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		F48EA9F9138F255A005C0601 /* BayesianKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BayesianKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48EA9FC138F2632005C0601 /* ParseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ParseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F48EAA6613916036005C0601 /* UrlConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlConnectionDelegate.h; sourceTree = "<group>"; };
+		F48EAA6713916036005C0601 /* UrlConnectionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlConnectionDelegate.m; sourceTree = "<group>"; };
 		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
 		F4D08BE813883F0300A4C273 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionView.h; path = TakeBackChatter/AMCollectionView.h; sourceTree = "<group>"; };
 		F4D08BE913883F0300A4C273 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionView.m; path = TakeBackChatter/AMCollectionView.m; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 				F426C02413861DCC00004388 /* NSDate_iso8601.m */,
 				F454E219138CC06C00CC8158 /* NSArray_extras.h */,
 				F454E21A138CC06C00CC8158 /* NSArray_extras.m */,
+				F48EAA6613916036005C0601 /* UrlConnectionDelegate.h */,
+				F48EAA6713916036005C0601 /* UrlConnectionDelegate.m */,
 			);
 			path = TakeBackChatter;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 				F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */,
 				F454E218138B56F500CC8158 /* FeedViewController.m in Sources */,
 				F454E21B138CC06C00CC8158 /* NSArray_extras.m in Sources */,
+				F48EAA6813916037005C0601 /* UrlConnectionDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
