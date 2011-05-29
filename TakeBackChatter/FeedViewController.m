@@ -11,6 +11,7 @@
 #import "FeedDataSource.h"
 #import "zkSforce.h"
 #import "CollectionViewFeedItem.h"
+#import "NewPostController.h"
 #import <BayesianKit/BayesianKit.h>
 
 @interface FeedViewController ()
@@ -100,6 +101,11 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 -(IBAction)loadNewerRows:(id)sender {
     [feedDataSource loadNewerRows:sender];
 }
+
+-(IBAction)createPost:(id)sender {
+    [[NewPostController postControllerFor:feedDataSource] retain];
+}
+
 @end
 
 @implementation LoadNewer

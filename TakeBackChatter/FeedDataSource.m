@@ -169,6 +169,17 @@ static int FEED_PAGE_SIZE = 25;
     return self.junkFeedItems.count;
 }
 
+-(void)updateStatus:(NSString *)newStatus {
+    ZKSObject *user = [ZKSObject withTypeAndId:@"User" sfId:[[self.sforce currentUserInfo] userId]];
+    [user setFieldValue:newStatus field:@"CurrentStatus"];
+    ZKSaveResult *sr = [[self.sforce update:[NSArray arrayWithObject:user]] firstObject];
+    if ([sr success]) {
+        [self loadNewerRows:self];
+    } else {
+        NSLog(@"%@ %@", [sr statusCode], [sr message]);
+    }
+}
+
 -(void)dealloc {
     [feedItems release];
     [filteredFeedItems release];

@@ -31,4 +31,6 @@
 -(IBAction)loadNewerRows:(id)sender;
 -(IBAction)loadOlderRows:(id)sender;
 
+-(void)updateStatus:(NSString *)newStatus;
+
 @end

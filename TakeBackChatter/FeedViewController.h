@@ -29,6 +29,7 @@
 
 -(IBAction)markSelectedPostsAsJunk:(id)sender;
 -(IBAction)markSelectedPostsAsNotJunk:(id)sender;
+-(IBAction)createPost:(id)sender;
 
 -(IBAction)loadOlderRows:(id)sender;
 -(IBAction)loadNewerRows:(id)sender;

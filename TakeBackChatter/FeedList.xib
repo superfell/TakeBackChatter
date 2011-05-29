@@ -71,6 +71,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>18DBA41E-13D8-4053-884C-90098DB6D889</string>
 							<string>7799D682-DABD-46FD-A7F7-F888D30329B6</string>
 							<string>A459A8DB-D0D9-4B55-B8F5-D078D2E4F8E1</string>
 							<string>NSToolbarCustomizeToolbarItem</string>
@@ -80,6 +81,28 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="NSToolbarItem" id="972727212">
+								<object class="NSMutableString" key="NSToolbarItemIdentifier">
+									<characters key="NS.bytes">18DBA41E-13D8-4053-884C-90098DB6D889</characters>
+								</object>
+								<string key="NSToolbarItemLabel">Create Post</string>
+								<string key="NSToolbarItemPaletteLabel">Create post</string>
+								<string key="NSToolbarItemToolTip"/>
+								<nil key="NSToolbarItemView"/>
+								<object class="NSCustomResource" key="NSToolbarItemImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">NSAddTemplate</string>
+								</object>
+								<nil key="NSToolbarItemTarget"/>
+								<nil key="NSToolbarItemAction"/>
+								<string key="NSToolbarItemMinSize">{0, 0}</string>
+								<string key="NSToolbarItemMaxSize">{0, 0}</string>
+								<bool key="NSToolbarItemEnabled">YES</bool>
+								<bool key="NSToolbarItemAutovalidates">YES</bool>
+								<int key="NSToolbarItemTag">-1</int>
+								<bool key="NSToolbarIsUserRemovable">YES</bool>
+								<int key="NSToolbarItemVisibilityPriority">0</int>
+							</object>
 							<object class="NSToolbarItem" id="804023687">
 								<object class="NSMutableString" key="NSToolbarItemIdentifier">
 									<characters key="NS.bytes">7799D682-DABD-46FD-A7F7-F888D30329B6</characters>
@@ -241,11 +264,14 @@
 						<reference ref="273358"/>
 						<reference ref="804023687"/>
 						<reference ref="729861386"/>
+						<reference ref="972727212"/>
 					</object>
 					<object class="NSArray" key="NSToolbarIBDefaultItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="804023687"/>
 						<reference ref="729861386"/>
+						<reference ref="957730252"/>
+						<reference ref="972727212"/>
 						<reference ref="157194251"/>
 						<reference ref="273358"/>
 					</object>
@@ -300,7 +326,7 @@
 									<string key="NSFrame">{{444, 1}, {15, 658}}</string>
 									<reference key="NSSuperview" ref="375869219"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
+									<reference key="NSNextKeyView" ref="9773862"/>
 									<reference key="NSTarget" ref="375869219"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSPercent">0.99333333333333329</double>
@@ -462,6 +488,14 @@
 					</object>
 					<int key="connectionID">47</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">createPost:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="972727212"/>
+					</object>
+					<int key="connectionID">49</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -511,6 +545,7 @@
 							<reference ref="157194251"/>
 							<reference ref="957730252"/>
 							<reference ref="948813938"/>
+							<reference ref="972727212"/>
 						</object>
 						<reference key="parent" ref="1033082251"/>
 					</object>
@@ -615,6 +650,11 @@
 						<reference key="object" ref="679483917"/>
 						<reference key="parent" ref="650288373"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">48</int>
+						<reference key="object" ref="972727212"/>
+						<reference key="parent" ref="11906985"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -642,6 +682,7 @@
 					<string>41.IBPluginDependency</string>
 					<string>42.IBPluginDependency</string>
 					<string>43.IBPluginDependency</string>
+					<string>48.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -672,6 +713,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -686,7 +728,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">47</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -765,6 +807,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>createPost:</string>
 							<string>loadNewerRows:</string>
 							<string>loadOlderRows:</string>
 							<string>markSelectedPostsAsJunk:</string>
@@ -772,6 +815,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -782,6 +826,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>createPost:</string>
 							<string>loadNewerRows:</string>
 							<string>loadOlderRows:</string>
 							<string>markSelectedPostsAsJunk:</string>
@@ -789,6 +834,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">createPost:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">loadNewerRows:</string>
 								<string key="candidateClassName">id</string>
@@ -858,6 +907,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>NSAddTemplate</string>
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
 				<string>NSToolbarCustomizeToolbarItemImage</string>
@@ -866,6 +916,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{8, 8}</string>
 				<string>{9, 8}</string>
 				<string>{7, 2}</string>
 				<string>{32, 32}</string>
