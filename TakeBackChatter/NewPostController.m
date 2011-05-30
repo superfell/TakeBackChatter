@@ -26,6 +26,8 @@
     self = [super init];
     feedDataSource = [feed retain];
     [NSBundle loadNibNamed:@"NewPost" owner:self];
+    [window setTitle:feedDataSource.defaultWindowTitle];
+    [window setFrameAutosaveName:[NSString stringWithFormat:@"%@ / %@", feedDataSource.defaultWindowAutosaveName, @"NewPost"]];
     return self;
 }
 

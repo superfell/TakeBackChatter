@@ -195,6 +195,14 @@ static int FEED_PAGE_SIZE = 25;
     [self checkSaveResult:sr];
 }
 
+-(NSString *)defaultWindowTitle {
+    return [NSString stringWithFormat:@"%@ / %@", [[self.sforce currentUserInfo] userName], [[self.sforce serverUrl] host]];
+}
+
+-(NSString *)defaultWindowAutosaveName {
+    return [NSString stringWithFormat:@"%@ / %@", [[self.sforce currentUserInfo] userId], [[self.sforce serverUrl] host]];
+}
+
 -(void)dealloc {
     [feedItems release];
     [filteredFeedItems release];

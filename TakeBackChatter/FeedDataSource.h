@@ -34,4 +34,7 @@
 -(void)updateStatus:(NSString *)newStatus;
 -(void)createContentPost:(NSString *)postText withFile:(NSString *)filename;
 
+@property (readonly) NSString *defaultWindowTitle;
+@property (readonly) NSString *defaultWindowAutosaveName;
+
 @end

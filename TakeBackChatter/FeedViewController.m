@@ -39,10 +39,9 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     feedDataSource = [src retain];
     [self bind:@"feedItems" toObject:src withKeyPath:@"filteredFeedItems" options:nil];
     
-    ZKSforceClient *c = feedDataSource.sforce;
     [NSBundle loadNibNamed:@"FeedList" owner:self];
-    [window setTitle:[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userName], [[c serverUrl] host]]];
-    [window setFrameAutosaveName:[NSString stringWithFormat:@"%@ / %@", [[c currentUserInfo] userId], [[c serverUrl] host]]];
+    [window setTitle:feedDataSource.defaultWindowTitle];
+    [window setFrameAutosaveName:[NSString stringWithFormat:@"%@ / %@", feedDataSource.defaultWindowAutosaveName, @"FeedViewController"]];
     
     [self.collectionView setAllowsMultipleSelection:YES];
 	[self.collectionView setRowHeight:105];
