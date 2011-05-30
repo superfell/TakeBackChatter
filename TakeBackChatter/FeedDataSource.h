@@ -32,5 +32,6 @@
 -(IBAction)loadOlderRows:(id)sender;
 
 -(void)updateStatus:(NSString *)newStatus;
+-(void)createContentPost:(NSString *)postText withFile:(NSString *)filename;
 
 @end

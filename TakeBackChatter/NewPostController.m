@@ -14,6 +14,10 @@
 @synthesize postText, attachmentFilename;
 @synthesize window;
 
++(NSSet *)keyPathsForValuesAffectingAttachmentIcon {
+    return [NSSet setWithObject:@"attachmentFilename"];
+}
+
 +(NSSet *)keyPathsForValuesAffectingCanCreate {
     return [NSSet setWithObject:@"postText"];
 }
@@ -35,20 +39,38 @@
     [feedDataSource release];
     [postText release];
     [attachmentFilename release];
+    [attachmentIcon release];
     [super dealloc];
 }
 
 -(IBAction)create:(id)sender {
     if ([attachmentFilename length] == 0)
         [feedDataSource updateStatus:postText];
+    else
+        [feedDataSource createContentPost:postText withFile:attachmentFilename];
+    
     [window close];
 }
 
 -(IBAction)attachFile:(id)sender {
+    NSOpenPanel *p = [NSOpenPanel openPanel];
+    [p setCanChooseDirectories:NO];
+    [p setAllowsMultipleSelection:NO];
+    [p setCanChooseFiles:YES];
+    [p beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
+        if (result != NSFileHandlingPanelOKButton) return;
+        [attachmentIcon autorelease];
+        attachmentIcon = [[[NSWorkspace sharedWorkspace] iconForFile:[[p URL] path]] retain];
+        self.attachmentFilename = [[p URL] path];
+    }];
 }
 
 -(BOOL)canCreate {
     return [postText length] > 0;
+}
+
+-(NSImage *)attachmentIcon {
+    return attachmentIcon != nil ? attachmentIcon : [NSImage imageNamed:NSImageNameMultipleDocuments];
 }
 
 -(void)windowWillClose:(id)sender {

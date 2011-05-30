@@ -13,6 +13,7 @@
     FeedDataSource  *feedDataSource;
     NSString        *postText;
     NSString        *attachmentFilename;
+    NSImage         *attachmentIcon;
     NSWindow        *window;
 }
 
@@ -24,6 +25,7 @@
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) NSString *postText;
 @property (retain) NSString *attachmentFilename;
+@property (readonly) NSImage *attachmentIcon;
 
 @property (readonly) BOOL canCreate;
 

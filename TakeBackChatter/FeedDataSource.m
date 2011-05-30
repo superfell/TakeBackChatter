@@ -10,6 +10,7 @@
 #import "FeedItem.h"
 #import "NSDate_iso8601.h"
 #import "NSArray_extras.h"
+#import "NSData-Base64Extensions.h"
 #import "TakeBackChatterAppDelegate.h"
 #import "UrlConnectionDelegate.h"
 #import <BayesianKit/BayesianKit.h>
@@ -169,15 +170,29 @@ static int FEED_PAGE_SIZE = 25;
     return self.junkFeedItems.count;
 }
 
--(void)updateStatus:(NSString *)newStatus {
-    ZKSObject *user = [ZKSObject withTypeAndId:@"User" sfId:[[self.sforce currentUserInfo] userId]];
-    [user setFieldValue:newStatus field:@"CurrentStatus"];
-    ZKSaveResult *sr = [[self.sforce update:[NSArray arrayWithObject:user]] firstObject];
+-(void)checkSaveResult:(ZKSaveResult *)sr {
     if ([sr success]) {
         [self loadNewerRows:self];
     } else {
         NSLog(@"%@ %@", [sr statusCode], [sr message]);
     }
+}
+
+-(void)updateStatus:(NSString *)newStatus {
+    ZKSObject *user = [ZKSObject withTypeAndId:@"User" sfId:[[self.sforce currentUserInfo] userId]];
+    [user setFieldValue:newStatus field:@"CurrentStatus"];
+    ZKSaveResult *sr = [[self.sforce update:[NSArray arrayWithObject:user]] firstObject];
+    [self checkSaveResult:sr];
+}
+
+-(void)createContentPost:(NSString *)postText withFile:(NSString *)filename {
+    ZKSObject *post = [ZKSObject withType:@"FeedPost"];
+    [post setFieldValue:[[self.sforce currentUserInfo] userId] field:@"ParentId"];
+    [post setFieldValue:[filename lastPathComponent] field:@"ContentFileName"];
+    [post setFieldValue:[[NSData dataWithContentsOfFile:filename] encodeBase64] field:@"ContentData"];
+    [post setFieldValue:postText field:@"Body"];
+    ZKSaveResult *sr = [[self.sforce create:[NSArray arrayWithObject:post]] firstObject];
+    [self checkSaveResult:sr];
 }
 
 -(void)dealloc {
