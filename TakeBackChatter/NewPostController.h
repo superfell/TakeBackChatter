@@ -12,6 +12,7 @@
 @interface NewPostController : NSObject {
     FeedDataSource  *feedDataSource;
     NSString        *postText;
+    NSData          *attachmentData;
     NSString        *attachmentFilename;
     NSImage         *attachmentIcon;
     NSWindow        *window;
@@ -21,12 +22,14 @@
 
 -(IBAction)create:(id)sender;
 -(IBAction)attachFile:(id)sender;
+-(IBAction)pasteFromClipboard:(id)sender;
 
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) NSString *postText;
 @property (retain) NSString *attachmentFilename;
-@property (readonly) NSImage *attachmentIcon;
+@property (retain, nonatomic, readonly) NSImage *attachmentIcon;
 
 @property (readonly) BOOL canCreate;
+@property (readonly) BOOL canEditFilename;
 
 @end

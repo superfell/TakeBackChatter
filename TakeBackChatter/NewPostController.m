@@ -6,20 +6,30 @@
 //
 
 #import "NewPostController.h"
+#import "NSArray_extras.h"
 #import "zkSforce.h"
 #import "FeedDataSource.h"
 
+@interface NewPostController ()
+@property (retain, nonatomic, readwrite) NSImage *attachmentIcon;
+@property (retain) NSData  *attachmentData;
+@end
+
 @implementation NewPostController
 
-@synthesize postText, attachmentFilename;
-@synthesize window;
+@synthesize postText, window;
+@synthesize attachmentFilename, attachmentData, attachmentIcon;
+
++(NSSet *)keyPathsForValuesAffectingCanEditFilename {
+    return [NSSet setWithObject:@"attachmentData"];
+}
 
 +(NSSet *)keyPathsForValuesAffectingAttachmentIcon {
     return [NSSet setWithObject:@"attachmentFilename"];
 }
 
 +(NSSet *)keyPathsForValuesAffectingCanCreate {
-    return [NSSet setWithObject:@"postText"];
+    return [NSSet setWithObjects:@"postText", @"attachmentData", @"attachmentFilename", nil];
 }
 
 - (id)initFor:(FeedDataSource *)feed {
@@ -40,17 +50,59 @@
     [window release];
     [feedDataSource release];
     [postText release];
+    [attachmentData release];
     [attachmentFilename release];
     [attachmentIcon release];
     [super dealloc];
 }
 
+-(IBAction)pasteFromClipboard:(id)sender {
+    NSPasteboard *p = [NSPasteboard generalPasteboard];
+    NSArray *types = [NSArray arrayWithObject:[NSString class]];
+    NSArray *items = [p readObjectsForClasses:types options:[NSDictionary dictionary]];
+    if (items != nil && items.count > 0) {
+        self.postText = [items firstObject];
+        return;
+    }
+    types = [NSArray arrayWithObject:[NSImage class]];
+    items = [p readObjectsForClasses:types options:[NSDictionary dictionary]];
+    if (items != nil && items.count > 0) {
+        NSImage *i = [items firstObject];
+        NSImageRep *pref = nil;
+        double prefScore = 0;
+        for (NSImageRep *ir in [i representations]) {
+            if (![ir isKindOfClass:[NSBitmapImageRep class]]) continue;
+            double s = [ir pixelsHigh] * [ir pixelsWide] * [ir bitsPerSample];
+            if (s > prefScore) {
+                prefScore = s;
+                pref = ir;
+            }
+        }
+        if (pref) {
+            NSData *image = [(NSBitmapImageRep *)pref representationUsingType:NSPNGFileType properties:nil];
+            if (image) {
+                self.attachmentData = image;
+                self.attachmentIcon = i;
+                self.attachmentFilename = @"";
+            }
+        }
+    }
+}
+
 -(IBAction)create:(id)sender {
-    if ([attachmentFilename length] == 0)
+    if ([attachmentFilename length] == 0 && attachmentData == nil)
         [feedDataSource updateStatus:postText];
-    else
-        [feedDataSource createContentPost:postText withFile:attachmentFilename];
-    
+    else {
+        NSData *data = self.attachmentData != nil ? self.attachmentData : [NSData dataWithContentsOfFile:attachmentFilename];
+        NSString *dataName = self.attachmentFilename;
+        if (self.attachmentData == nil) {
+            dataName = [dataName lastPathComponent];
+        } else {
+            if (![[dataName lowercaseString] hasSuffix:@".png"])
+                dataName = [dataName stringByAppendingString:@".png"];
+        }
+        [feedDataSource createContentPost:postText content:data contentName:dataName];
+    }    
     [window close];
 }
 
@@ -61,14 +113,19 @@
     [p setCanChooseFiles:YES];
     [p beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
         if (result != NSFileHandlingPanelOKButton) return;
-        [attachmentIcon autorelease];
-        attachmentIcon = [[[NSWorkspace sharedWorkspace] iconForFile:[[p URL] path]] retain];
+        self.attachmentIcon = [[[NSWorkspace sharedWorkspace] iconForFile:[[p URL] path]] retain];
         self.attachmentFilename = [[p URL] path];
+        self.attachmentData= nil;
     }];
 }
 
 -(BOOL)canCreate {
-    return [postText length] > 0;
+    return (postText.length > 0) && 
+        ((self.attachmentData == nil) || (self.attachmentFilename.length> 0));
+}
+
+-(BOOL)canEditFilename {
+    return self.attachmentData != nil;
 }
 
 -(NSImage *)attachmentIcon {

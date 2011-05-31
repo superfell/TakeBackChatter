@@ -32,7 +32,7 @@
 -(IBAction)loadOlderRows:(id)sender;
 
 -(void)updateStatus:(NSString *)newStatus;
--(void)createContentPost:(NSString *)postText withFile:(NSString *)filename;
+-(void)createContentPost:(NSString *)postText content:(NSData *)content contentName:(NSString *)name;
 
 @property (readonly) NSString *defaultWindowTitle;
 @property (readonly) NSString *defaultWindowAutosaveName;

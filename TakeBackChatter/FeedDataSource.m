@@ -185,11 +185,11 @@ static int FEED_PAGE_SIZE = 25;
     [self checkSaveResult:sr];
 }
 
--(void)createContentPost:(NSString *)postText withFile:(NSString *)filename {
+-(void)createContentPost:(NSString *)postText content:(NSData *)content contentName:(NSString *)name {
     ZKSObject *post = [ZKSObject withType:@"FeedPost"];
+    [post setFieldValue:name field:@"ContentFileName"];
+    [post setFieldValue:[content encodeBase64] field:@"ContentData"];
     [post setFieldValue:[[self.sforce currentUserInfo] userId] field:@"ParentId"];
-    [post setFieldValue:[filename lastPathComponent] field:@"ContentFileName"];
-    [post setFieldValue:[[NSData dataWithContentsOfFile:filename] encodeBase64] field:@"ContentData"];
     [post setFieldValue:postText field:@"Body"];
     ZKSaveResult *sr = [[self.sforce create:[NSArray arrayWithObject:post]] firstObject];
     [self checkSaveResult:sr];
