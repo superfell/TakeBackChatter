@@ -97,8 +97,12 @@
     if (contentIcon == nil) {
         NSString *mimeType = [row valueForKeyPath:@"FeedPost.ContentType"];
         CFStringRef uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (CFStringRef)mimeType, NULL);
-        contentIcon = [[[NSWorkspace sharedWorkspace] iconForFileType:(NSString*)uti] retain];
-        CFRelease(uti);
+        if (uti == nil)
+            NSLog(@"Unable to find a UTI for %@", mimeType);
+        else {
+            contentIcon = [[[NSWorkspace sharedWorkspace] iconForFileType:(NSString*)uti] retain];
+            CFRelease(uti);
+        }
     }
     return contentIcon;
 }
