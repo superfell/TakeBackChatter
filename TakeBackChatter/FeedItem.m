@@ -106,16 +106,26 @@
 -(NSAttributedString *)linkPostBody {
     NSMutableAttributedString *s = [[NSMutableAttributedString alloc] init];
     [s beginEditing];
-    [s appendAttributedString:[NSAttributedString attributedStringWithString:[row valueForKeyPath:@"FeedPost.Body"]]];
-    [s appendAttributedString:[NSAttributedString attributedStringWithString:@"\r"]];
-    [s appendAttributedString:[NSAttributedString attributedStringWithString:[row valueForKeyPath:@"FeedPost.Title"]]];
-    [s appendAttributedString:[NSAttributedString attributedStringWithString:@"\r"]];
-
-    NSString *url = [row valueForKeyPath:@"FeedPost.LinkUrl"];
-    [s appendAttributedString:[NSAttributedString hyperlinkFromString:url withURL:[NSURL URLWithString:url]]];
-
-     [s endEditing];
-    return s;
+    NSString *body = [row valueForKeyPath:@"FeedPost.Body"];
+    NSString *title = [row valueForKeyPath:@"FeedPost.Title"];
+    NSString *link = [row valueForKeyPath:@"FeedPost.LinkUrl"];
+    if (body.length > 0) {
+        [s appendAttributedString:[body attributedString]];
+        [s appendAttributedString:[@"\r" attributedString]];
+    }
+    if (title.length > 0) {
+        [s appendAttributedString:[title attributedString]];
+        [s appendAttributedString:[@"\r" attributedString]];
+    }
+    if (link.length > 0) {
+        NSURL *url = [NSURL URLWithString:link];
+        if (url != nil)
+            [s appendAttributedString:[NSAttributedString hyperlinkFromString:link withURL:url]];
+        else
+            [s appendAttributedString:[link attributedString]];
+    }
+    [s endEditing];
+    return [s autorelease];
 }
 
 -(NSObject *)body {
