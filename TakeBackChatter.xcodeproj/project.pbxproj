@@ -121,12 +121,12 @@
 		F40C81CD13887FE300B6C525 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sad.png; sourceTree = "<group>"; };
 		F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BayesianKit.xcodeproj; path = BayesianKit/BayesianKit.xcodeproj; sourceTree = "<group>"; };
 		F40CA5E1138A287E009B8160 /* FeedList.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedList.xib; sourceTree = "<group>"; };
-		F426C02313861DCC00004388 /* NSDate_iso8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDate_iso8601.h; sourceTree = "<group>"; };
-		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDate_iso8601.m; sourceTree = "<group>"; };
+		F426C02313861DCC00004388 /* NSDate_iso8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDate_iso8601.h; path = TakeBackChatter/NSDate_iso8601.h; sourceTree = "<group>"; };
+		F426C02413861DCC00004388 /* NSDate_iso8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDate_iso8601.m; path = TakeBackChatter/NSDate_iso8601.m; sourceTree = "<group>"; };
 		F454E216138B56F500CC8158 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		F454E217138B56F500CC8158 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
-		F454E219138CC06C00CC8158 /* NSArray_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArray_extras.h; sourceTree = "<group>"; };
-		F454E21A138CC06C00CC8158 /* NSArray_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArray_extras.m; sourceTree = "<group>"; };
+		F454E219138CC06C00CC8158 /* NSArray_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSArray_extras.h; path = TakeBackChatter/NSArray_extras.h; sourceTree = "<group>"; };
+		F454E21A138CC06C00CC8158 /* NSArray_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSArray_extras.m; path = TakeBackChatter/NSArray_extras.m; sourceTree = "<group>"; };
 		F454E21C138EB47600CC8158 /* MoreNewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreNewer.xib; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -210,8 +210,8 @@
 		F48AB8EB1384CB7200BC9EF6 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		F48AB8F31384D0B800BC9EF6 /* FeedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDataSource.h; sourceTree = "<group>"; };
 		F48AB8F41384D0B800BC9EF6 /* FeedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDataSource.m; sourceTree = "<group>"; };
-		F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKSObject_KVO.h; sourceTree = "<group>"; };
-		F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSObject_KVO.m; sourceTree = "<group>"; };
+		F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZKSObject_KVO.h; path = TakeBackChatter/ZKSObject_KVO.h; sourceTree = "<group>"; };
+		F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZKSObject_KVO.m; path = TakeBackChatter/ZKSObject_KVO.m; sourceTree = "<group>"; };
 		F48AB9161384DC1700BC9EF6 /* credential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = credential.h; sourceTree = "<group>"; };
 		F48AB9171384DC1700BC9EF6 /* credential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = credential.m; sourceTree = "<group>"; };
 		F48AB9191384DC5900BC9EF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -223,8 +223,8 @@
 		F48EAA6713916036005C0601 /* UrlConnectionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlConnectionDelegate.m; sourceTree = "<group>"; };
 		F48EAA6B1391E979005C0601 /* NewPostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostController.h; sourceTree = "<group>"; };
 		F48EAA6C1391E979005C0601 /* NewPostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostController.m; sourceTree = "<group>"; };
-		F48EAA7413931D77005C0601 /* NSData-Base64Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData-Base64Extensions.h"; sourceTree = "<group>"; };
-		F48EAA7513931D78005C0601 /* NSData-Base64Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData-Base64Extensions.m"; sourceTree = "<group>"; };
+		F48EAA7413931D77005C0601 /* NSData-Base64Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData-Base64Extensions.h"; path = "TakeBackChatter/NSData-Base64Extensions.h"; sourceTree = "<group>"; };
+		F48EAA7513931D78005C0601 /* NSData-Base64Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData-Base64Extensions.m"; path = "TakeBackChatter/NSData-Base64Extensions.m"; sourceTree = "<group>"; };
 		F48EAA7713931E3F005C0601 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		F48EAAAF139410A1005C0601 /* NewPost.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewPost.xib; sourceTree = "<group>"; };
 		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
@@ -238,8 +238,8 @@
 		F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeedItem.m; sourceTree = "<group>"; };
 		F4D08BF41388428100A4C273 /* CollectionViewFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFeed.h; sourceTree = "<group>"; };
 		F4D08BF51388428100A4C273 /* CollectionViewFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeed.m; sourceTree = "<group>"; };
-		F4DC901B13947478004A0E00 /* NSString_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extras.h; sourceTree = "<group>"; };
-		F4DC901C13947478004A0E00 /* NSString_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_extras.m; sourceTree = "<group>"; };
+		F4DC901B13947478004A0E00 /* NSString_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSString_extras.h; path = TakeBackChatter/NSString_extras.h; sourceTree = "<group>"; };
+		F4DC901C13947478004A0E00 /* NSString_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSString_extras.m; path = TakeBackChatter/NSString_extras.m; sourceTree = "<group>"; };
 		F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentFeedItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +275,7 @@
 				F40C826F13888FBA00B6C525 /* BayesianKit.xcodeproj */,
 				F48EA9FC138F2632005C0601 /* ParseKit.framework */,
 				F4D08BE013883EA400A4C273 /* AMCollectionView */,
+				F48DA9951394A19E001C10CA /* Categories */,
 				F48AB8851384CB2700BC9EF6 /* zkSforce */,
 				F48AB8661384C66400BC9EF6 /* TakeBackChatter */,
 				F48AB85F1384C66400BC9EF6 /* Frameworks */,
@@ -341,16 +342,6 @@
 				F48EAA6613916036005C0601 /* UrlConnectionDelegate.h */,
 				F48EAA6713916036005C0601 /* UrlConnectionDelegate.m */,
 				F48AB8671384C66400BC9EF6 /* Supporting Files */,
-				F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */,
-				F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */,
-				F426C02313861DCC00004388 /* NSDate_iso8601.h */,
-				F426C02413861DCC00004388 /* NSDate_iso8601.m */,
-				F454E219138CC06C00CC8158 /* NSArray_extras.h */,
-				F454E21A138CC06C00CC8158 /* NSArray_extras.m */,
-				F48EAA7413931D77005C0601 /* NSData-Base64Extensions.h */,
-				F48EAA7513931D78005C0601 /* NSData-Base64Extensions.m */,
-				F4DC901B13947478004A0E00 /* NSString_extras.h */,
-				F4DC901C13947478004A0E00 /* NSString_extras.m */,
 			);
 			path = TakeBackChatter;
 			sourceTree = "<group>";
@@ -441,6 +432,23 @@
 				F48AB8C91384CB3C00BC9EF6 /* zkXmlDeserializer.m */,
 			);
 			name = zkSforce;
+			sourceTree = "<group>";
+		};
+		F48DA9951394A19E001C10CA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F48AB9121384D71300BC9EF6 /* ZKSObject_KVO.h */,
+				F48AB9131384D71300BC9EF6 /* ZKSObject_KVO.m */,
+				F426C02313861DCC00004388 /* NSDate_iso8601.h */,
+				F426C02413861DCC00004388 /* NSDate_iso8601.m */,
+				F454E219138CC06C00CC8158 /* NSArray_extras.h */,
+				F454E21A138CC06C00CC8158 /* NSArray_extras.m */,
+				F48EAA7413931D77005C0601 /* NSData-Base64Extensions.h */,
+				F48EAA7513931D78005C0601 /* NSData-Base64Extensions.m */,
+				F4DC901B13947478004A0E00 /* NSString_extras.h */,
+				F4DC901C13947478004A0E00 /* NSString_extras.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		F4D08BE013883EA400A4C273 /* AMCollectionView */ = {
