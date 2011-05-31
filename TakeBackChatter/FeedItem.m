@@ -48,6 +48,7 @@
     [row release];
     [actorPhotoUrl release];
     [actorPhoto release];
+    [contentIcon release];
     [super dealloc];
 }
 
@@ -86,6 +87,20 @@
         case FeedTypeTrackedChange: return [NSString stringWithFormat:@"%@ - %@", name, actor];
     }
     return name;
+}
+
+-(NSString *)contentTitle {
+    return [row valueForKeyPath:@"FeedPost.Title"];
+}
+
+-(NSImage *)contentIcon {
+    if (contentIcon == nil) {
+        NSString *mimeType = [row valueForKeyPath:@"FeedPost.ContentType"];
+        CFStringRef uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (CFStringRef)mimeType, NULL);
+        contentIcon = [[[NSWorkspace sharedWorkspace] iconForFileType:(NSString*)uti] retain];
+        CFRelease(uti);
+    }
+    return contentIcon;
 }
 
 -(NSAttributedString *)linkPostBody {

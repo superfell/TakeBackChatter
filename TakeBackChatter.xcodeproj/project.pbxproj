@@ -74,6 +74,7 @@
 		F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */; };
 		F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF51388428100A4C273 /* CollectionViewFeed.m */; };
 		F4DC901D13947478004A0E00 /* NSString_extras.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DC901C13947478004A0E00 /* NSString_extras.m */; };
+		F4DC901F139479E2004A0E00 /* ContentFeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,7 @@
 		F4D08BF51388428100A4C273 /* CollectionViewFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeed.m; sourceTree = "<group>"; };
 		F4DC901B13947478004A0E00 /* NSString_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extras.h; sourceTree = "<group>"; };
 		F4DC901C13947478004A0E00 /* NSString_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_extras.m; sourceTree = "<group>"; };
+		F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentFeedItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				F48AB9221384E09C00BC9EF6 /* FeedItem.m */,
 				F40CA5E1138A287E009B8160 /* FeedList.xib */,
 				F4D08BEF13883FCA00A4C273 /* FeedItem.xib */,
+				F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */,
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
 				F454E21C138EB47600CC8158 /* MoreNewer.xib */,
 				F4A29DE7138EC0870037CD5E /* MoreOlder.xib */,
@@ -537,6 +540,7 @@
 				F454E21D138EB47600CC8158 /* MoreNewer.xib in Resources */,
 				F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */,
 				F48EAAB0139410A1005C0601 /* NewPost.xib in Resources */,
+				F4DC901F139479E2004A0E00 /* ContentFeedItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,18 +7,23 @@
 
 #import "CollectionViewFeedItem.h"
 #import "FeedViewController.h"
+#import "FeedItem.h"
 
 @implementation CollectionViewFeedItem
 
 - (id)initWithCollectionView:(AMCollectionView *)theCollectionView representedObject:(id)theObject {
 	self = [super initWithCollectionView:theCollectionView representedObject:theObject];
-    [NSBundle loadNibNamed:@"FeedItem" owner:self];
+    NSString *nibName = [theObject feedItemType] == FeedTypeContentPost ? @"ContentFeedItem" : @"FeedItem";
+    [NSBundle loadNibNamed:nibName owner:self];
     actorPhoto.layer.borderWidth = 1.0;
     CGColorRef gray = CGColorCreateGenericGray(0.7,0.7);
     actorPhoto.layer.borderColor = gray;
     CGColorRelease(gray);
     actorPhoto.layer.cornerRadius = 10.0;
     actorPhoto.layer.masksToBounds = YES;
+    NSSize frameSize = [view frame].size;
+    NSSize textSize = [bodyTextField frame].size;
+    heightExtra = frameSize.height - textSize.height;
 	return self;
 }
 
@@ -31,7 +36,7 @@
     float propBodyWidth = bodySize.width + (newSize.width - frameSize.width);
     
     float bodyHeight = [[bodyTextField cell] cellSizeForBounds:NSMakeRect(0, 0, propBodyWidth, 100000)].height;
-    return NSMakeSize(newSize.width, fmaxf(min_height, bodyHeight + (105 - 56)));
+    return NSMakeSize(newSize.width, fmaxf(min_height, bodyHeight + heightExtra));
 }
 
 @end

@@ -11,6 +11,7 @@
 @interface CollectionViewFeedItem : AMCollectionViewItem {
     IBOutlet NSTextField *bodyTextField;
     IBOutlet NSImageView *actorPhoto;
+    CGFloat               heightExtra;
 }
 
 @end

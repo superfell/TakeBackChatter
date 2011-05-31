@@ -21,6 +21,7 @@ typedef enum {
     ZKSObject       *row;
     NSURL           *actorPhotoUrl;
     NSImage         *actorPhoto;
+    NSImage         *contentIcon;
     FeedItemType    feedItemType;
 }
 
@@ -38,6 +39,9 @@ typedef enum {
 @property (readonly) NSObject *body;            // NSString or NSAttributedString
 @property (readonly) NSString *age;             // "5m", "10d", "1h" etc.
 @property (readonly) NSString *commentsLabel;   // "3 comments", etc.
+
+@property (readonly) NSString *contentTitle;
+@property (readonly) NSImage *contentIcon;
 
 @property (readonly) NSDate *createdDate;
 

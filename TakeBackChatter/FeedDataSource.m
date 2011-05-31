@@ -103,7 +103,7 @@ static int FEED_PAGE_SIZE = 25;
 
 -(NSString *)buildQueryWithDate:(NSDate *)date newer:(BOOL)newer {
     NSMutableString *soql = [NSMutableString stringWithString:@"SELECT Id, Type, CreatedDate, CreatedById, CreatedBy.Name, " \
-        "ParentId, Parent.Name, FeedPostId, FeedPost.Body, FeedPost.Title, FeedPost.LinkUrl, " \
+        "ParentId, Parent.Name, FeedPostId, FeedPost.Body, FeedPost.Title, FeedPost.LinkUrl, FeedPost.ContentType, " \
             "(SELECT Id, FieldName, OldValue, NewValue FROM FeedTrackedChanges), " \
             "(SELECT Id, CreatedDate, CreatedById, CreatedBy.Name, CommentBody FROM FeedComments ORDER BY CreatedDate DESC) " \
         "FROM NewsFeed "];
