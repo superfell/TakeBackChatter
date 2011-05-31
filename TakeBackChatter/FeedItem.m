@@ -8,6 +8,7 @@
 #import "FeedItem.h"
 #import "ZKSObject.h"
 #import "zkQueryResult.h"
+#import "NSString_extras.h"
 #import "TakeBackChatterAppDelegate.h"
 #import <BayesianKit/BayesianKit.h>
 
@@ -87,15 +88,32 @@
     return name;
 }
 
--(NSString *)body {
+-(NSAttributedString *)linkPostBody {
+    NSMutableAttributedString *s = [[NSMutableAttributedString alloc] init];
+    [s beginEditing];
+    [s appendAttributedString:[NSAttributedString attributedStringWithString:[row valueForKeyPath:@"FeedPost.Body"]]];
+    [s appendAttributedString:[NSAttributedString attributedStringWithString:@"\r"]];
+    [s appendAttributedString:[NSAttributedString attributedStringWithString:[row valueForKeyPath:@"FeedPost.Title"]]];
+    [s appendAttributedString:[NSAttributedString attributedStringWithString:@"\r"]];
+
+    NSString *url = [row valueForKeyPath:@"FeedPost.LinkUrl"];
+    [s appendAttributedString:[NSAttributedString hyperlinkFromString:url withURL:[NSURL URLWithString:url]]];
+
+     [s endEditing];
+    return s;
+}
+
+-(NSObject *)body {
     switch (self.feedItemType) {
         case FeedTypeUserStatus:
         case FeedTypeTextPost:
-        case FeedTypeLinkPost:
         case FeedTypeContentPost:
             return [row valueForKeyPath:@"FeedPost.Body"];
+        case FeedTypeLinkPost:
+            return [self linkPostBody];
         case FeedTypeTrackedChange:
-            return [NSString stringWithFormat:@"made %@", [self quantity:[[row queryResultValue:@"FeedTrackedChanges"] size] singluar:@"change" plural:@"changes"]];
+            return [NSString stringWithFormat:@"made %@", 
+                    [self quantity:[[row queryResultValue:@"FeedTrackedChanges"] size] singluar:@"change" plural:@"changes"]];
     }
 }
 

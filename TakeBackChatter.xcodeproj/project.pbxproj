@@ -73,6 +73,7 @@
 		F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D08BEF13883FCA00A4C273 /* FeedItem.xib */; };
 		F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */; };
 		F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF51388428100A4C273 /* CollectionViewFeed.m */; };
+		F4DC901D13947478004A0E00 /* NSString_extras.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DC901C13947478004A0E00 /* NSString_extras.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +237,8 @@
 		F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeedItem.m; sourceTree = "<group>"; };
 		F4D08BF41388428100A4C273 /* CollectionViewFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFeed.h; sourceTree = "<group>"; };
 		F4D08BF51388428100A4C273 /* CollectionViewFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeed.m; sourceTree = "<group>"; };
+		F4DC901B13947478004A0E00 /* NSString_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_extras.h; sourceTree = "<group>"; };
+		F4DC901C13947478004A0E00 /* NSString_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_extras.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +346,8 @@
 				F454E21A138CC06C00CC8158 /* NSArray_extras.m */,
 				F48EAA7413931D77005C0601 /* NSData-Base64Extensions.h */,
 				F48EAA7513931D78005C0601 /* NSData-Base64Extensions.m */,
+				F4DC901B13947478004A0E00 /* NSString_extras.h */,
+				F4DC901C13947478004A0E00 /* NSString_extras.m */,
 			);
 			path = TakeBackChatter;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				F48EAA6813916037005C0601 /* UrlConnectionDelegate.m in Sources */,
 				F48EAA6D1391E979005C0601 /* NewPostController.m in Sources */,
 				F48EAA7613931D78005C0601 /* NSData-Base64Extensions.m in Sources */,
+				F4DC901D13947478004A0E00 /* NSString_extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

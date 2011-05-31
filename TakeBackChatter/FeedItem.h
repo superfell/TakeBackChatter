@@ -35,7 +35,7 @@ typedef enum {
 @property (retain) NSURL *actorPhotoUrl;
 
 @property (readonly) NSString *title;
-@property (readonly) NSString *body;
+@property (readonly) NSObject *body;            // NSString or NSAttributedString
 @property (readonly) NSString *age;             // "5m", "10d", "1h" etc.
 @property (readonly) NSString *commentsLabel;   // "3 comments", etc.
 
