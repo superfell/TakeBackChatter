@@ -14,6 +14,8 @@
     CGFloat               heightExtra;
 }
 
+-(IBAction)showContent:(id)sender;
+
 @end
 
 

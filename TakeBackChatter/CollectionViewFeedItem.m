@@ -15,12 +15,14 @@
 	self = [super initWithCollectionView:theCollectionView representedObject:theObject];
     NSString *nibName = [theObject feedItemType] == FeedTypeContentPost ? @"ContentFeedItem" : @"FeedItem";
     [NSBundle loadNibNamed:nibName owner:self];
+    
     actorPhoto.layer.borderWidth = 1.0;
     CGColorRef gray = CGColorCreateGenericGray(0.7,0.7);
     actorPhoto.layer.borderColor = gray;
     CGColorRelease(gray);
     actorPhoto.layer.cornerRadius = 10.0;
     actorPhoto.layer.masksToBounds = YES;
+    
     NSSize frameSize = [view frame].size;
     NSSize textSize = [bodyTextField frame].size;
     heightExtra = frameSize.height - textSize.height;
@@ -28,6 +30,10 @@
     [bodyTextField setAllowsEditingTextAttributes:YES];
     [bodyTextField setSelectable:YES];
 	return self;
+}
+
+-(void)showContent:(id)sender {
+    NSLog(@"showContet clicked %@", sender);
 }
 
 - (NSSize)sizeForViewWithProposedSize:(NSSize)newSize {
