@@ -24,6 +24,9 @@
     NSSize frameSize = [view frame].size;
     NSSize textSize = [bodyTextField frame].size;
     heightExtra = frameSize.height - textSize.height;
+    
+    [bodyTextField setAllowsEditingTextAttributes:YES];
+    [bodyTextField setSelectable:YES];
 	return self;
 }
 
