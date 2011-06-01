@@ -121,7 +121,7 @@ static int FEED_PAGE_SIZE = 25;
         if ([qr size] == 0) return;
         NSMutableArray *res = [NSMutableArray arrayWithCapacity:[[qr records] count]];
         for (ZKSObject *r in [qr records])
-            [res addObject:[FeedItem feedItemFrom:r]];
+            [res addObject:[FeedItem feedItemFrom:r dataSource:self]];
         
         [self startActorFetch:res];
         

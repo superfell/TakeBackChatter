@@ -6,6 +6,7 @@
 //
 
 #import "FeedItem.h"
+#import "FeedDataSource.h"
 #import "ZKSObject.h"
 #import "zkQueryResult.h"
 #import "NSString_extras.h"
@@ -14,7 +15,7 @@
 
 @implementation FeedItem
 
-@synthesize feedItemType, actorPhotoUrl, actorPhoto;
+@synthesize feedItemType, actorPhotoUrl, actorPhoto, feedDataSource;
 
 // This tells KVO (and theirfore the UI binding), that the 'ActorPhoto' property value is affected by changes to the 'ActorPhotoUrl' property
 +(NSSet *)keyPathsForValuesAffectingActorPhoto {
@@ -37,9 +38,10 @@
     return FeedTypeUserStatus;
 }
 
-- (id)initWithRow:(ZKSObject *)r {
+- (id)initWithRow:(ZKSObject *)r dataSource:(FeedDataSource *)s {
     self = [super init];
     row = [r retain];
+    feedDataSource = [s retain];    // sigh, TODO fix retain loop
     feedItemType = [self resolveType];
     return self;
 }
@@ -52,12 +54,16 @@
     [super dealloc];
 }
 
-+(id)feedItemFrom:(ZKSObject *)row {
-    return [[[FeedItem alloc] initWithRow:row] autorelease];
++(id)feedItemFrom:(ZKSObject *)row dataSource:(FeedDataSource *)src {
+    return [[[FeedItem alloc] initWithRow:row dataSource:src] autorelease];
 }
 
 -(NSString *)quantity:(int)q singluar:(NSString *)s plural:(NSString *)p {
     return [NSString stringWithFormat:@"%d %@", q, q == 1 ? s : p];
+}
+
+-(NSString *)rowId {
+    return [row id];
 }
 
 -(NSString *)actor {

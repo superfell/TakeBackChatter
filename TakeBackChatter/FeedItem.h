@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @class ZKSObject;
+@class FeedDataSource;
 
 typedef enum {
     FeedTypeUserStatus,
@@ -18,6 +19,7 @@ typedef enum {
 } FeedItemType;
 
 @interface FeedItem : NSObject {
+    FeedDataSource  *feedDataSource;
     ZKSObject       *row;
     NSURL           *actorPhotoUrl;
     NSImage         *actorPhoto;
@@ -25,11 +27,13 @@ typedef enum {
     FeedItemType    feedItemType;
 }
 
-+(id)feedItemFrom:(ZKSObject *)row;
++(id)feedItemFrom:(ZKSObject *)row dataSource:(FeedDataSource *)src;
 
+@property (readonly) FeedDataSource *feedDataSource;
 @property (readonly) NSString *type;
 @property (readonly) FeedItemType feedItemType;
 
+@property (readonly) NSString *rowId;
 @property (readonly) NSString *actor;
 @property (readonly) NSString *actorId;
 @property (retain) NSImage *actorPhoto;
