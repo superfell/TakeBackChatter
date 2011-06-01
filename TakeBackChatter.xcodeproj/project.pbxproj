@@ -68,6 +68,7 @@
 		F48EAA7813931E3F005C0601 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F48EAA7713931E3F005C0601 /* libcrypto.dylib */; };
 		F48EAAB0139410A1005C0601 /* NewPost.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48EAAAF139410A1005C0601 /* NewPost.xib */; };
 		F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A29DE7138EC0870037CD5E /* MoreOlder.xib */; };
+		F4AC3B651395E889005FBBCF /* NSString-Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AC3B641395E889005FBBCF /* NSString-Base64Extensions.m */; };
 		F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BE913883F0300A4C273 /* AMCollectionView.m */; };
 		F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */; };
 		F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D08BEF13883FCA00A4C273 /* FeedItem.xib */; };
@@ -228,6 +229,8 @@
 		F48EAA7713931E3F005C0601 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = usr/lib/libcrypto.dylib; sourceTree = SDKROOT; };
 		F48EAAAF139410A1005C0601 /* NewPost.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewPost.xib; sourceTree = "<group>"; };
 		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
+		F4AC3B631395E889005FBBCF /* NSString-Base64Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-Base64Extensions.h"; sourceTree = "<group>"; };
+		F4AC3B641395E889005FBBCF /* NSString-Base64Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-Base64Extensions.m"; sourceTree = "<group>"; };
 		F4D08BE813883F0300A4C273 /* AMCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionView.h; path = TakeBackChatter/AMCollectionView.h; sourceTree = "<group>"; };
 		F4D08BE913883F0300A4C273 /* AMCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionView.m; path = TakeBackChatter/AMCollectionView.m; sourceTree = "<group>"; };
 		F4D08BEA13883F0300A4C273 /* AMCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionViewItem.h; path = TakeBackChatter/AMCollectionViewItem.h; sourceTree = "<group>"; };
@@ -445,6 +448,8 @@
 				F454E21A138CC06C00CC8158 /* NSArray_extras.m */,
 				F48EAA7413931D77005C0601 /* NSData-Base64Extensions.h */,
 				F48EAA7513931D78005C0601 /* NSData-Base64Extensions.m */,
+				F4AC3B631395E889005FBBCF /* NSString-Base64Extensions.h */,
+				F4AC3B641395E889005FBBCF /* NSString-Base64Extensions.m */,
 				F4DC901B13947478004A0E00 /* NSString_extras.h */,
 				F4DC901C13947478004A0E00 /* NSString_extras.m */,
 			);
@@ -609,6 +614,7 @@
 				F48EAA6D1391E979005C0601 /* NewPostController.m in Sources */,
 				F48EAA7613931D78005C0601 /* NSData-Base64Extensions.m in Sources */,
 				F4DC901D13947478004A0E00 /* NSString_extras.m in Sources */,
+				F4AC3B651395E889005FBBCF /* NSString-Base64Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
