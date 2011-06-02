@@ -9,12 +9,13 @@
 
 @class FeedController;
 @class BKClassifier;
+@class ZKLoginController;
 
 @interface TakeBackChatterAppDelegate : NSObject <NSApplicationDelegate> {
-@private
     BKClassifier    *classifier;
     NSMenuItem      *loginMenu, *logoutMenu;
     NSMutableArray  *feedControllers;
+    ZKLoginController *loginController;
 }
 
 @property (readonly) BKClassifier *classifier;

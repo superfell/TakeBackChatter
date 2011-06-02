@@ -38,9 +38,9 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 }
 
 -(IBAction)startApiLogin:(id)sender {
-    NSLog(@"Todo API Login");
-    ZKLoginController *c = [[ZKLoginController alloc] init];
-    [c showLoginWindow:self target:self selector:@selector(showFeedForClient:)];
+    if (loginController == nil)
+        loginController = [[ZKLoginController alloc] init];
+    [loginController showLoginWindow:self target:self selector:@selector(showFeedForClient:)];
 }
 
 -(void)registerDefaults {
@@ -176,6 +176,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 -(void)dealloc {
     [feedControllers release];
     [classifier release];
+    [loginController release];
     [super dealloc];
 }
 
