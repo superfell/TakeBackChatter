@@ -9,6 +9,7 @@
 
 @class ZKSforceClient;
 @class CollectionViewFeed;
+@class FeedItem;
 
 @interface FeedDataSource : NSObject {
     NSArray         *feedItems, *filteredFeedItems, *junkFeedItems;
@@ -33,6 +34,7 @@
 
 -(void)updateStatus:(NSString *)newStatus;
 -(void)createContentPost:(NSString *)postText content:(NSData *)content contentName:(NSString *)name;
+-(void)downloadContentFor:(FeedItem *)feedItem;
 
 @property (readonly) NSString *defaultWindowTitle;
 @property (readonly) NSString *defaultWindowAutosaveName;

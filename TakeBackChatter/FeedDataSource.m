@@ -13,6 +13,7 @@
 #import "NSData-Base64Extensions.h"
 #import "TakeBackChatterAppDelegate.h"
 #import "UrlConnectionDelegate.h"
+#import "NSString-Base64Extensions.h"
 #import <BayesianKit/BayesianKit.h>
 
 static int FEED_PAGE_SIZE = 25;
@@ -200,6 +201,26 @@ static int FEED_PAGE_SIZE = 25;
 
 -(NSString *)defaultWindowAutosaveName {
     return [NSString stringWithFormat:@"%@ / %@", [[self.sforce currentUserInfo] userId], [[self.sforce serverUrl] host]];
+}
+
+-(void)downloadContentFor:(FeedItem *)feedItem  {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        // Note the limit 1 is needed otherwise you can hit the MALFORMED_QUERY non admin users need limit
+        NSString *soql = [NSString stringWithFormat:@"select ContentData, ContentFilename from NewsFeed where id='%@' limit 1", [feedItem rowId]];
+        ZKQueryResult *feed = [self.sforce query:soql];
+        if ([feed size] == 0) return;   //TODO notify user ?
+        ZKSObject *row = [[feed records] firstObject];
+        NSString *data = [row fieldValue:@"ContentData"];
+        NSString *filename = [row fieldValue:@"ContentFileName"];
+        NSData *contentData = [data decodeBase64WithNewlines:NO];
+        NSArray * dirs = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+        NSString *fullPath = [[dirs firstObject] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", [feedItem rowId], filename]];
+        [contentData writeToFile:fullPath atomically:YES];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [[NSWorkspace sharedWorkspace] openFile:fullPath];
+        });
+    });
 }
 
 -(void)dealloc {

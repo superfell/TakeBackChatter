@@ -8,6 +8,7 @@
 #import "CollectionViewFeedItem.h"
 #import "FeedViewController.h"
 #import "FeedItem.h"
+#import "FeedDataSource.h"
 
 @implementation CollectionViewFeedItem
 
@@ -33,7 +34,7 @@
 }
 
 -(void)showContent:(id)sender {
-    NSLog(@"showContet clicked %@", sender);
+    [[[self representedObject] feedDataSource] downloadContentFor:[self representedObject]];
 }
 
 - (NSSize)sizeForViewWithProposedSize:(NSSize)newSize {
