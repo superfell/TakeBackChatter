@@ -55,15 +55,7 @@ static NSString *test = @"https://test.salesforce.com";
 	return self;
 }
 
-- (void)setImage:(NSString *)name onButton:(NSButton *)b {
-	NSString *imgFile = [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
-	NSImage *img = [[[NSImage alloc] initWithContentsOfFile:imgFile] autorelease];
-	[b setImage:img];
-}
-
 - (void)awakeFromNib {
-	[self setImage:@"plus-8" onButton:addButton];
-	[self setImage:@"minus-8" onButton:delButton];
 	[loginProgress setUsesThreadedAnimation:YES];
 	[loginProgress setHidden:YES];
 	[loginProgress setDoubleValue:22.0];
