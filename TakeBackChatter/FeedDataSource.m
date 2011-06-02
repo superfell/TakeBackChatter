@@ -81,7 +81,7 @@ static int FEED_PAGE_SIZE = 25;
         // (because they need a runloop)
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             for (ZKSObject *r in [qr records]) {
-                NSURL *imgUrl = [NSURL URLWithString:[r fieldValue:@"SmallPhotoUrl"]];
+                NSURL *imgUrl = [NSURL URLWithString:[r fieldValue:@"SmallPhotoUrl"] relativeToURL:[self.sforce serverUrl]];
                 NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
                 [req setValue:[NSString stringWithFormat:@"OAuth %@", sid] forHTTPHeaderField:@"Authorization"];
 
