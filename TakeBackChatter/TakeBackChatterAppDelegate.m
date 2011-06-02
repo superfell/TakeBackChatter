@@ -124,6 +124,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
 	NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
     
+    NSLog(@"oauth callback got url %@", url);
 	// Now you can parse the URL and perform whatever action is needed
     
     ZKSforceClient *client = [[[ZKSforceClient alloc] init] autorelease];
