@@ -31,11 +31,16 @@ static NSString * login_lastUsernameKey = @"login_lastUserName";
 static NSString *prod = @"https://login.salesforce.com";
 static NSString *test = @"https://test.salesforce.com";
 
++(NSSet *)keyPathsForValuesAffectingCredentials {
+    return [NSSet setWithObject:@"server"];
+}
 
-+ (void)initialize {
-	[self setKeys:[NSArray arrayWithObject:@"server"]   triggerChangeNotificationsForDependentKey:@"credentials"];
-	[self setKeys:[NSArray arrayWithObject:@"server"]   triggerChangeNotificationsForDependentKey:@"canDeleteServer"];
-	[self setKeys:[NSArray arrayWithObject:@"username"] triggerChangeNotificationsForDependentKey:@"password"];
++(NSSet *)keyPathsForValuesAffectingCanDeleteServer {
+    return [NSSet setWithObject:@"server"];
+}
+
++(NSSet *)keyPathsForValuesAffectingPassword {
+    return [NSSet setWithObject:@"username"];
 }
 
 +(void)addToDefaults:(NSMutableDictionary *)defaults {
@@ -150,9 +155,7 @@ static NSString *test = @"https://test.salesforce.com";
 	if (![self canDeleteServer]) return;
 	NSArray *servers = [[NSUserDefaults standardUserDefaults] objectForKey:@"servers"];
 	NSMutableArray *newServers = [NSMutableArray arrayWithCapacity:[servers count]];
-	NSString *s;
-	NSEnumerator *e = [servers objectEnumerator];
-	while (s = [e nextObject]) {
+    for (NSString *s in servers) {
 		if ([s caseInsensitiveCompare:server] == NSOrderedSame) continue;
 		[newServers addObject:s];
 	}
@@ -359,9 +362,7 @@ static NSString *test = @"https://test.salesforce.com";
 		NSArray *allCredentials = [Credential credentialsForServer:server];
 		NSMutableArray * filtered = [NSMutableArray arrayWithCapacity:[allCredentials count]];
 		NSMutableSet *usernames = [NSMutableSet set];
-		Credential *c;
-		NSEnumerator *e = [allCredentials objectEnumerator];
-		while (c = [e nextObject]) {
+        for (Credential *c in allCredentials) {
 			if ([usernames containsObject:[[c username] lowercaseString]]) continue;
 			[usernames addObject:[[c username] lowercaseString]];
 			[filtered addObject:c];
@@ -377,9 +378,7 @@ static NSString *test = @"https://test.salesforce.com";
 
 - (void)setPasswordFromKeychain {
 	// see if there's a matching credential and default the password if so
-	Credential *c;
-	NSEnumerator *e = [[self credentials] objectEnumerator];
-	while (c = [e nextObject]) {
+    for (Credential *c in [self credentials]) {
 		if ([[c username] caseInsensitiveCompare:username] == NSOrderedSame) {
 			[self setPassword:[c password]];
 			[self setSelectedCredential:c];
