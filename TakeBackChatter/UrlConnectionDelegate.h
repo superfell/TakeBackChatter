@@ -10,12 +10,13 @@
 @interface UrlConnectionDelegate : NSObject {
     NSMutableData       *data;
     NSHTTPURLResponse   *response;
+    NSError             *error;
 }
 
-@property (retain) NSMutableData     *data;
-@property (retain) NSHTTPURLResponse *response;
-@property (readonly) NSUInteger      httpStatusCode;
-
+@property (retain,readonly) NSMutableData     *data;
+@property (retain,readonly) NSHTTPURLResponse *response;
+@property (retain,readonly) NSError           *error;
+@property (readonly) NSUInteger                httpStatusCode;
 @end
 
 typedef void (^UrlCompletionBlock)(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err);

@@ -7,14 +7,25 @@
 
 #import "UrlConnectionDelegate.h"
 
+@interface UrlConnectionDelegate ()
+@property (retain) NSMutableData     *data;
+@property (retain) NSHTTPURLResponse *response;
+@property (retain) NSError           *error;
+@end
+
 @implementation UrlConnectionDelegate
 
-@synthesize data, response;
+@synthesize data, response, error;
 
 -(void)dealloc {
     [response release];
     [data release];
+    [error release];
     [super dealloc];
+}
+
+-(void)connectionRequestEnded:(NSURLConnection *)connection {
+    // subclasses should implmement
 }
 
 -(NSUInteger)httpStatusCode {
@@ -27,13 +38,18 @@
     self.data = [[NSMutableData alloc] init];
 }
 
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)err {
+    self.error = err;
+    [self connectionRequestEnded:connection];
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
     [self.data appendData:d];
 }
 
 // we've gotten all the response data, run the completion block.
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // subclasses should implmement
+    [self connectionRequestEnded:connection];
 }
 
 @end
@@ -60,9 +76,9 @@
 }
 
 // we've gotten all the response data, run the completion block.
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)connectionRequestEnded:(NSURLConnection *)connection {
     dispatch_async(queueToRunBlock, ^(void) {
-        self.completionBlock(self.httpStatusCode, self.response, self.data, nil);
+        self.completionBlock(self.httpStatusCode, self.response, self.data, self.error);
     });
 }
 
