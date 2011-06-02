@@ -87,7 +87,10 @@ static int FEED_PAGE_SIZE = 25;
 
                 CachingUrlConnectionDelegate *delegate = [CachingUrlConnectionDelegate 
                     urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *data, NSError *err) {
-                    
+                    if (err != nil) {
+                        NSLog(@"photoLoader: got error on url %@ %@", [imgUrl absoluteString], err);
+                        return;
+                    }
                     NSImage *img = [[[NSImage alloc] initWithData:data] autorelease];
                     NSString *userId = [r id];
                     for (FeedItem *i in items) {
