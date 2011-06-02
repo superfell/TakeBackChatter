@@ -10,6 +10,7 @@
 #import "FeedDataSource.h"
 #import "zkSforce.h"
 #import "credential.h"
+#import "ZKLoginController.h"
 #import <BayesianKit/BayesianKit.h>
 
 @implementation TakeBackChatterAppDelegate
@@ -19,7 +20,9 @@
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
 
-static NSString *PREFS_SERVER_KEY = @"servers";
+static NSString *PREFS_SERVER_KEY = @"oauth_servers";
+static NSString *PREFS_SHOW_API_LOGIN = @"api_login";
+
 static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 
 -(IBAction)startLogin:(id)sender {
@@ -34,9 +37,18 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
+-(IBAction)startApiLogin:(id)sender {
+    NSLog(@"Todo API Login");
+    ZKLoginController *c = [[ZKLoginController alloc] init];
+    [c showLoginWindow:self target:self selector:@selector(showFeedForClient:)];
+}
+
 -(void)registerDefaults {
     NSArray *servers = [NSArray arrayWithObjects:@"https://login.salesforce.com", @"https://test.salesforce.com", nil];
-    NSDictionary *defaults = [NSDictionary dictionaryWithObject:servers forKey:PREFS_SERVER_KEY];
+    NSMutableDictionary *defaults = [NSMutableDictionary dictionaryWithCapacity:10];
+    [defaults setObject:servers forKey:PREFS_SERVER_KEY];
+    [defaults setObject:[NSNumber numberWithBool:NO] forKey:PREFS_SHOW_API_LOGIN];
+    [ZKLoginController addToDefaults:defaults];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
@@ -45,6 +57,11 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:PREFS_SERVER_KEY]) {
         NSMenuItem *i = [[[NSMenuItem alloc] initWithTitle:server action:@selector(startLogin:) keyEquivalent:@""] autorelease];
         [i setRepresentedObject:server];
+        [subMenu addItem:i];
+    }
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFS_SHOW_API_LOGIN]) {
+        [subMenu addItem:[NSMenuItem separatorItem]];
+        NSMenuItem *i = [[[NSMenuItem alloc] initWithTitle:@"API Login" action:@selector(startApiLogin:) keyEquivalent:@""] autorelease];
         [subMenu addItem:i];
     }
     [loginMenu setSubmenu:subMenu];
