@@ -46,6 +46,9 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [self.collectionView setAllowsMultipleSelection:YES];
 	[self.collectionView setRowHeight:105];
 	[self.collectionView setDrawsBackground:YES];
+    [self.collectionView setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
+                                                                       [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1.0],
+                                                                       nil]];
     [window makeKeyAndOrderFront:self];
     return self;
 }
