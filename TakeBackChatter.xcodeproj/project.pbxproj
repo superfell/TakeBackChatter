@@ -15,6 +15,9 @@
 		F454E218138B56F500CC8158 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E217138B56F500CC8158 /* FeedViewController.m */; };
 		F454E21B138CC06C00CC8158 /* NSArray_extras.m in Sources */ = {isa = PBXBuildFile; fileRef = F454E21A138CC06C00CC8158 /* NSArray_extras.m */; };
 		F454E21D138EB47600CC8158 /* MoreNewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F454E21C138EB47600CC8158 /* MoreNewer.xib */; };
+		F46039A81398821B00C584BD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46039A71398821B00C584BD /* Sparkle.framework */; };
+		F46039A91398826C00C584BD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F46039A71398821B00C584BD /* Sparkle.framework */; };
+		F46039AB1398844F00C584BD /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F46039AA1398844F00C584BD /* dsa_pub.pem */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
@@ -113,6 +116,7 @@
 			files = (
 				F48EA9FB138F261B005C0601 /* BayesianKit.framework in CopyFiles */,
 				F48EA9FD138F2632005C0601 /* ParseKit.framework in CopyFiles */,
+				F46039A91398826C00C584BD /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +135,8 @@
 		F454E219138CC06C00CC8158 /* NSArray_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSArray_extras.h; path = TakeBackChatter/NSArray_extras.h; sourceTree = "<group>"; };
 		F454E21A138CC06C00CC8158 /* NSArray_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSArray_extras.m; path = TakeBackChatter/NSArray_extras.m; sourceTree = "<group>"; };
 		F454E21C138EB47600CC8158 /* MoreNewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreNewer.xib; sourceTree = "<group>"; };
+		F46039A71398821B00C584BD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		F46039AA1398844F00C584BD /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -261,6 +267,7 @@
 				F48AB91A1384DC5900BC9EF6 /* Security.framework in Frameworks */,
 				F48AB8EC1384CB7200BC9EF6 /* libxml2.2.dylib in Frameworks */,
 				F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */,
+				F46039A81398821B00C584BD /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +309,7 @@
 		F48AB85F1384C66400BC9EF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F46039A71398821B00C584BD /* Sparkle.framework */,
 				F48AB8601384C66400BC9EF6 /* Cocoa.framework */,
 				F48AB8621384C66400BC9EF6 /* Other Frameworks */,
 			);
@@ -360,6 +368,7 @@
 		F48AB8671384C66400BC9EF6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F46039AA1398844F00C584BD /* dsa_pub.pem */,
 				F40C81CC13887FE300B6C525 /* happy.png */,
 				F40C81CD13887FE300B6C525 /* sad.png */,
 				F48AB8681384C66400BC9EF6 /* TakeBackChatter-Info.plist */,
@@ -563,6 +572,7 @@
 				F48EAAB0139410A1005C0601 /* NewPost.xib in Resources */,
 				F4DC901F139479E2004A0E00 /* ContentFeedItem.xib in Resources */,
 				F4AC3B6913980479005FBBCF /* Login.xib in Resources */,
+				F46039AB1398844F00C584BD /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

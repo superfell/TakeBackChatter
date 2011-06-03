@@ -69,6 +69,14 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
+								<object class="NSMenuItem" id="371279737">
+									<reference key="NSMenu" ref="110575045"/>
+									<string key="NSTitle">Check for Updates ...</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="304266470">
 									<reference key="NSMenu" ref="110575045"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1340,6 +1348,9 @@
 			<object class="NSCustomObject" id="976324537">
 				<string key="NSClassName">TakeBackChatterAppDelegate</string>
 			</object>
+			<object class="NSCustomObject" id="684839522">
+				<string key="NSClassName">SUUpdater</string>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -1992,6 +2003,14 @@
 					</object>
 					<int key="connectionID">665</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">checkForUpdates:</string>
+						<reference key="source" ref="684839522"/>
+						<reference key="destination" ref="371279737"/>
+					</object>
+					<int key="connectionID">673</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2334,6 +2353,7 @@
 							<reference ref="1046388886"/>
 							<reference ref="1056857174"/>
 							<reference ref="342932134"/>
+							<reference ref="371279737"/>
 						</object>
 						<reference key="parent" ref="694149608"/>
 					</object>
@@ -3043,6 +3063,16 @@
 						</object>
 						<reference key="parent" ref="527239979"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">671</int>
+						<reference key="object" ref="684839522"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">672</int>
+						<reference key="object" ref="371279737"/>
+						<reference key="parent" ref="110575045"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -3272,6 +3302,8 @@
 					<string>591.IBPluginDependency</string>
 					<string>592.IBPluginDependency</string>
 					<string>666.IBPluginDependency</string>
+					<string>671.IBPluginDependency</string>
+					<string>672.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -3525,6 +3557,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -3564,7 +3598,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">670</int>
+			<int key="maxID">673</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
