@@ -16,6 +16,8 @@
 			<string>NSToolbar</string>
 			<string>NSToolbarFlexibleSpaceItem</string>
 			<string>NSScroller</string>
+			<string>NSSegmentedControl</string>
+			<string>NSSegmentedCell</string>
 			<string>NSScrollView</string>
 			<string>NSTextFieldCell</string>
 			<string>NSToolbarSpaceItem</string>
@@ -326,7 +328,7 @@
 									<string key="NSFrame">{{444, 1}, {15, 658}}</string>
 									<reference key="NSSuperview" ref="375869219"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="9773862"/>
+									<reference key="NSNextKeyView" ref="598622699"/>
 									<reference key="NSTarget" ref="375869219"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSPercent">0.99333333333333329</double>
@@ -397,6 +399,63 @@
 								<string key="NSContents"># Junk:</string>
 								<reference key="NSSupport" ref="199615227"/>
 								<reference key="NSControlView" ref="650288373"/>
+								<reference key="NSBackgroundColor" ref="140367453"/>
+								<reference key="NSTextColor" ref="337854300"/>
+							</object>
+						</object>
+						<object class="NSSegmentedControl" id="330999385">
+							<reference key="NSNextResponder" ref="784581011"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{54, 4}, {143, 25}}</string>
+							<reference key="NSSuperview" ref="784581011"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="9773862"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSSegmentedCell" key="NSCell" id="650302505">
+								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags2">0</int>
+								<object class="NSFont" key="NSSupport">
+									<string key="NSName">LucidaGrande</string>
+									<double key="NSSize">13</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<reference key="NSControlView" ref="330999385"/>
+								<object class="NSMutableArray" key="NSSegmentImages">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<object class="NSSegmentItem">
+										<string key="NSSegmentItemLabel">All</string>
+										<int key="NSSegmentItemImageScaling">0</int>
+									</object>
+									<object class="NSSegmentItem">
+										<string key="NSSegmentItemLabel">Good</string>
+										<int key="NSSegmentItemTag">1</int>
+										<bool key="NSSegmentItemSelected">YES</bool>
+										<int key="NSSegmentItemImageScaling">0</int>
+									</object>
+									<object class="NSSegmentItem">
+										<string key="NSSegmentItemLabel">Junk</string>
+										<int key="NSSegmentItemTag">2</int>
+										<int key="NSSegmentItemImageScaling">0</int>
+									</object>
+								</object>
+								<int key="NSSelectedSegment">1</int>
+								<int key="NSSegmentStyle">4</int>
+							</object>
+						</object>
+						<object class="NSTextField" id="598622699">
+							<reference key="NSNextResponder" ref="784581011"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{5, 9}, {43, 17}}</string>
+							<reference key="NSSuperview" ref="784581011"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="330999385"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSTextFieldCell" key="NSCell" id="224601525">
+								<int key="NSCellFlags">68288064</int>
+								<int key="NSCellFlags2">272630784</int>
+								<string key="NSContents">Feed:</string>
+								<reference key="NSSupport" ref="199615227"/>
+								<reference key="NSControlView" ref="598622699"/>
 								<reference key="NSBackgroundColor" ref="140367453"/>
 								<reference key="NSTextColor" ref="337854300"/>
 							</object>
@@ -496,6 +555,14 @@
 					</object>
 					<int key="connectionID">49</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setFeedListTypeFromSender:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="330999385"/>
+					</object>
+					<int key="connectionID">55</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -557,6 +624,8 @@
 							<reference ref="375869219"/>
 							<reference ref="9773862"/>
 							<reference ref="650288373"/>
+							<reference ref="598622699"/>
+							<reference ref="330999385"/>
 						</object>
 						<reference key="parent" ref="1033082251"/>
 					</object>
@@ -655,6 +724,34 @@
 						<reference key="object" ref="972727212"/>
 						<reference key="parent" ref="11906985"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="330999385"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="650302505"/>
+						</object>
+						<reference key="parent" ref="784581011"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">51</int>
+						<reference key="object" ref="650302505"/>
+						<reference key="parent" ref="330999385"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">52</int>
+						<reference key="object" ref="598622699"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="224601525"/>
+						</object>
+						<reference key="parent" ref="784581011"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">53</int>
+						<reference key="object" ref="224601525"/>
+						<reference key="parent" ref="598622699"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -684,6 +781,11 @@
 					<string>43.IBPluginDependency</string>
 					<string>48.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
+					<string>50.IBPluginDependency</string>
+					<string>51.IBNSSegmentedControlInspectorSelectedSegmentMetadataKey</string>
+					<string>51.IBPluginDependency</string>
+					<string>52.IBPluginDependency</string>
+					<string>53.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -713,6 +815,11 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="2"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
@@ -728,7 +835,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -812,9 +919,11 @@
 							<string>loadOlderRows:</string>
 							<string>markSelectedPostsAsJunk:</string>
 							<string>markSelectedPostsAsNotJunk:</string>
+							<string>setFeedListTypeFromSender:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -831,6 +940,7 @@
 							<string>loadOlderRows:</string>
 							<string>markSelectedPostsAsJunk:</string>
 							<string>markSelectedPostsAsNotJunk:</string>
+							<string>setFeedListTypeFromSender:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -852,6 +962,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">markSelectedPostsAsNotJunk:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">setFeedListTypeFromSender:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

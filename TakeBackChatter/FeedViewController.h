@@ -34,6 +34,8 @@
 -(IBAction)loadOlderRows:(id)sender;
 -(IBAction)loadNewerRows:(id)sender;
 
+-(IBAction)setFeedListTypeFromSender:(id)sender;
+
 @end
 
 @interface LoadNewer : NSObject<CollectionViewItemType> {

@@ -105,6 +105,19 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [[NewPostController postControllerFor:feedDataSource] retain];
 }
 
+-(IBAction)setFeedListTypeFromSender:(id)sender {
+    NSSegmentedControl *s = sender;
+    NSInteger t = [s selectedSegment];
+    NSString *srcPropName = nil;
+    switch (t) {
+        case 0 : srcPropName = @"feedItems"; break;
+        case 1 : srcPropName = @"filteredFeedItems"; break;
+        case 2 : srcPropName = @"junkFeedItems"; break;
+    }
+    if (srcPropName != nil)
+        [self bind:@"feedItems" toObject:feedDataSource withKeyPath:srcPropName options:nil];
+}
+
 @end
 
 @implementation LoadNewer
