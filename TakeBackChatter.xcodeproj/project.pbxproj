@@ -18,6 +18,7 @@
 		F46039A81398821B00C584BD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46039A71398821B00C584BD /* Sparkle.framework */; };
 		F46039A91398826C00C584BD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F46039A71398821B00C584BD /* Sparkle.framework */; };
 		F46039AB1398844F00C584BD /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F46039AA1398844F00C584BD /* dsa_pub.pem */; };
+		F46039DE13988DD200C584BD /* prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = F46039DD13988DD200C584BD /* prefs.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
@@ -137,6 +138,8 @@
 		F454E21C138EB47600CC8158 /* MoreNewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreNewer.xib; sourceTree = "<group>"; };
 		F46039A71398821B00C584BD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		F46039AA1398844F00C584BD /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		F46039DC13988DD200C584BD /* prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefs.h; sourceTree = "<group>"; };
+		F46039DD13988DD200C584BD /* prefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = prefs.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -360,6 +363,8 @@
 				F48EAA6C1391E979005C0601 /* NewPostController.m */,
 				F48EAA6613916036005C0601 /* UrlConnectionDelegate.h */,
 				F48EAA6713916036005C0601 /* UrlConnectionDelegate.m */,
+				F46039DC13988DD200C584BD /* prefs.h */,
+				F46039DD13988DD200C584BD /* prefs.m */,
 				F48AB8671384C66400BC9EF6 /* Supporting Files */,
 			);
 			path = TakeBackChatter;
@@ -635,6 +640,7 @@
 				F4DC901D13947478004A0E00 /* NSString_extras.m in Sources */,
 				F4AC3B6A13980479005FBBCF /* ZKLoginController.m in Sources */,
 				F4AC3BA313986232005FBBCF /* NSString-Base64Extensions.m in Sources */,
+				F46039DE13988DD200C584BD /* prefs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

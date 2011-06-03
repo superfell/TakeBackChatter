@@ -11,6 +11,7 @@
 #import "zkSforce.h"
 #import "credential.h"
 #import "ZKLoginController.h"
+#import "prefs.h"
 #import <BayesianKit/BayesianKit.h>
 
 @implementation TakeBackChatterAppDelegate
@@ -19,9 +20,6 @@
 
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
-
-static NSString *PREFS_SERVER_KEY = @"oauth_servers";
-static NSString *PREFS_SHOW_API_LOGIN = @"api_login";
 
 static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 
