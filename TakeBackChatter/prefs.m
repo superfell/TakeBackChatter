@@ -9,3 +9,4 @@
 
 NSString *PREFS_SERVER_KEY = @"oauth_servers";
 NSString *PREFS_SHOW_API_LOGIN = @"api_login";
+NSString *PREFS_JUNK_THRESHOLD = @"junk_threshold";

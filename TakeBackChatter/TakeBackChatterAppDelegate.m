@@ -46,6 +46,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     NSMutableDictionary *defaults = [NSMutableDictionary dictionaryWithCapacity:10];
     [defaults setObject:servers forKey:PREFS_SERVER_KEY];
     [defaults setObject:[NSNumber numberWithBool:NO] forKey:PREFS_SHOW_API_LOGIN];
+    [defaults setObject:[NSNumber numberWithInt:90] forKey:PREFS_JUNK_THRESHOLD];
     [ZKLoginController addToDefaults:defaults];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }

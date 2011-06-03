@@ -13,6 +13,7 @@
 #import "NSData-Base64Extensions.h"
 #import "TakeBackChatterAppDelegate.h"
 #import "UrlConnectionDelegate.h"
+#import "prefs.h"
 #import "NSString-Base64Extensions.h"
 #import <BayesianKit/BayesianKit.h>
 
@@ -161,9 +162,10 @@ static int FEED_PAGE_SIZE = 25;
 }
 
 -(void)filterFeed {
-    NSPredicate *junkp = [NSPredicate predicateWithFormat:@"chanceIsJunk > 90"];
+    NSNumber *junkThreshold = [NSNumber numberWithLong:[[NSUserDefaults standardUserDefaults] integerForKey:PREFS_JUNK_THRESHOLD]];
+    NSPredicate *junkp = [NSPredicate predicateWithFormat:@"chanceIsJunk > %@", junkThreshold];
     NSArray *junk = [feedItems filteredArrayUsingPredicate:junkp];
-    NSPredicate *goodp = [NSPredicate predicateWithFormat:@"chanceIsJunk <= 90"];
+    NSPredicate *goodp = [NSPredicate predicateWithFormat:@"chanceIsJunk <= %@", junkThreshold];
     NSArray *filtered = [feedItems filteredArrayUsingPredicate:goodp];
     self.junkFeedItems = junk;
     self.filteredFeedItems = filtered;
