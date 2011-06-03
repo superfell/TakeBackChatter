@@ -33,7 +33,7 @@
 - (NSData *) decodeBase64WithNewlines: (BOOL) encodedWithNewlines;
 {
     // Create a memory buffer containing Base64 encoded string data
-    BIO * mem = BIO_new_mem_buf((void *) [self cString], [self cStringLength]);
+    BIO * mem = BIO_new_mem_buf((void *) [self UTF8String], (int)[self lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
     
     // Push a Base64 filter so that reading from the buffer decodes it
     BIO * b64 = BIO_new(BIO_f_base64());
@@ -42,7 +42,7 @@
     mem = BIO_push(b64, mem);
     
     // Decode into an NSMutableData
-    NSMutableData * data = [NSMutableData data];
+    NSMutableData * data = [NSMutableData dataWithCapacity:MIN(64, [self length] *3/4)];
     char inbuf[512];
     int inlen;
     while ((inlen = BIO_read(mem, inbuf, sizeof(inbuf))) > 0)
