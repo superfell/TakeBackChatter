@@ -216,8 +216,11 @@ static int FEED_PAGE_SIZE = 25;
         NSString *data = [row fieldValue:@"ContentData"];
         NSString *filename = [row fieldValue:@"ContentFileName"];
         NSData *contentData = [data decodeBase64WithNewlines:NO];
-        NSArray * dirs = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
-        NSString *fullPath = [[dirs firstObject] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", [feedItem rowId], filename]];
+        NSArray *dirs = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+        NSString *chatterDownload = [[dirs firstObject] stringByAppendingPathComponent:@"Chatter"];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:chatterDownload])
+            [[NSFileManager defaultManager] createDirectoryAtPath:chatterDownload withIntermediateDirectories:YES attributes:nil error:nil];
+        NSString *fullPath = [chatterDownload stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", [feedItem rowId], filename]];
         [contentData writeToFile:fullPath atomically:YES];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
