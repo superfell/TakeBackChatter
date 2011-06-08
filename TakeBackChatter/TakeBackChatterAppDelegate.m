@@ -12,7 +12,7 @@
 #import "credential.h"
 #import "ZKLoginController.h"
 #import "prefs.h"
-#import <BayesianKit/BayesianKit.h>
+#import "Categorizer.h"
 
 @implementation TakeBackChatterAppDelegate
 
@@ -149,29 +149,16 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     [self showFeedForClient:client];
 }
 
--(NSString *)classifierFilename {
-    NSArray * dirs = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *appDir = [[dirs objectAtIndex:0] stringByAppendingPathComponent:@"TakeBackChatter"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:appDir])
-        [[NSFileManager defaultManager] createDirectoryAtPath:appDir withIntermediateDirectories:YES attributes:nil error:nil];
-    NSString *corpusFile = [appDir stringByAppendingPathComponent:@"corpus.bks"];
-    return corpusFile;
-}
-
--(BKClassifier *)classifier {
-    if (classifier == nil) {
-        NSString *corpusFile = [self classifierFilename];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:corpusFile])
-            classifier = [[BKClassifier alloc] initWithContentsOfFile:corpusFile];
-        else
-            classifier = [[BKClassifier alloc] init];
+-(Categorizer *)categorizer {
+    @synchronized(self) {
+        if (categorizer == nil) 
+            categorizer = [[Categorizer alloc] init];
+        return categorizer;
     }
-    return classifier;
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification {
-    if (classifier != nil)
-        [classifier writeToFile:[self classifierFilename]];
+    [categorizer persist];
 }
 
 -(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
@@ -180,7 +167,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 
 -(void)dealloc {
     [feedControllers release];
-    [classifier release];
+    [categorizer release];
     [loginController release];
     [super dealloc];
 }

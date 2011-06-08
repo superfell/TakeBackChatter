@@ -8,18 +8,18 @@
 #import <Cocoa/Cocoa.h>
 
 @class FeedController;
-@class BKClassifier;
+@class Categorizer;
 @class ZKLoginController;
 
 @interface TakeBackChatterAppDelegate : NSObject <NSApplicationDelegate> {
-    BKClassifier      *classifier;
+    Categorizer       *categorizer;
     NSMenuItem        *loginMenu, *logoutMenu;
     NSMutableArray    *feedControllers;
     ZKLoginController *loginController;
     NSWindow          *welcomeWindow;
 }
 
-@property (readonly) BKClassifier *classifier;
+@property (readonly) Categorizer *categorizer;
 
 @property (assign) IBOutlet NSMenuItem *loginMenu;
 @property (assign) IBOutlet NSMenuItem *logoutMenu;

@@ -12,16 +12,13 @@
 #import "zkSforce.h"
 #import "CollectionViewFeedItem.h"
 #import "NewPostController.h"
-#import <BayesianKit/BayesianKit.h>
+#import "Categorizer.h"
 
 @interface FeedViewController ()
 @property (retain) NSArray *feedViewItems;  // this are the items that drive the list view, it includes the objects for the load more... rows
 @end
 
 @implementation FeedViewController
-
-static NSString *POOL_NAME_GOOD = @"Good";
-static NSString *POOL_NAME_JUNK = @"Junk";
 
 @synthesize collectionView, feedDataSource, feedItems;
 @synthesize feedViewItems;
@@ -77,23 +74,14 @@ static NSString *POOL_NAME_JUNK = @"Junk";
     [self.collectionView setContent:fv];
 }
 
--(void)catorgorizeSelectedPostsAs:(NSString *)poolName {
-    NSArray *selection = [self.collectionView selectedObjects];
-    NSMutableString *text = [NSMutableString string];
-    for (FeedItem *item in selection)
-        [text appendString:[item classificationText]];
-    
-    BKClassifier *classifier = [[NSApp delegate] classifier];
-    [classifier trainWithString:text forPoolNamed:poolName];
+-(IBAction)markSelectedPostsAsJunk:(id)sender {
+    [[[NSApp delegate] categorizer] categorizeItemsAsJunk:[self.collectionView selectedObjects]];
     [feedDataSource filterFeed];
 }
 
--(IBAction)markSelectedPostsAsJunk:(id)sender {
-    [self catorgorizeSelectedPostsAs:POOL_NAME_JUNK];
-}
-
 -(IBAction)markSelectedPostsAsNotJunk:(id)sender {
-    [self catorgorizeSelectedPostsAs:POOL_NAME_GOOD];
+    [[[NSApp delegate] categorizer] categorizeItemsAsGood:[self.collectionView selectedObjects]];
+    [feedDataSource filterFeed];
 }
 
 -(IBAction)loadOlderRows:(id)sender {

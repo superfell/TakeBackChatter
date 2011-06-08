@@ -11,7 +11,7 @@
 #import "zkQueryResult.h"
 #import "NSString_extras.h"
 #import "TakeBackChatterAppDelegate.h"
-#import <BayesianKit/BayesianKit.h>
+#import "Categorizer.h"
 
 @implementation FeedItem
 
@@ -180,9 +180,7 @@
 }
 
 -(int)chanceIsJunk {
-    NSDictionary *cl = [[[NSApp delegate] classifier] guessWithString:self.classificationText];
-    NSNumber *g = [cl objectForKey:@"Junk"];
-    return [g floatValue] *100;
+    return [[[NSApp delegate] categorizer] chanceIsJunk:self];
 }
 
 @end

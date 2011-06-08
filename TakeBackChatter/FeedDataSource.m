@@ -15,7 +15,6 @@
 #import "UrlConnectionDelegate.h"
 #import "prefs.h"
 #import "NSString-Base64Extensions.h"
-#import <BayesianKit/BayesianKit.h>
 
 static int FEED_PAGE_SIZE = 25;
 
