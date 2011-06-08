@@ -12,16 +12,18 @@
 @class ZKLoginController;
 
 @interface TakeBackChatterAppDelegate : NSObject <NSApplicationDelegate> {
-    BKClassifier    *classifier;
-    NSMenuItem      *loginMenu, *logoutMenu;
-    NSMutableArray  *feedControllers;
+    BKClassifier      *classifier;
+    NSMenuItem        *loginMenu, *logoutMenu;
+    NSMutableArray    *feedControllers;
     ZKLoginController *loginController;
+    NSWindow          *welcomeWindow;
 }
 
 @property (readonly) BKClassifier *classifier;
 
 @property (assign) IBOutlet NSMenuItem *loginMenu;
 @property (assign) IBOutlet NSMenuItem *logoutMenu;
+@property (assign) IBOutlet NSWindow *welcomeWindow;
 
 -(IBAction)startLogin:(id)sender;
 -(IBAction)logout:(id)sender;

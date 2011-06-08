@@ -17,6 +17,7 @@
 @implementation TakeBackChatterAppDelegate
 
 @synthesize loginMenu, logoutMenu;
+@synthesize welcomeWindow;
 
 static NSString *OAUTH_CLIENTID = @"3MVG99OxTyEMCQ3hP1_9.Mh8dF0T4Kw7LW_opx3J5Tj4AizUt0an8hoogMWADGIJaqUgLkVomaqyz5RRIHD4L";
 static NSString *OAUTH_CALLBACK = @"compocketsoaptakebackchatter:///oauthdone";
@@ -47,6 +48,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     [defaults setObject:servers forKey:PREFS_SERVER_KEY];
     [defaults setObject:[NSNumber numberWithBool:NO] forKey:PREFS_SHOW_API_LOGIN];
     [defaults setObject:[NSNumber numberWithInt:90] forKey:PREFS_JUNK_THRESHOLD];
+    [defaults setObject:[NSNumber numberWithBool:YES] forKey:PREFS_SHOW_WELCOME];
     [ZKLoginController addToDefaults:defaults];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
@@ -94,6 +96,9 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     feedControllers = [[NSMutableArray alloc] init];
     [self registerDefaults];
     [self setupLoginMenu];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFS_SHOW_WELCOME]) {
+        [self.welcomeWindow makeKeyAndOrderFront:self];
+    }
     
     for (NSString *server in [[NSUserDefaults standardUserDefaults] arrayForKey:PREFS_SERVER_KEY]) {
         for (Credential *c in [Credential credentialsForServer:server]) {
