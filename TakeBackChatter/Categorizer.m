@@ -10,7 +10,12 @@
 #import <BayesianKit/BayesianKit.h>
 
 @interface Categorizer ()
+-(NSString *)categorizerFilePath;
+
+-(NSString *)categorizerFile:(NSString *)fn;
 -(NSString *)classifierFilename;
+-(NSString *)goodIdsFilename;
+-(NSString *)junkIdsFilename;
 @end
 
 @implementation Categorizer
@@ -18,55 +23,96 @@
 static NSString *POOL_NAME_GOOD = @"Good";
 static NSString *POOL_NAME_JUNK = @"Junk";
 
-- (id)init {
-    self = [super init];
+static NSString *CORPUS_FN   = @"corpus.bks";
+static NSString *GOOD_IDS_FN = @"good.ids";
+static NSString *JUNK_IDS_FN = @"junk.ids";
+
+-(void)initClassifier {
     NSString *corpusFile = [self classifierFilename];
     if ([[NSFileManager defaultManager] fileExistsAtPath:corpusFile])
         classifier = [[BKClassifier alloc] initWithContentsOfFile:corpusFile];
     else
         classifier = [[BKClassifier alloc] init];
+}
+
+-(NSMutableSet *)initIds:(NSString *)fn {
+    NSString *file = [self categorizerFile:fn];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:file]) 
+        return [NSMutableSet setWithArray:[NSArray arrayWithContentsOfFile:file]];
+    return [NSMutableSet set];
+}
+
+-(id)init {
+    self = [super init];
+    [self initClassifier];
+    goodIds = [[self initIds:GOOD_IDS_FN] retain];
+    junkIds = [[self initIds:JUNK_IDS_FN] retain];
     return self;
 }
 
-- (void)dealloc {
+-(void)dealloc {
     [classifier release];
+    [goodIds release];
+    [junkIds release];
     [super dealloc];
 }
 
--(NSString *)classifierFilename {
+-(NSString *)categorizerFilePath {
     NSArray * dirs = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *appDir = [[dirs objectAtIndex:0] stringByAppendingPathComponent:@"TakeBackChatter"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:appDir])
         [[NSFileManager defaultManager] createDirectoryAtPath:appDir withIntermediateDirectories:YES attributes:nil error:nil];
-    NSString *corpusFile = [appDir stringByAppendingPathComponent:@"corpus.bks"];
-    return corpusFile;
+    return appDir;
+}
+
+-(NSString *)categorizerFile:(NSString *)fn {
+    return [self.categorizerFilePath stringByAppendingPathComponent:fn];
+}
+
+-(NSString *)classifierFilename {
+    return [self categorizerFile:CORPUS_FN];
+}
+
+-(NSString *)goodIdsFilename {
+    return [self categorizerFile:GOOD_IDS_FN];
+}
+
+-(NSString *)junkIdsFilename {
+    return [self categorizerFile:JUNK_IDS_FN];
 }
 
 -(void)persist {
-    if (classifier != nil)
-        [classifier writeToFile:[self classifierFilename]];
+    [classifier writeToFile:[self classifierFilename]];
+    [[goodIds allObjects] writeToFile:[self goodIdsFilename] atomically:YES];
+    [[junkIds allObjects] writeToFile:[self junkIdsFilename] atomically:YES];
 }
 
 -(int)chanceIsJunk:(FeedItem *)item {
+    if ([junkIds containsObject:[item rowId]]) return 100;
+    if ([goodIds containsObject:[item rowId]]) return 0;
     NSDictionary *cl = [ classifier guessWithString:item.classificationText];
     NSNumber *g = [cl objectForKey:@"Junk"];
     return [g floatValue] * 100;
 }
 
--(void)categorize:(NSArray *)items as:(NSString *)poolname {
-    NSMutableString *text = [NSMutableString string];
-    for (FeedItem *item in items)
-        [text appendString:item.classificationText];
-    
-    [classifier trainWithString:text forPoolNamed:poolname];
+-(void)categorize:(NSArray *)items 
+               as:(NSString *)poolname 
+         addIdsTo:(NSMutableSet *)addTo 
+    removeIdsFrom:(NSMutableSet *)removeFrom {
+
+    for (FeedItem *item in items) {
+        [classifier trainWithString:item.classificationText forPoolNamed:poolname];
+        [addTo addObject:[item rowId]];
+        [removeFrom removeObject:[item rowId]];
+    }
 }
 
 -(void)categorizeItemsAsJunk:(NSArray *)items {
-    [self categorize:items as:POOL_NAME_JUNK];
+    [self categorize:items as:POOL_NAME_JUNK addIdsTo:junkIds removeIdsFrom:goodIds];
 }
 
 -(void)categorizeItemsAsGood:(NSArray *)items {
-    [self categorize:items as:POOL_NAME_GOOD];
+    [self categorize:items as:POOL_NAME_GOOD addIdsTo:goodIds removeIdsFrom:junkIds];
 }
 
 @end

@@ -12,10 +12,12 @@
 
 @interface Categorizer : NSObject {
     BKClassifier      *classifier;
+    NSMutableSet      *goodIds, *junkIds;
 }
 
 -(void)persist;
 
+// if the item has been explicitly categorized, then we'll return that, regardless of what the stats say.
 -(int)chanceIsJunk:(FeedItem *)item;
 
 -(void)categorizeItemsAsJunk:(NSArray *)items;
