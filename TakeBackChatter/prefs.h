@@ -11,3 +11,4 @@ extern NSString *PREFS_SERVER_KEY;
 extern NSString *PREFS_SHOW_API_LOGIN;
 extern NSString *PREFS_JUNK_THRESHOLD;
 extern NSString *PREFS_SHOW_WELCOME;
+extern NSString *PREFS_TRAINING_COUNT;

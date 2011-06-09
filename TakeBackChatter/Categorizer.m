@@ -7,6 +7,7 @@
 
 #import "Categorizer.h"
 #import "FeedItem.h"
+#import "prefs.h"
 #import <BayesianKit/BayesianKit.h>
 
 @interface Categorizer ()
@@ -26,6 +27,10 @@ static NSString *POOL_NAME_JUNK = @"Junk";
 static NSString *CORPUS_FN   = @"corpus.bks";
 static NSString *GOOD_IDS_FN = @"good.ids";
 static NSString *JUNK_IDS_FN = @"junk.ids";
+
++(void)addToDefaults:(NSMutableDictionary *)defaults {
+    [defaults setObject:[NSNumber numberWithInt:10] forKey:PREFS_TRAINING_COUNT];
+}
 
 -(void)initClassifier {
     NSString *corpusFile = [self classifierFilename];
@@ -113,6 +118,14 @@ static NSString *JUNK_IDS_FN = @"junk.ids";
 
 -(void)categorizeItemsAsGood:(NSArray *)items {
     [self categorize:items as:POOL_NAME_GOOD addIdsTo:goodIds removeIdsFrom:junkIds];
+}
+
+-(BOOL)isTraining {
+    return self.categorizedCount < [[NSUserDefaults standardUserDefaults] integerForKey:PREFS_TRAINING_COUNT];
+}
+
+-(NSUInteger)categorizedCount {
+    return goodIds.count + junkIds.count;
 }
 
 @end

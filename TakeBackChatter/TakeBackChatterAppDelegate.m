@@ -50,6 +50,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
     [defaults setObject:[NSNumber numberWithInt:90] forKey:PREFS_JUNK_THRESHOLD];
     [defaults setObject:[NSNumber numberWithBool:YES] forKey:PREFS_SHOW_WELCOME];
     [ZKLoginController addToDefaults:defaults];
+    [Categorizer addToDefaults:defaults];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 

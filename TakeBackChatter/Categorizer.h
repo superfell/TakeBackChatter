@@ -15,6 +15,8 @@
     NSMutableSet      *goodIds, *junkIds;
 }
 
++(void)addToDefaults:(NSMutableDictionary *)defaults;
+
 -(void)persist;
 
 // if the item has been explicitly categorized, then we'll return that, regardless of what the stats say.
@@ -22,5 +24,8 @@
 
 -(void)categorizeItemsAsJunk:(NSArray *)items;
 -(void)categorizeItemsAsGood:(NSArray *)items;
+
+-(BOOL)isTraining;              // returns true if we need to categorize more items
+-(NSUInteger)categorizedCount;  // number of items categorized
 
 @end
