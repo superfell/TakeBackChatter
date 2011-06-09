@@ -139,7 +139,9 @@ static NSString *JUNK_IDS_FN = @"junk.ids";
 }
 
 -(NSUInteger)trainingLeft {
-    return MAX(0, [[NSUserDefaults standardUserDefaults] integerForKey:PREFS_TRAINING_COUNT] - self.categorizedCount);
+    NSUInteger c = self.categorizedCount;
+    NSInteger t = [[NSUserDefaults standardUserDefaults] integerForKey:PREFS_TRAINING_COUNT];
+    return t > c ? t-c : 0;
 }
 
 @end

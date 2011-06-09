@@ -16,6 +16,7 @@
     FeedDataSource     *feedDataSource;
     NSArray            *feedItems;
     NSWindow           *window;
+    NSSegmentedControl *feedSelectionControl;
     NSArray            *feedViewItems;
     NSObject           *loadNewer, *loadOlder;
 }
@@ -23,6 +24,7 @@
 -(id)initWithDataSource:(FeedDataSource *)src;
 
 @property (nonatomic, retain) IBOutlet NSWindow           *window;
+@property (nonatomic, retain) IBOutlet NSSegmentedControl *feedSelectionControl;
 @property (nonatomic, retain) IBOutlet CollectionViewFeed *collectionView;
 @property (readonly)                       FeedDataSource *feedDataSource;
 @property (nonatomic, retain)                     NSArray *feedItems;

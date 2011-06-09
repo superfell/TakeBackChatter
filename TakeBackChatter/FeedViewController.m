@@ -22,7 +22,7 @@
 
 @synthesize collectionView, feedDataSource, feedItems;
 @synthesize feedViewItems;
-@synthesize window;
+@synthesize window, feedSelectionControl;
 
 +(void)initialize {
     [self exposeBinding:@"feedItems"];
@@ -38,7 +38,6 @@
     loadOlder = [[LoadOlder alloc] initWithController:self];
     
     feedDataSource = [src retain];
-    [self bind:@"feedItems" toObject:src withKeyPath:@"filteredFeedItems" options:nil];
     
     [NSBundle loadNibNamed:@"FeedList" owner:self];
     [window setTitle:feedDataSource.defaultWindowTitle];
@@ -50,6 +49,9 @@
     [self.collectionView setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
                                                                        [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1.0],
                                                                        nil]];
+    
+    [self.feedSelectionControl setSelectedSegment:[self.categorizer isTraining] ? 0 : 1];
+    [self setFeedListTypeFromSender:self.feedSelectionControl];
     [window makeKeyAndOrderFront:self];
     return self;
 }
@@ -115,8 +117,8 @@
 
 -(NSString *)junkSummary {
     Categorizer *c = [self categorizer];
-    return [c isTraining] ? [NSString stringWithFormat:@"Training: %d to go", [c trainingLeft]] :
-                            [NSString stringWithFormat:@"Junk: %d", [feedDataSource junkCount]];
+    return [c isTraining] ? [NSString stringWithFormat:@"Training: %lu to go", (unsigned long)[c trainingLeft]] :
+                            [NSString stringWithFormat:@"Junk: %lu", (unsigned long)[feedDataSource junkCount]];
 }
 
 -(Categorizer *)categorizer {
