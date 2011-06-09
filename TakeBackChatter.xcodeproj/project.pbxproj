@@ -72,6 +72,7 @@
 		F48EAA7813931E3F005C0601 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F48EAA7713931E3F005C0601 /* libcrypto.dylib */; };
 		F48EAAB0139410A1005C0601 /* NewPost.xib in Resources */ = {isa = PBXBuildFile; fileRef = F48EAAAF139410A1005C0601 /* NewPost.xib */; };
 		F499AD23139F20D200B5A72A /* Categorizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F499AD22139F20D200B5A72A /* Categorizer.m */; };
+		F499AD5513A076FD00B5A72A /* TrainingHelp.xib in Resources */ = {isa = PBXBuildFile; fileRef = F499AD5413A076FD00B5A72A /* TrainingHelp.xib */; };
 		F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A29DE7138EC0870037CD5E /* MoreOlder.xib */; };
 		F4AC3B6913980479005FBBCF /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AC3B6613980479005FBBCF /* Login.xib */; };
 		F4AC3B6A13980479005FBBCF /* ZKLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AC3B6813980479005FBBCF /* ZKLoginController.m */; };
@@ -242,6 +243,7 @@
 		F48EAAAF139410A1005C0601 /* NewPost.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewPost.xib; sourceTree = "<group>"; };
 		F499AD21139F20D200B5A72A /* Categorizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categorizer.h; sourceTree = "<group>"; };
 		F499AD22139F20D200B5A72A /* Categorizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categorizer.m; sourceTree = "<group>"; };
+		F499AD5413A076FD00B5A72A /* TrainingHelp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingHelp.xib; sourceTree = "<group>"; };
 		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
 		F4AC3B6613980479005FBBCF /* Login.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
 		F4AC3B6713980479005FBBCF /* ZKLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLoginController.h; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				F48AB8751384C66400BC9EF6 /* MainMenu.xib */,
 				F454E21C138EB47600CC8158 /* MoreNewer.xib */,
 				F4A29DE7138EC0870037CD5E /* MoreOlder.xib */,
+				F499AD5413A076FD00B5A72A /* TrainingHelp.xib */,
 				F454E216138B56F500CC8158 /* FeedViewController.h */,
 				F454E217138B56F500CC8158 /* FeedViewController.m */,
 				F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */,
@@ -583,6 +586,7 @@
 				F4DC901F139479E2004A0E00 /* ContentFeedItem.xib in Resources */,
 				F4AC3B6913980479005FBBCF /* Login.xib in Resources */,
 				F46039AB1398844F00C584BD /* dsa_pub.pem in Resources */,
+				F499AD5513A076FD00B5A72A /* TrainingHelp.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

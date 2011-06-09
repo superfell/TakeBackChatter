@@ -16,6 +16,7 @@
 
 @interface FeedViewController ()
 @property (retain) NSArray *feedViewItems;  // this are the items that drive the list view, it includes the objects for the load more... rows
+-(void)showTrainingHelpWindow;
 @end
 
 @implementation FeedViewController
@@ -53,6 +54,10 @@
     [self.feedSelectionControl setSelectedSegment:[self.categorizer isTraining] ? 0 : 1];
     [self setFeedListTypeFromSender:self.feedSelectionControl];
     [window makeKeyAndOrderFront:self];
+    
+    if ([self.categorizer categorizedCount] == 0)
+        [self showTrainingHelpWindow];
+    
     return self;
 }
 
@@ -64,6 +69,10 @@
     [loadNewer release];
     [feedViewItems release];
     [super dealloc];
+}
+
+-(void)showTrainingHelpWindow {
+    [NSBundle loadNibNamed:@"TrainingHelp" owner:self];
 }
 
 -(void)setFeedItems:(NSArray *)items {
