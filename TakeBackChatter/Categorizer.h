@@ -27,5 +27,6 @@
 
 -(BOOL)isTraining;              // returns true if we need to categorize more items
 -(NSUInteger)categorizedCount;  // number of items categorized
+-(NSUInteger)trainingLeft;      // how many more items needed for training.
 
 @end

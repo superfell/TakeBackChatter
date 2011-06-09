@@ -28,6 +28,10 @@
     [self exposeBinding:@"feedItems"];
 }
 
++(NSSet *)keyPathsForValuesAffectingJunkSummary {
+    return [NSSet setWithObjects:@"feedDataSource.junkCount", @"categorizer.trainingLeft", @"categorizer.isTraining", nil];
+}
+
 -(id)initWithDataSource:(FeedDataSource *)src {
     self = [super init];
     loadNewer = [[LoadNewer alloc] initWithController:self];
@@ -107,6 +111,16 @@
     }
     if (srcPropName != nil)
         [self bind:@"feedItems" toObject:feedDataSource withKeyPath:srcPropName options:nil];
+}
+
+-(NSString *)junkSummary {
+    Categorizer *c = [self categorizer];
+    return [c isTraining] ? [NSString stringWithFormat:@"Training: %d to go", [c trainingLeft]] :
+                            [NSString stringWithFormat:@"Junk: %d", [feedDataSource junkCount]];
+}
+
+-(Categorizer *)categorizer {
+    return [[NSApp delegate] categorizer];
 }
 
 @end

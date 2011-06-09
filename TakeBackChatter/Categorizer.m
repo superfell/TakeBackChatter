@@ -32,6 +32,14 @@ static NSString *JUNK_IDS_FN = @"junk.ids";
     [defaults setObject:[NSNumber numberWithInt:10] forKey:PREFS_TRAINING_COUNT];
 }
 
++(NSSet *)keyPathsForValuesAffectingTrainingLeft {
+    return [NSSet setWithObject:@"categorizedCount"];
+}
+
++(NSSet *)keyPathsForValuesAffectingIsTraining {
+    return [NSSet setWithObject:@"categorizedCount"];
+}
+
 -(void)initClassifier {
     NSString *corpusFile = [self classifierFilename];
     if ([[NSFileManager defaultManager] fileExistsAtPath:corpusFile])
@@ -105,11 +113,13 @@ static NSString *JUNK_IDS_FN = @"junk.ids";
          addIdsTo:(NSMutableSet *)addTo 
     removeIdsFrom:(NSMutableSet *)removeFrom {
 
+    [self willChangeValueForKey:@"categorizedCount"];
     for (FeedItem *item in items) {
         [classifier trainWithString:item.classificationText forPoolNamed:poolname];
         [addTo addObject:[item rowId]];
         [removeFrom removeObject:[item rowId]];
     }
+    [self didChangeValueForKey:@"categorizedCount"];
 }
 
 -(void)categorizeItemsAsJunk:(NSArray *)items {
@@ -121,11 +131,15 @@ static NSString *JUNK_IDS_FN = @"junk.ids";
 }
 
 -(BOOL)isTraining {
-    return self.categorizedCount < [[NSUserDefaults standardUserDefaults] integerForKey:PREFS_TRAINING_COUNT];
+    return self.trainingLeft > 0;
 }
 
 -(NSUInteger)categorizedCount {
     return goodIds.count + junkIds.count;
+}
+
+-(NSUInteger)trainingLeft {
+    return MAX(0, [[NSUserDefaults standardUserDefaults] integerForKey:PREFS_TRAINING_COUNT] - self.categorizedCount);
 }
 
 @end

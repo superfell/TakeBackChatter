@@ -9,6 +9,7 @@
 #import "CollectionViewFeed.h"
 
 @class FeedDataSource;
+@class Categorizer;
 
 @interface FeedViewController : NSObject {
     CollectionViewFeed *collectionView;
@@ -26,6 +27,8 @@
 @property (readonly)                       FeedDataSource *feedDataSource;
 @property (nonatomic, retain)                     NSArray *feedItems;
 
+@property (readonly) Categorizer *categorizer; // this is exposed to help with KVO / key dependency stuff.
+@property (readonly) NSString    *junkSummary; // summary text, like Junk :5, or Training: 9 to go
 
 -(IBAction)markSelectedPostsAsJunk:(id)sender;
 -(IBAction)markSelectedPostsAsNotJunk:(id)sender;
