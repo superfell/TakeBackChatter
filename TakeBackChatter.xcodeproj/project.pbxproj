@@ -526,6 +526,7 @@
 		F48AB8531384C66400BC9EF6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = F48AB8561384C66400BC9EF6 /* Build configuration list for PBXProject "TakeBackChatter" */;
