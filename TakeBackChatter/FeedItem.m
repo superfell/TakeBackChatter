@@ -7,15 +7,23 @@
 
 #import "FeedItem.h"
 #import "FeedDataSource.h"
-#import "ZKSObject.h"
 #import "zkQueryResult.h"
 #import "NSString_extras.h"
 #import "TakeBackChatterAppDelegate.h"
 #import "Categorizer.h"
 
+static NSDateFormatter *dateFormatter, *dateTimeFormatter;
+
 @implementation FeedItem
 
 @synthesize feedItemType, actorPhotoUrl, actorPhoto, feedDataSource;
+
++(void)initialize {
+	dateTimeFormatter = [[NSDateFormatter alloc] init];
+	[dateTimeFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSSZ"];
+	dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+}
 
 // This tells KVO (and theirfore the UI binding), that the 'ActorPhoto' property value is affected by changes to the 'ActorPhotoUrl' property
 +(NSSet *)keyPathsForValuesAffectingActorPhoto {
@@ -38,53 +46,64 @@
     return FeedTypeUserStatus;
 }
 
-- (id)initWithRow:(ZKSObject *)r dataSource:(FeedDataSource *)s {
+-(id)initWithFeedItem:(NSDictionary *)feedItem dataSource:(FeedDataSource *)src {
     self = [super init];
-    row = [r retain];
-    feedDataSource = [s retain];    // sigh, TODO fix retain loop
+    data = [feedItem retain];
+    feedDataSource = [src retain];    // sigh, TODO fix retain loop
     feedItemType = [self resolveType];
     return self;
 }
 
 - (void)dealloc {
-    [row release];
+    [data release];
     [actorPhotoUrl release];
     [actorPhoto release];
     [contentIcon release];
     [super dealloc];
 }
 
-+(id)feedItemFrom:(ZKSObject *)row dataSource:(FeedDataSource *)src {
-    return [[[FeedItem alloc] initWithRow:row dataSource:src] autorelease];
++(id)connectFeedItem:(NSDictionary *)feedItem dataSource:(FeedDataSource *)src {
+    return [[[FeedItem alloc] initWithFeedItem:feedItem dataSource:src] autorelease];
 }
 
 -(NSString *)quantity:(int)q singluar:(NSString *)s plural:(NSString *)p {
     return [NSString stringWithFormat:@"%d %@", q, q == 1 ? s : p];
 }
 
+-(NSDate *)dateTimeValue:(NSString *)key {
+    NSString *v = [data objectForKey:key];
+    if (v == nil) return nil;
+	// ok, so a little hackish, but does the job
+	// note to self, make sure API always returns GMT times ;)
+	NSMutableString *dt = [NSMutableString stringWithString:v];
+	[dt deleteCharactersInRange:NSMakeRange([dt length] -1,1)];
+	[dt appendString:@"+00"];
+	return [dateTimeFormatter dateFromString:dt];
+}
+
 -(NSString *)rowId {
-    return [row id];
+    return [data objectForKey:@"id"];
 }
 
 -(NSString *)actor {
-    return [row valueForKeyPath:@"CreatedBy.Name"];
+    return [data valueForKeyPath:@"actor.name"];
 }
 
 -(NSString *)actorId {
-    return [row valueForKey:@"CreatedById"];
+    return [data valueForKeyPath:@"actor.id"];
 }
 
 -(NSDate *)createdDate {
-    return [row dateTimeValue:@"CreatedDate"];
+    return [self dateTimeValue:@"createdDate"];
 }
 
 -(NSString *)type {
-    return [row valueForKey:@"Type"];
+    return [data objectForKey:@"type"];
 }
 
 -(NSString *)title {
     NSString *actor = [self actor];
-    NSString *name = [row valueForKeyPath:@"Parent.Name"];
+    NSString *name = [data valueForKeyPath:@"parent.name"];
     switch (self.feedItemType) {
         case FeedTypeUserStatus: return name;
         case FeedTypeTextPost:
@@ -96,12 +115,13 @@
 }
 
 -(NSString *)contentTitle {
-    return [row valueForKeyPath:@"FeedPost.Title"];
+    return [data valueForKeyPath:@"attachment.title"];
 }
 
 -(NSImage *)contentIcon {
     if (contentIcon == nil) {
-        NSString *mimeType = [row valueForKeyPath:@"FeedPost.ContentType"];
+        NSObject *mimeType = [data valueForKeyPath:@"attachment.mimeType"];
+        if (mimeType == [NSNull null]) return nil;
         CFStringRef uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (CFStringRef)mimeType, NULL);
         if (uti == nil)
             NSLog(@"Unable to find a UTI for %@", mimeType);
@@ -116,9 +136,9 @@
 -(NSAttributedString *)linkPostBody {
     NSMutableAttributedString *s = [[NSMutableAttributedString alloc] init];
     [s beginEditing];
-    NSString *body = [row valueForKeyPath:@"FeedPost.Body"];
-    NSString *title = [row valueForKeyPath:@"FeedPost.Title"];
-    NSString *link = [row valueForKeyPath:@"FeedPost.LinkUrl"];
+    NSString *body = [data valueForKeyPath:@"body.text"];
+    NSString *title = [data valueForKeyPath:@"attachment.title"];
+    NSString *link = [data valueForKeyPath:@"attachment.url"];
     if (body.length > 0) {
         [s appendAttributedString:[body attributedString]];
         [s appendAttributedString:[@"\r" attributedString]];
@@ -143,21 +163,20 @@
         case FeedTypeUserStatus:
         case FeedTypeTextPost:
         case FeedTypeContentPost:
-            return [row valueForKeyPath:@"FeedPost.Body"];
+            return [data valueForKeyPath:@"body.text"];
         case FeedTypeLinkPost:
             return [self linkPostBody];
         case FeedTypeTrackedChange:
-            return [NSString stringWithFormat:@"made %@", 
-                    [self quantity:[[row queryResultValue:@"FeedTrackedChanges"] size] singluar:@"change" plural:@"changes"]];
+            return [data valueForKeyPath:@"body.text"];
     }
 }
 
 -(int)commentCount {
-    return [[row queryResultValue:@"FeedComments"] size];
+    return [[data valueForKeyPath:@"comments.total"] intValue];
 }
 
 -(NSArray *)comments {
-    return [[row queryResultValue:@"FeedComments"] records];
+    return [data valueForKeyPath:@"comments.comments"];
 }
 
 -(NSString *)commentsLabel {
@@ -167,7 +186,7 @@
 }
 
 -(NSString *)age {
-    NSDate *created = [row dateTimeValue:@"CreatedDate"];
+    NSDate *created = [self dateTimeValue:@"createdDate"];
     NSTimeInterval age = abs([created timeIntervalSinceNow]);
     if (age < 3600) return [self quantity:(int)(age/60) singluar:@"min" plural:@"mins"];
     age = age / 3600;

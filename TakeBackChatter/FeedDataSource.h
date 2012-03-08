@@ -13,6 +13,7 @@
 
 @interface FeedDataSource : NSObject {
     NSArray         *feedItems, *filteredFeedItems, *junkFeedItems;
+    NSMutableArray  *feedPages;
     BOOL            hasMore;
     ZKSforceClient *sforce;
 }
@@ -22,6 +23,7 @@
 -(NSArray *)feedItems;              // all items fetched
 -(NSArray *)filteredFeedItems;      // all items not considered junk
 -(NSArray *)junkFeedItems;          // all junk items
+-(NSArray *)feedPages;              // all pages fetched
 -(NSUInteger)junkCount;
 
 @property (readonly) BOOL hasMore;

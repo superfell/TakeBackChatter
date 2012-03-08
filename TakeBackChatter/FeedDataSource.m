@@ -8,6 +8,7 @@
 #import "FeedDataSource.h"
 #import "zkSforce.h"
 #import "FeedItem.h"
+#import "FeedPage.h"
 #import "NSDate_iso8601.h"
 #import "NSArray_extras.h"
 #import "NSData-Base64Extensions.h"
@@ -24,6 +25,7 @@ static int FEED_PAGE_SIZE = 25;
 @property (nonatomic,retain) NSArray *feedItems;
 @property (nonatomic,retain) NSArray *filteredFeedItems;
 @property (nonatomic,retain) NSArray *junkFeedItems;
+
 -(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore;
 
 @end
@@ -58,7 +60,12 @@ static int FEED_PAGE_SIZE = 25;
 -(id)initWithSforceClient:(ZKSforceClient *)c {
     self = [super init];
     sforce = [c retain];
+    feedPages = [[NSMutableArray alloc] init];
     return self;
+}
+
+-(NSArray *)feedPages {
+    return feedPages;
 }
 
 -(void)startActorFetch:(NSArray *)items {
@@ -104,58 +111,73 @@ static int FEED_PAGE_SIZE = 25;
     });
 }
 
--(NSString *)buildQueryWithDate:(NSDate *)date newer:(BOOL)newer {
-    NSMutableString *soql = [NSMutableString stringWithString:@"SELECT Id, Type, CreatedDate, CreatedById, CreatedBy.Name, " \
-        "ParentId, Parent.Name, FeedPostId, FeedPost.Body, FeedPost.Title, FeedPost.LinkUrl, FeedPost.ContentType, " \
-            "(SELECT Id, FieldName, OldValue, NewValue FROM FeedTrackedChanges), " \
-            "(SELECT Id, CreatedDate, CreatedById, CreatedBy.Name, CommentBody FROM FeedComments ORDER BY CreatedDate DESC) " \
-        "FROM NewsFeed "];
-    if (date != nil)
-        [soql appendFormat:@" where CreatedDate %@ %@ ", newer ? @">" : @"<",  [date iso8601formatted]];
-    
-    [soql appendFormat:@"ORDER BY CreatedDate DESC, Id DESC LIMIT %d", FEED_PAGE_SIZE];
-    return soql;
+-(NSArray *)resolveNewFeed:(FeedPage *)newFrontPage {
+    if ([feedPages count] > 0) {
+        // the set of feed Item Ids in the current front page.
+        NSMutableSet *fp = [[[NSMutableSet alloc] init] autorelease];
+        for (FeedItem *i in [[feedPages objectAtIndex:0] feedItems]) {
+            [fp addObject:[i rowId]];
+        }
+        NSMutableArray *newItems = [NSMutableArray arrayWithCapacity:[[newFrontPage feedItems] count]];
+        for (FeedItem *i in [newFrontPage feedItems]) {
+            if ([fp containsObject:[i rowId]]) break;
+            [newItems addObject:i];
+        }
+        // nothing new to add, just return the current feed.
+        if ([newItems count] == 0)
+            return self.feedItems;
+        // got at least one new item, add the page, and build the new feed items list.
+        [feedPages insertObject:newFrontPage atIndex:0];
+        return [newItems arrayByAddingObjectsFromArray:self.feedItems];
+        
+    } else {
+        [feedPages insertObject:newFrontPage atIndex:0];
+        return [newFrontPage feedItems];
+    }
 }
 
--(void)startQueryWithDate:(NSDate *)date newer:(BOOL)newer {
-    NSString *soql = [self buildQueryWithDate:date newer:newer];
+-(void)fetchFeed:(NSURL *)feedUrl newer:(BOOL)newer {
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:feedUrl];
+    [req setValue:[NSString stringWithFormat:@"OAuth %@", [self.sforce sessionId]] forHTTPHeaderField:@"Authorization"];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        ZKQueryResult *qr = [self.sforce query:soql];
-        if ([qr size] == 0) return;
-        NSMutableArray *res = [NSMutableArray arrayWithCapacity:[[qr records] count]];
-        for (ZKSObject *r in [qr records])
-            [res addObject:[FeedItem feedItemFrom:r dataSource:self]];
-        
-        [self startActorFetch:res];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            NSArray *newFeed = res;
-            if (date != nil) {
-                if (newer) 
-                    newFeed = [res arrayByAddingObjectsFromArray:self.feedItems];
-                else
-                    newFeed = [self.feedItems arrayByAddingObjectsFromArray:res];
-            }
-            [self setFeedItems:newFeed updateHasMore:((date == nil) || (!newer))];
-            self.feedItems = newFeed;
-        });
-    });
+    JsonUrlConnectionDelegateWithBlock *delegate = [JsonUrlConnectionDelegateWithBlock 
+            urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+                if (httpStatusCode == 200) {
+                    FeedPage *page = [FeedPage connectFeedPage:(NSDictionary *)jsonValue dataSource:self];
+                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        NSArray *newFeed;
+                        if (newer) {
+                            newFeed = [self resolveNewFeed:page];
+                        } else {
+                            [feedPages addObject:page];
+                            newFeed = [self.feedItems arrayByAddingObjectsFromArray:[page feedItems]];
+                        }
+                        
+                        [self setFeedItems:newFeed updateHasMore:YES];
+                        self.feedItems = newFeed;
+                    });
+                    
+                } else {
+                    NSLog(@"Feed request returned HTTP status code %lu", httpStatusCode);
+                }
+    } runOnMainThread:YES];
+    [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
 }
 
 -(IBAction)loadNewerRows:(id)sender {
-    FeedItem *first = [self.feedItems firstObject];
-    [self startQueryWithDate:[first createdDate] newer:YES];
+    NSURL *feedUrl = [NSURL URLWithString:@"/services/data/v24.0/chatter/feeds/news/me/feed-items?sort=LastModifiedDateDesc" 
+                            relativeToURL:[self.sforce serverUrl]];
+    [self fetchFeed:feedUrl newer:YES];
 }
 
 -(IBAction)loadOlderRows:(id)sender {
-    FeedItem *last = [self.feedItems lastObject];
-    [self startQueryWithDate:[last createdDate] newer:NO];
+    NSURL *feedUrl = [[feedPages lastObject] nextUrl];
+    [self fetchFeed:feedUrl newer:NO];
 }
 
 -(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore {
     if (updateMore)
-        self.hasMore = ((items.count % FEED_PAGE_SIZE) == 0) && (items.count > 0);
+        self.hasMore = [[feedPages lastObject] nextUrl] != nil;
     self.feedItems = items;
     [self filterFeed];
 }
@@ -231,6 +253,7 @@ static int FEED_PAGE_SIZE = 25;
 }
 
 -(void)dealloc {
+    [feedPages release];
     [feedItems release];
     [filteredFeedItems release];
     [junkFeedItems release];
