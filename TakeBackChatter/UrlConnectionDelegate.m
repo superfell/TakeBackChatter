@@ -6,6 +6,7 @@
 //
 
 #import "UrlConnectionDelegate.h"
+#import "SBJson.h"
 
 @interface UrlConnectionDelegate ()
 @property (retain) NSMutableData     *data;
@@ -79,6 +80,38 @@
 - (void)connectionRequestEnded:(NSURLConnection *)connection {
     dispatch_async(queueToRunBlock, ^(void) {
         self.completionBlock(self.httpStatusCode, self.response, self.data, self.error);
+    });
+}
+
+@end
+
+@implementation JsonUrlConnectionDelegateWithBlock
+
+@synthesize completionBlock;
+
++(id)urlDelegateWithBlock:(JsonUrlCompletionBlock)doneBlock queue:(dispatch_queue_t)queue {
+    JsonUrlConnectionDelegateWithBlock *d = [[JsonUrlConnectionDelegateWithBlock alloc] init];
+    d.completionBlock = doneBlock;
+    d->queueToRunBlock = queue;
+    return [d autorelease];
+}
+
++(id)urlDelegateWithBlock:(JsonUrlCompletionBlock) doneBlock runOnMainThread:(BOOL)useMain {
+    dispatch_queue_t q = useMain ? dispatch_get_main_queue() : dispatch_get_current_queue();
+    return [self urlDelegateWithBlock:doneBlock queue:q];
+}
+
+-(void)dealloc {
+    [completionBlock release];
+    [super dealloc];
+}
+
+// we've gotten all the response data, run the completion block.
+- (void)connectionRequestEnded:(NSURLConnection *)connection {
+    dispatch_async(queueToRunBlock, ^(void) {
+        SBJsonParser *p = [[[SBJsonParser alloc] init] autorelease];
+        NSObject *val = [p objectWithData:self.data];
+        self.completionBlock(self.httpStatusCode, val);
     });
 }
 
