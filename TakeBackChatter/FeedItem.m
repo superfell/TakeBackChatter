@@ -25,11 +25,6 @@ static NSDateFormatter *dateFormatter, *dateTimeFormatter;
 	[dateFormatter setDateFormat:@"yyyy-MM-dd"];
 }
 
-// This tells KVO (and theirfore the UI binding), that the 'ActorPhoto' property value is affected by changes to the 'ActorPhotoUrl' property
-+(NSSet *)keyPathsForValuesAffectingActorPhoto {
-    return [NSSet setWithObject:@"actorPhotoUrl"];
-}
-
 - (FeedItemType)resolveType {
     NSString *t = self.type;
     if ([t isEqualToString:@"UserStatus"])
@@ -92,6 +87,11 @@ static NSDateFormatter *dateFormatter, *dateTimeFormatter;
 
 -(NSString *)actorId {
     return [data valueForKeyPath:@"actor.id"];
+}
+
+-(NSURL *)actorPhotoUrl {
+    NSString *photo = [data valueForKeyPath:@"actor.photo.smallPhotoUrl"];
+    return [NSURL URLWithString:photo relativeToURL:feedDataSource.serverUrl];
 }
 
 -(NSDate *)createdDate {
@@ -207,8 +207,7 @@ static NSDateFormatter *dateFormatter, *dateTimeFormatter;
     // Note that we run this entire block on the main thread because the NSURLConnections need to be started from the main thread
     // (because they need a runloop)
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        NSString *photo = [data valueForKeyPath:@"actor.photo.smallPhotoUrl"];
-        NSURL *imgUrl = [NSURL URLWithString:photo relativeToURL:feedDataSource.serverUrl];
+        NSURL *imgUrl = self.actorPhotoUrl;
         NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
         [req setValue:[NSString stringWithFormat:@"OAuth %@", feedDataSource.sessionId] forHTTPHeaderField:@"Authorization"];
             

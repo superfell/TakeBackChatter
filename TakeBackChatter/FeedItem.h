@@ -39,7 +39,7 @@ typedef enum {
 @property (readonly) NSString *actor;
 @property (readonly) NSString *actorId;
 @property (retain) NSImage *actorPhoto;
-@property (retain) NSURL *actorPhotoUrl;
+@property (readonly) NSURL *actorPhotoUrl;
 
 @property (readonly) NSString *title;
 @property (readonly) NSObject *body;            // NSString or NSAttributedString
