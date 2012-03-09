@@ -8,7 +8,6 @@
 #import "FeedPage.h"
 #import "FeedItem.h"
 #import "FeedDataSource.h"
-#import "zkSforceClient.h"
 
 @implementation FeedPage
 
@@ -40,7 +39,7 @@
 -(NSURL *)url:(NSString *)key {
     NSObject *rel = [data objectForKey:key];
     if (rel == nil || rel == [NSNull null]) return nil;
-    return [NSURL URLWithString:(NSString *)rel relativeToURL:[source.sforce serverUrl]];
+    return [NSURL URLWithString:(NSString *)rel relativeToURL:source.serverUrl];
 }
 
 -(NSURL *)previousUrl {
