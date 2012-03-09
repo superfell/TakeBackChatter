@@ -116,3 +116,17 @@
 }
 
 @end
+
+
+
+@implementation CachingUrlConnectionDelegate
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cr {
+    // indicate that this response can be cached on disk.
+    return [[[NSCachedURLResponse alloc] initWithResponse:[cr response] 
+                                                     data:[cr data] 
+                                                 userInfo:[cr userInfo] 
+                                            storagePolicy:NSURLCacheStorageAllowed] autorelease];
+}
+
+@end

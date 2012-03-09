@@ -7,10 +7,10 @@
 
 #import "FeedItem.h"
 #import "FeedDataSource.h"
-#import "zkQueryResult.h"
 #import "NSString_extras.h"
 #import "TakeBackChatterAppDelegate.h"
 #import "Categorizer.h"
+#import "UrlConnectionDelegate.h"
 
 static NSDateFormatter *dateFormatter, *dateTimeFormatter;
 
@@ -51,6 +51,7 @@ static NSDateFormatter *dateFormatter, *dateTimeFormatter;
     data = [feedItem retain];
     feedDataSource = [src retain];    // sigh, TODO fix retain loop
     feedItemType = [self resolveType];
+    [self fetchActorPhoto];
     return self;
 }
 
@@ -200,6 +201,28 @@ static NSDateFormatter *dateFormatter, *dateTimeFormatter;
 
 -(int)chanceIsJunk {
     return [[[NSApp delegate] categorizer] chanceIsJunk:self];
+}
+
+-(void)fetchActorPhoto {
+    // Note that we run this entire block on the main thread because the NSURLConnections need to be started from the main thread
+    // (because they need a runloop)
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        NSString *photo = [data valueForKeyPath:@"actor.photo.smallPhotoUrl"];
+        NSURL *imgUrl = [NSURL URLWithString:photo relativeToURL:feedDataSource.serverUrl];
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+        [req setValue:[NSString stringWithFormat:@"OAuth %@", feedDataSource.sessionId] forHTTPHeaderField:@"Authorization"];
+            
+        CachingUrlConnectionDelegate *delegate = [CachingUrlConnectionDelegate 
+             urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err) {
+                  if (err != nil) {
+                      NSLog(@"photoLoader: got error on url %@ %@", [imgUrl absoluteString], err);
+                      return;
+                  }
+                  NSImage *img = [[[NSImage alloc] initWithData:body] autorelease];
+                 self.actorPhoto = img;
+             } runOnMainThread:YES];
+        [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
+    });
 }
 
 @end

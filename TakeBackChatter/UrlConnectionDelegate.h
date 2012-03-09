@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+// Base UrlConnection delegate impl
 @interface UrlConnectionDelegate : NSObject {
     NSMutableData       *data;
     NSHTTPURLResponse   *response;
@@ -21,6 +22,7 @@
 
 typedef void (^UrlCompletionBlock)(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err);
 
+// Delegate that runs a block on completion of the request.
 @interface UrlConnectionDelegateWithBlock : UrlConnectionDelegate {
     UrlCompletionBlock  completionBlock;
     dispatch_queue_t    queueToRunBlock;
@@ -39,6 +41,7 @@ typedef void (^UrlCompletionBlock)(NSUInteger httpStatusCode, NSHTTPURLResponse 
 
 typedef void (^JsonUrlCompletionBlock)(NSUInteger httpStatusCode, NSObject *jsonValue);
 
+// Delegate that parses a json response.
 @interface JsonUrlConnectionDelegateWithBlock : UrlConnectionDelegate {
     JsonUrlCompletionBlock  jsonCompletionBlock;
     dispatch_queue_t        queueToRunBlock;
@@ -53,4 +56,10 @@ typedef void (^JsonUrlCompletionBlock)(NSUInteger httpStatusCode, NSObject *json
 
 @property (copy) JsonUrlCompletionBlock  completionBlock;
 
+@end
+
+
+// Delegate that allows for caching HTTPS requests. (used for images)
+@interface CachingUrlConnectionDelegate : UrlConnectionDelegateWithBlock {
+}
 @end

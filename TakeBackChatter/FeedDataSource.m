@@ -17,8 +17,6 @@
 #import "prefs.h"
 #import "NSString-Base64Extensions.h"
 
-static int FEED_PAGE_SIZE = 25;
-
 @interface FeedDataSource ()
 
 @property (assign) BOOL hasMore;
@@ -27,22 +25,6 @@ static int FEED_PAGE_SIZE = 25;
 @property (nonatomic,retain) NSArray *junkFeedItems;
 
 -(void)setFeedItems:(NSArray *)items updateHasMore:(BOOL)updateMore;
-
-@end
-
-@interface CachingUrlConnectionDelegate : UrlConnectionDelegateWithBlock {
-}
-@end
-
-@implementation CachingUrlConnectionDelegate
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cr {
-    // indicate that this response can be cached on disk.
-    return [[[NSCachedURLResponse alloc] initWithResponse:[cr response] 
-                                                     data:[cr data] 
-                                                 userInfo:[cr userInfo] 
-                                            storagePolicy:NSURLCacheStorageAllowed] autorelease];
-}
 
 @end
 
@@ -68,47 +50,12 @@ static int FEED_PAGE_SIZE = 25;
     return feedPages;
 }
 
--(void)startActorFetch:(NSArray *)items {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        NSMutableSet *actors = [NSMutableSet set];
-        for (FeedItem *i in items)
-            [actors addObject:[i actorId]];
-        
-        NSMutableString *soql = [NSMutableString stringWithCapacity:100];
-        [soql appendString:@"select id, SmallPhotoUrl from User where id in ("];
-        for (NSString *actor in actors)
-            [soql appendFormat:@"'%@',", actor];
-        [soql deleteCharactersInRange:NSMakeRange([soql length]-1,1)];
-        [soql appendString:@")"];
-        
-        ZKQueryResult *qr = [self.sforce query:soql];
-        NSString *sid = [self.sforce.sessionId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        // Note that we run this entire block on the main thread because the NSURLConnections need to be started from the main thread
-        // (because they need a runloop)
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            for (ZKSObject *r in [qr records]) {
-                NSURL *imgUrl = [NSURL URLWithString:[r fieldValue:@"SmallPhotoUrl"] relativeToURL:[self.sforce serverUrl]];
-                NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
-                [req setValue:[NSString stringWithFormat:@"OAuth %@", sid] forHTTPHeaderField:@"Authorization"];
+-(NSURL *)serverUrl {
+    return sforce.serverUrl;
+}
 
-                CachingUrlConnectionDelegate *delegate = [CachingUrlConnectionDelegate 
-                    urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *data, NSError *err) {
-                    if (err != nil) {
-                        NSLog(@"photoLoader: got error on url %@ %@", [imgUrl absoluteString], err);
-                        return;
-                    }
-                    NSImage *img = [[[NSImage alloc] initWithData:data] autorelease];
-                    NSString *userId = [r id];
-                    for (FeedItem *i in items) {
-                        if ([userId isEqualToString:[i actorId]])
-                            i.actorPhoto = img;
-                    }
-                } runOnMainThread:YES];
-                [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
-            }
-        });
-    });
+-(NSString *)sessionId {
+    return sforce.sessionId;
 }
 
 -(NSArray *)resolveNewFeed:(FeedPage *)newFrontPage {
@@ -161,6 +108,7 @@ static int FEED_PAGE_SIZE = 25;
                     NSLog(@"Feed request returned HTTP status code %lu", httpStatusCode);
                 }
     } runOnMainThread:YES];
+    NSLog(@"starting request for %@ %@", [req HTTPMethod], [req URL]);
     [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
 }
 

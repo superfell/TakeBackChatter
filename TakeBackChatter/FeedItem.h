@@ -29,6 +29,8 @@ typedef enum {
 
 +(id)connectFeedItem:(NSDictionary *)feedItem dataSource:(FeedDataSource *)src;
 
+-(void)fetchActorPhoto;
+
 @property (readonly) FeedDataSource *feedDataSource;
 @property (readonly) NSString *type;
 @property (readonly) FeedItemType feedItemType;

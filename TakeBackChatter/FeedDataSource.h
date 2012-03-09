@@ -28,6 +28,8 @@
 
 @property (readonly) BOOL hasMore;
 @property (readonly) ZKSforceClient *sforce;
+@property (readonly) NSURL *serverUrl;
+@property (readonly) NSString *sessionId;
 
 -(void)filterFeed;  // recalculated the filtered feed list.
 
@@ -40,5 +42,6 @@
 
 @property (readonly) NSString *defaultWindowTitle;
 @property (readonly) NSString *defaultWindowAutosaveName;
+
 
 @end
