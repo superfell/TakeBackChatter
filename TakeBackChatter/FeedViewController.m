@@ -6,6 +6,7 @@
 //
 
 #import "FeedViewController.h"
+#import "Feed.h"
 #import "FeedItem.h"
 #import "TakeBackChatterAppDelegate.h"
 #import "FeedDataSource.h"
@@ -82,7 +83,7 @@
     NSMutableArray *fv = [NSMutableArray arrayWithCapacity:[feedItems count] + 2];
     [fv addObject:loadNewer];
     [fv addObjectsFromArray:feedItems];
-    if ([feedDataSource hasMore])
+    if ([[feedDataSource feed] hasMore])
         [fv addObject:loadOlder];
     
     self.feedViewItems = fv;
@@ -91,20 +92,20 @@
 
 -(IBAction)markSelectedPostsAsJunk:(id)sender {
     [[[NSApp delegate] categorizer] categorizeItemsAsJunk:[self.collectionView selectedObjects]];
-    [feedDataSource filterFeed];
+    [[feedDataSource feed] filterFeed];
 }
 
 -(IBAction)markSelectedPostsAsNotJunk:(id)sender {
     [[[NSApp delegate] categorizer] categorizeItemsAsGood:[self.collectionView selectedObjects]];
-    [feedDataSource filterFeed];
+    [[feedDataSource feed] filterFeed];
 }
 
 -(IBAction)loadOlderRows:(id)sender {
-    [feedDataSource loadOlderRows:sender];
+    [[feedDataSource feed] loadOlderRows:sender];
 }
 
 -(IBAction)loadNewerRows:(id)sender {
-    [feedDataSource loadNewerRows:sender];
+    [[feedDataSource feed] loadNewerRows:sender];
 }
 
 -(IBAction)createPost:(id)sender {
@@ -121,13 +122,13 @@
         case 2 : srcPropName = @"junkFeedItems"; break;
     }
     if (srcPropName != nil)
-        [self bind:@"feedItems" toObject:feedDataSource withKeyPath:srcPropName options:nil];
+        [self bind:@"feedItems" toObject:[feedDataSource feed] withKeyPath:srcPropName options:nil];
 }
 
 -(NSString *)junkSummary {
     Categorizer *c = [self categorizer];
     return [c isTraining] ? [NSString stringWithFormat:@"Training: %lu to go", (unsigned long)[c trainingLeft]] :
-                            [NSString stringWithFormat:@"Junk: %lu", (unsigned long)[feedDataSource junkCount]];
+                            [NSString stringWithFormat:@"Junk: %lu", (unsigned long)[[feedDataSource feed] junkCount]];
 }
 
 -(Categorizer *)categorizer {

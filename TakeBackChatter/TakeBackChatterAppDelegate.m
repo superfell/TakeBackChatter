@@ -13,6 +13,7 @@
 #import "ZKLoginController.h"
 #import "prefs.h"
 #import "Categorizer.h"
+#import "Feed.h"
 
 @implementation TakeBackChatterAppDelegate
 
@@ -81,7 +82,7 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 -(void)showFeedForClient:(ZKSforceClient *)client {
     FeedDataSource *src = [[[FeedDataSource alloc] initWithSforceClient:client] autorelease];
     FeedViewController *ctrl = [[FeedViewController alloc] initWithDataSource:src];
-    [src loadNewerRows:self];
+    [[src feed]loadNewerRows:self];
     [feedControllers addObject:ctrl];
     [ctrl release];
 }

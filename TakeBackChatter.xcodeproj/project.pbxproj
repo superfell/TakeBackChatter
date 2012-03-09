@@ -97,6 +97,7 @@
 		F4F4FDA5150862480088B18B /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4FD98150862480088B18B /* SBJsonUTF8Stream.m */; };
 		F4F4FDA6150862480088B18B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4FD9A150862480088B18B /* SBJsonWriter.m */; };
 		F4F4FDA9150876270088B18B /* FeedPage.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4FDA8150876260088B18B /* FeedPage.m */; };
+		F4F4FDAC1509AACE0088B18B /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4FDAB1509AACD0088B18B /* Feed.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -304,6 +305,8 @@
 		F4F4FD9A150862480088B18B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = TakeBackChatter/SBJSON/SBJsonWriter.m; sourceTree = "<group>"; };
 		F4F4FDA7150876260088B18B /* FeedPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedPage.h; sourceTree = "<group>"; };
 		F4F4FDA8150876260088B18B /* FeedPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedPage.m; sourceTree = "<group>"; };
+		F4F4FDAA1509AACD0088B18B /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
+		F4F4FDAB1509AACD0088B18B /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,10 +396,12 @@
 				F499AD22139F20D200B5A72A /* Categorizer.m */,
 				F48AB8F31384D0B800BC9EF6 /* FeedDataSource.h */,
 				F48AB8F41384D0B800BC9EF6 /* FeedDataSource.m */,
-				F48AB9211384E09B00BC9EF6 /* FeedItem.h */,
-				F48AB9221384E09C00BC9EF6 /* FeedItem.m */,
+				F4F4FDAA1509AACD0088B18B /* Feed.h */,
+				F4F4FDAB1509AACD0088B18B /* Feed.m */,
 				F4F4FDA7150876260088B18B /* FeedPage.h */,
 				F4F4FDA8150876260088B18B /* FeedPage.m */,
+				F48AB9211384E09B00BC9EF6 /* FeedItem.h */,
+				F48AB9221384E09C00BC9EF6 /* FeedItem.m */,
 				F40CA5E1138A287E009B8160 /* FeedList.xib */,
 				F4D08BEF13883FCA00A4C273 /* FeedItem.xib */,
 				F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */,
@@ -742,6 +747,7 @@
 				F4F4FDA5150862480088B18B /* SBJsonUTF8Stream.m in Sources */,
 				F4F4FDA6150862480088B18B /* SBJsonWriter.m in Sources */,
 				F4F4FDA9150876270088B18B /* FeedPage.m in Sources */,
+				F4F4FDAC1509AACE0088B18B /* Feed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
