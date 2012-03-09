@@ -83,33 +83,42 @@
     }
 }
 
--(void)fetchFeed:(NSURL *)feedUrl newer:(BOOL)newer {
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:feedUrl];
-    [req setValue:[NSString stringWithFormat:@"OAuth %@", [self.sforce sessionId]] forHTTPHeaderField:@"Authorization"];
-    
-    JsonUrlConnectionDelegateWithBlock *delegate = [JsonUrlConnectionDelegateWithBlock 
-            urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
-                if (httpStatusCode == 200) {
-                    FeedPage *page = [FeedPage connectFeedPage:(NSDictionary *)jsonValue dataSource:self];
-                    dispatch_async(dispatch_get_main_queue(), ^(void) {
-                        NSArray *newFeed;
-                        if (newer) {
-                            newFeed = [self resolveNewFeed:page];
-                        } else {
-                            [feedPages addObject:page];
-                            newFeed = [self.feedItems arrayByAddingObjectsFromArray:[page feedItems]];
-                        }
-                        
-                        [self setFeedItems:newFeed updateHasMore:YES];
-                        self.feedItems = newFeed;
-                    });
-                    
-                } else {
-                    NSLog(@"Feed request returned HTTP status code %lu", httpStatusCode);
-                }
-    } runOnMainThread:YES];
+-(void)fetchJsonUrl:(NSURL *)url done:(JsonUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain {
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    [req setValue:[NSString stringWithFormat:@"OAuth %@", self.sessionId] forHTTPHeaderField:@"Authorization"];
+    JsonUrlConnectionDelegateWithBlock *delegate = [JsonUrlConnectionDelegateWithBlock
+                                                    urlDelegateWithBlock:doneBlock runOnMainThread:runOnMain];
+
     NSLog(@"starting request for %@ %@", [req HTTPMethod], [req URL]);
     [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
+}
+
+-(void)fetchJsonPath:(NSString *)path done:(JsonUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain {
+    NSURL *url = [NSURL URLWithString:path relativeToURL:self.serverUrl];
+    [self fetchJsonUrl:url done:doneBlock runOnMainThread:runOnMain];
+}
+
+-(void)fetchFeed:(NSURL *)feedUrl newer:(BOOL)newer {
+    [self fetchJsonUrl:feedUrl done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+        if (httpStatusCode == 200) {
+            FeedPage *page = [FeedPage connectFeedPage:(NSDictionary *)jsonValue dataSource:self];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                NSArray *newFeed;
+                if (newer) {
+                    newFeed = [self resolveNewFeed:page];
+                } else {
+                    [feedPages addObject:page];
+                    newFeed = [self.feedItems arrayByAddingObjectsFromArray:[page feedItems]];
+                }
+                
+                [self setFeedItems:newFeed updateHasMore:YES];
+                self.feedItems = newFeed;
+            });
+            
+        } else {
+            NSLog(@"Feed request returned HTTP status code %lu", httpStatusCode);
+        }
+    } runOnMainThread:YES];
 }
 
 -(IBAction)loadNewerRows:(id)sender {
