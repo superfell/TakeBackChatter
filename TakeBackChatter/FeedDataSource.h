@@ -14,11 +14,14 @@
 @class Feed;
 
 @interface FeedDataSource : NSObject {
-    ZKSforceClient *sforce;
-    Feed           *feed;
+    ZKSforceClient  *sforce;
+    Feed            *feed;
+    NSArray         *feeds;
 }
 
 -(id)initWithSforceClient:(ZKSforceClient *)c;
+
+-(NSArray *)feeds;    // of Feed
 
 @property (readonly) Feed *feed;
 

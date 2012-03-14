@@ -17,7 +17,17 @@
 #import "prefs.h"
 #import "NSString-Base64Extensions.h"
 
+@interface FeedDataSource ()
+
+@property (retain) NSArray *feeds;
+
+-(void)fetchFeeds;
+
+@end
+
 @implementation FeedDataSource
+
+@synthesize feeds;
 
 -(id)initWithSforceClient:(ZKSforceClient *)c {
     self = [super init];
@@ -25,9 +35,10 @@
     feed = [[Feed connectFeed:@"/services/data/v24.0/chatter/feeds/news/me/feed-items?sort=LastModifiedDateDesc" 
                         label:@"My Chatter" 
                        source:self] retain];
+    [self fetchFeeds];
     return self;
 }
-
+        
 -(Feed *)feed {
     return feed;
 }
@@ -64,6 +75,17 @@
     [self fetchJsonUrl:url done:doneBlock runOnMainThread:runOnMain];
 }
 
+-(void)fetchFeeds {
+    [self fetchJsonPath:@"/services/data/v24.0/chatter/feeds" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+        NSMutableArray *results = [NSMutableArray array];
+        NSArray *jsonFeeds = [(NSDictionary *)jsonValue objectForKey:@"feeds"];
+        for (NSDictionary *f in jsonFeeds) {
+            Feed *newFeed = [Feed connectFeed:[f objectForKey:@"feedItemsUrl"] label:[f objectForKey:@"label"] source:self];
+            [results addObject:newFeed];
+        }
+        self.feeds = [NSArray arrayWithArray:results];
+    } runOnMainThread:YES];
+}
 
 -(void)checkSaveResult:(ZKSaveResult *)sr {
     if ([sr success]) {
