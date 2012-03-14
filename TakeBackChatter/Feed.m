@@ -117,9 +117,7 @@
 }
 
 -(IBAction)loadNewerRows:(id)sender {
-    NSURL *feedUrl = [NSURL URLWithString:@"/services/data/v24.0/chatter/feeds/news/me/feed-items?sort=LastModifiedDateDesc" 
-                            relativeToURL:dataSource.serverUrl];
-    [self fetchFeed:feedUrl newer:YES];
+    [self fetchFeed:baseUrl newer:YES];
 }
 
 -(IBAction)loadOlderRows:(id)sender {
