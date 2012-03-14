@@ -51,6 +51,7 @@
 -(void)fetchJsonUrl:(NSURL *)url done:(JsonUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain {
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setValue:[NSString stringWithFormat:@"OAuth %@", self.sessionId] forHTTPHeaderField:@"Authorization"];
+    [req setValue:@"false" forHTTPHeaderField:@"X-Chatter-Entity-Encoding"];
     JsonUrlConnectionDelegateWithBlock *delegate = [JsonUrlConnectionDelegateWithBlock
                                                     urlDelegateWithBlock:doneBlock runOnMainThread:runOnMain];
 
