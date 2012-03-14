@@ -53,8 +53,8 @@
                                                                        nil]];
     
     [self.feedSelectionControl setSelectedSegment:[self.categorizer isTraining] ? 0 : 1];
-    [self setFeedListTypeFromSender:self.feedSelectionControl];
     [window makeKeyAndOrderFront:self];
+    [feedDataSource addObserver:self forKeyPath:@"feed" options:0 context:nil];
     
     if ([self.categorizer categorizedCount] == 0)
         [self showTrainingHelpWindow];
@@ -64,6 +64,7 @@
 
 - (void)dealloc {
     [self unbind:@"feedItems"];
+    [feedDataSource removeObserver:self forKeyPath:@"feed"];
     [feedDataSource release];
     [collectionView release];
     [window release];
@@ -112,6 +113,13 @@
     [[NewPostController postControllerFor:feedDataSource] retain];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"feed"]) {
+        // the feed property of the data source has changed to a different feed, rebind to it if needed
+        [self setFeedListTypeFromSender:feedSelectionControl];
+    }
+}
+
 -(IBAction)setFeedListTypeFromSender:(id)sender {
     NSSegmentedControl *s = sender;
     NSInteger t = [s selectedSegment];
@@ -121,8 +129,11 @@
         case 1 : srcPropName = @"filteredFeedItems"; break;
         case 2 : srcPropName = @"junkFeedItems"; break;
     }
-    if (srcPropName != nil)
+    NSLog(@"feed = %@, propName=%@", [feedDataSource feed], srcPropName);
+    if (srcPropName != nil && [feedDataSource feed] != nil) {
         [self bind:@"feedItems" toObject:[feedDataSource feed] withKeyPath:srcPropName options:nil];
+        [[feedDataSource feed] loadNewerRows:self];
+    }
 }
 
 -(NSString *)junkSummary {

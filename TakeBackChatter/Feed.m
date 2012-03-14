@@ -56,6 +56,10 @@
     return f;
 }
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@ (url=%@)", label, baseUrl];
+}
+
 -(NSString *)label {
     return label;
 }
@@ -66,6 +70,10 @@
 
 -(NSArray *)feedPages {
     return feedPages;
+}
+
+-(BOOL)isMyChatter {
+    return [[baseUrl path] rangeOfString:@"chatter/feeds/news/me/feed-items"].location != NSNotFound;
 }
 
 -(NSArray *)resolveNewFeed:(FeedPage *)newFrontPage {

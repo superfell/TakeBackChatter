@@ -27,22 +27,15 @@
 
 @implementation FeedDataSource
 
-@synthesize feeds;
+@synthesize feeds, feed;
 
 -(id)initWithSforceClient:(ZKSforceClient *)c {
     self = [super init];
     sforce = [c retain];
-    feed = [[Feed connectFeed:@"/services/data/v24.0/chatter/feeds/news/me/feed-items?sort=LastModifiedDateDesc" 
-                        label:@"My Chatter" 
-                       source:self] retain];
     [self fetchFeeds];
     return self;
 }
         
--(Feed *)feed {
-    return feed;
-}
-
 -(NSURL *)serverUrl {
     return sforce.serverUrl;
 }
@@ -79,11 +72,16 @@
     [self fetchJsonPath:@"/services/data/v24.0/chatter/feeds" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
         NSMutableArray *results = [NSMutableArray array];
         NSArray *jsonFeeds = [(NSDictionary *)jsonValue objectForKey:@"feeds"];
+        Feed *myChatter = nil;
         for (NSDictionary *f in jsonFeeds) {
             Feed *newFeed = [Feed connectFeed:[f objectForKey:@"feedItemsUrl"] label:[f objectForKey:@"label"] source:self];
             [results addObject:newFeed];
+            if ([newFeed isMyChatter])
+                myChatter = [[newFeed retain] autorelease];
         }
         self.feeds = [NSArray arrayWithArray:results];
+        self.feed = myChatter;
+        
     } runOnMainThread:YES];
 }
 
@@ -146,6 +144,7 @@
 -(void)dealloc {
     [sforce release];
     [feed release];
+    [feeds release];
     [super dealloc];
 }
 

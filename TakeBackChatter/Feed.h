@@ -22,6 +22,7 @@
 
 @property (readonly) NSString *label;
 @property (readonly) BOOL hasMore;
+@property (readonly) BOOL isMyChatter;  // is this the "My Chatter" feed ?
 
 -(NSArray *)feedItems;              // all items fetched
 -(NSArray *)filteredFeedItems;      // all items not considered junk

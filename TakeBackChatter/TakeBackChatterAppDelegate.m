@@ -82,7 +82,6 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
 -(void)showFeedForClient:(ZKSforceClient *)client {
     FeedDataSource *src = [[[FeedDataSource alloc] initWithSforceClient:client] autorelease];
     FeedViewController *ctrl = [[FeedViewController alloc] initWithDataSource:src];
-    [[src feed] loadNewerRows:self];
     [feedControllers addObject:ctrl];
     [ctrl release];
 }
@@ -113,11 +112,12 @@ static NSString *KEYCHAIN_CRED_COMMENT = @"oauth token";
             ZKSforceClient *client = [[[ZKSforceClient alloc] init] autorelease];
             @try {
                 [client loginWithRefreshToken:refreshToken authUrl:authHost oAuthConsumerKey:OAUTH_CLIENTID];
-                [self addLogoutMenuItem:c];
-                [self showFeedForClient:client];
             } @catch (NSException *ex) {
                 NSLog(@"error with refresh token %@", [ex reason]);
+                continue;
             }
+            [self addLogoutMenuItem:c];
+            [self showFeedForClient:client];
         }
     }
 }

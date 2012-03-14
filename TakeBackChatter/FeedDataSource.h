@@ -23,7 +23,7 @@
 
 -(NSArray *)feeds;    // of Feed
 
-@property (readonly) Feed *feed;
+@property (retain) Feed *feed;
 
 @property (readonly) NSURL *serverUrl;
 @property (readonly) NSString *sessionId;
