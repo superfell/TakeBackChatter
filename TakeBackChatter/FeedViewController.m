@@ -14,6 +14,7 @@
 #import "CollectionViewItems.h"
 #import "NewPostController.h"
 #import "Categorizer.h"
+#import "PeopleViewController.h"
 
 @interface FeedViewController ()
 @property (retain) NSArray *feedViewItems;  // this are the items that drive the list view, it includes the objects for the load more... rows
@@ -22,7 +23,7 @@
 
 @implementation FeedViewController
 
-@synthesize feedCollectionView, feedDataSource, feedItems;
+@synthesize feedCollectionView, feedDataSource, feedItems, peopleViewController;
 @synthesize feedViewItems;
 @synthesize window, feedSelectionControl;
 
@@ -54,6 +55,7 @@
     if ([self.categorizer categorizedCount] == 0)
         [self showTrainingHelpWindow];
     
+    peopleViewController.dataSource = src;
     return self;
 }
 
@@ -65,6 +67,7 @@
     [window release];
     [loadNewer release];
     [feedViewItems release];
+    [peopleViewController release];
     [super dealloc];
 }
 

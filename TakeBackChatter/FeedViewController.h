@@ -10,6 +10,7 @@
 
 @class FeedDataSource;
 @class Categorizer;
+@class PeopleViewController;
 
 @interface FeedViewController : NSObject {
     CollectionViewFeed *feedCollectionView;
@@ -21,9 +22,13 @@
     NSObject           *loadNewer, *loadOlder;
     
     NSWindow           *window;
+    
+    PeopleViewController *peopleViewController;
 }
 
 -(id)initWithDataSource:(FeedDataSource *)src;
+
+@property (nonatomic, retain) IBOutlet PeopleViewController *peopleViewController;
 
 @property (nonatomic, retain) IBOutlet NSWindow           *window;
 @property (nonatomic, retain) IBOutlet NSSegmentedControl *feedSelectionControl;

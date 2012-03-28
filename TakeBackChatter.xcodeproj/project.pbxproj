@@ -74,6 +74,7 @@
 		F499AD23139F20D200B5A72A /* Categorizer.m in Sources */ = {isa = PBXBuildFile; fileRef = F499AD22139F20D200B5A72A /* Categorizer.m */; };
 		F499AD5513A076FD00B5A72A /* TrainingHelp.xib in Resources */ = {isa = PBXBuildFile; fileRef = F499AD5413A076FD00B5A72A /* TrainingHelp.xib */; };
 		F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A29DE7138EC0870037CD5E /* MoreOlder.xib */; };
+		F4A3EB801522AEC600B5059B /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3EB7F1522AEC600B5059B /* PeopleViewController.m */; };
 		F4AC3B6913980479005FBBCF /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AC3B6613980479005FBBCF /* Login.xib */; };
 		F4AC3B6A13980479005FBBCF /* ZKLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AC3B6813980479005FBBCF /* ZKLoginController.m */; };
 		F4AC3BA313986232005FBBCF /* NSString-Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AC3BA213986232005FBBCF /* NSString-Base64Extensions.m */; };
@@ -259,6 +260,8 @@
 		F499AD22139F20D200B5A72A /* Categorizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categorizer.m; sourceTree = "<group>"; };
 		F499AD5413A076FD00B5A72A /* TrainingHelp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingHelp.xib; sourceTree = "<group>"; };
 		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
+		F4A3EB7E1522AEC600B5059B /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleViewController.h; sourceTree = "<group>"; };
+		F4A3EB7F1522AEC600B5059B /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
 		F4AC3B6613980479005FBBCF /* Login.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
 		F4AC3B6713980479005FBBCF /* ZKLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLoginController.h; sourceTree = "<group>"; };
 		F4AC3B6813980479005FBBCF /* ZKLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLoginController.m; sourceTree = "<group>"; };
@@ -409,6 +412,8 @@
 				F454E21C138EB47600CC8158 /* MoreNewer.xib */,
 				F4A29DE7138EC0870037CD5E /* MoreOlder.xib */,
 				F499AD5413A076FD00B5A72A /* TrainingHelp.xib */,
+				F4A3EB7E1522AEC600B5059B /* PeopleViewController.h */,
+				F4A3EB7F1522AEC600B5059B /* PeopleViewController.m */,
 				F454E216138B56F500CC8158 /* FeedViewController.h */,
 				F454E217138B56F500CC8158 /* FeedViewController.m */,
 				F4D08BF11388404C00A4C273 /* CollectionViewItems.h */,
@@ -748,6 +753,7 @@
 				F4F4FDA6150862480088B18B /* SBJsonWriter.m in Sources */,
 				F4F4FDA9150876270088B18B /* FeedPage.m in Sources */,
 				F4F4FDAC1509AACE0088B18B /* Feed.m in Sources */,
+				F4A3EB801522AEC600B5059B /* PeopleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
