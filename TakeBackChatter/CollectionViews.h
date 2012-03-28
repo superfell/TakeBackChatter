@@ -19,3 +19,6 @@
 -(Class)classOfItemForCollectionView:(CollectionViewFeed *)cv;
 @end
 
+@interface CollectionViewPeople : AMCollectionView {
+}
+@end

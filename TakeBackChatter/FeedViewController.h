@@ -6,13 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CollectionViewFeed.h"
+#import "CollectionViews.h"
 
 @class FeedDataSource;
 @class Categorizer;
 
 @interface FeedViewController : NSObject {
-    CollectionViewFeed *collectionView;
+    CollectionViewFeed *feedCollectionView;
     FeedDataSource     *feedDataSource;
     NSArray            *feedItems;
     NSWindow           *window;
@@ -25,7 +25,7 @@
 
 @property (nonatomic, retain) IBOutlet NSWindow           *window;
 @property (nonatomic, retain) IBOutlet NSSegmentedControl *feedSelectionControl;
-@property (nonatomic, retain) IBOutlet CollectionViewFeed *collectionView;
+@property (nonatomic, retain) IBOutlet CollectionViewFeed *feedCollectionView;
 @property (readonly)                       FeedDataSource *feedDataSource;
 @property (nonatomic, retain)                     NSArray *feedItems;
 

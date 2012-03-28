@@ -5,7 +5,7 @@
 //  Created by Simon Fell on 5/21/11.
 //
 
-#import "CollectionViewFeedItem.h"
+#import "CollectionViewItems.h"
 #import "FeedViewController.h"
 #import "FeedItem.h"
 #import "FeedDataSource.h"
@@ -78,3 +78,14 @@
 }
 
 @end
+
+@implementation CollectionViewPersonItem
+
+-(id)initWithCollectionView:(AMCollectionView *)theCollectionView representedObject:(id)theObject {
+    self = [super initWithCollectionView:theCollectionView representedObject:theObject];
+    // TODO [NSBundle loadNibNamed:@"Person" owner:self];
+    return self;
+}
+
+@end
+

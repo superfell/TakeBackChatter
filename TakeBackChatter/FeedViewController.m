@@ -11,7 +11,7 @@
 #import "TakeBackChatterAppDelegate.h"
 #import "FeedDataSource.h"
 #import "zkSforce.h"
-#import "CollectionViewFeedItem.h"
+#import "CollectionViewItems.h"
 #import "NewPostController.h"
 #import "Categorizer.h"
 
@@ -22,7 +22,7 @@
 
 @implementation FeedViewController
 
-@synthesize collectionView, feedDataSource, feedItems;
+@synthesize feedCollectionView, feedDataSource, feedItems;
 @synthesize feedViewItems;
 @synthesize window, feedSelectionControl;
 
@@ -45,10 +45,10 @@
     [window setTitle:feedDataSource.defaultWindowTitle];
     [window setFrameAutosaveName:[NSString stringWithFormat:@"%@ / %@", feedDataSource.defaultWindowAutosaveName, @"FeedViewController"]];
     
-    [self.collectionView setAllowsMultipleSelection:YES];
-	[self.collectionView setRowHeight:105];
-	[self.collectionView setDrawsBackground:YES];
-    [self.collectionView setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
+    [self.feedCollectionView setAllowsMultipleSelection:YES];
+	[self.feedCollectionView setRowHeight:105];
+	[self.feedCollectionView setDrawsBackground:YES];
+    [self.feedCollectionView setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
                                                                        [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1.0],
                                                                        nil]];
     
@@ -66,7 +66,7 @@
     [self unbind:@"feedItems"];
     [feedDataSource removeObserver:self forKeyPath:@"feed"];
     [feedDataSource release];
-    [collectionView release];
+    [feedCollectionView release];
     [window release];
     [loadNewer release];
     [feedViewItems release];
@@ -88,16 +88,16 @@
         [fv addObject:loadOlder];
     
     self.feedViewItems = fv;
-    [self.collectionView setContent:fv];
+    [self.feedCollectionView setContent:fv];
 }
 
 -(IBAction)markSelectedPostsAsJunk:(id)sender {
-    [[[NSApp delegate] categorizer] categorizeItemsAsJunk:[self.collectionView selectedObjects]];
+    [[[NSApp delegate] categorizer] categorizeItemsAsJunk:[self.feedCollectionView selectedObjects]];
     [[feedDataSource feed] filterFeed];
 }
 
 -(IBAction)markSelectedPostsAsNotJunk:(id)sender {
-    [[[NSApp delegate] categorizer] categorizeItemsAsGood:[self.collectionView selectedObjects]];
+    [[[NSApp delegate] categorizer] categorizeItemsAsGood:[self.feedCollectionView selectedObjects]];
     [[feedDataSource feed] filterFeed];
 }
 

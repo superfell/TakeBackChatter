@@ -30,3 +30,7 @@
 
 -(IBAction)loadOlder:(id)sender;
 @end
+
+@interface CollectionViewPersonItem : AMCollectionViewItem {
+}
+@end

@@ -80,8 +80,8 @@
 		F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BE913883F0300A4C273 /* AMCollectionView.m */; };
 		F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */; };
 		F4D08BF013883FCA00A4C273 /* FeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D08BEF13883FCA00A4C273 /* FeedItem.xib */; };
-		F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */; };
-		F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF51388428100A4C273 /* CollectionViewFeed.m */; };
+		F4D08BF31388404C00A4C273 /* CollectionViewItems.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF21388404C00A4C273 /* CollectionViewItems.m */; };
+		F4D08BF61388428100A4C273 /* CollectionViews.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D08BF51388428100A4C273 /* CollectionViews.m */; };
 		F4DC901D13947478004A0E00 /* NSString_extras.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DC901C13947478004A0E00 /* NSString_extras.m */; };
 		F4DC901F139479E2004A0E00 /* ContentFeedItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */; };
 		F4F4FD9B150862480088B18B /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F4FD83150862480088B18B /* NSObject+SBJson.m */; };
@@ -270,10 +270,10 @@
 		F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionViewItem.m; path = TakeBackChatter/AMCollectionViewItem.m; sourceTree = "<group>"; };
 		F4D08BEC13883F0300A4C273 /* AMCollectionViewItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionViewItemProtocol.h; path = TakeBackChatter/AMCollectionViewItemProtocol.h; sourceTree = "<group>"; };
 		F4D08BEF13883FCA00A4C273 /* FeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedItem.xib; sourceTree = "<group>"; };
-		F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFeedItem.h; sourceTree = "<group>"; };
-		F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeedItem.m; sourceTree = "<group>"; };
-		F4D08BF41388428100A4C273 /* CollectionViewFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewFeed.h; sourceTree = "<group>"; };
-		F4D08BF51388428100A4C273 /* CollectionViewFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewFeed.m; sourceTree = "<group>"; };
+		F4D08BF11388404C00A4C273 /* CollectionViewItems.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CollectionViewItems.h; sourceTree = "<group>"; };
+		F4D08BF21388404C00A4C273 /* CollectionViewItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewItems.m; sourceTree = "<group>"; };
+		F4D08BF41388428100A4C273 /* CollectionViews.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CollectionViews.h; sourceTree = "<group>"; };
+		F4D08BF51388428100A4C273 /* CollectionViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViews.m; sourceTree = "<group>"; };
 		F4DC901B13947478004A0E00 /* NSString_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSString_extras.h; path = TakeBackChatter/NSString_extras.h; sourceTree = "<group>"; };
 		F4DC901C13947478004A0E00 /* NSString_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSString_extras.m; path = TakeBackChatter/NSString_extras.m; sourceTree = "<group>"; };
 		F4DC901E139479E2004A0E00 /* ContentFeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentFeedItem.xib; sourceTree = "<group>"; };
@@ -411,10 +411,10 @@
 				F499AD5413A076FD00B5A72A /* TrainingHelp.xib */,
 				F454E216138B56F500CC8158 /* FeedViewController.h */,
 				F454E217138B56F500CC8158 /* FeedViewController.m */,
-				F4D08BF11388404C00A4C273 /* CollectionViewFeedItem.h */,
-				F4D08BF21388404C00A4C273 /* CollectionViewFeedItem.m */,
-				F4D08BF41388428100A4C273 /* CollectionViewFeed.h */,
-				F4D08BF51388428100A4C273 /* CollectionViewFeed.m */,
+				F4D08BF11388404C00A4C273 /* CollectionViewItems.h */,
+				F4D08BF21388404C00A4C273 /* CollectionViewItems.m */,
+				F4D08BF41388428100A4C273 /* CollectionViews.h */,
+				F4D08BF51388428100A4C273 /* CollectionViews.m */,
 				F48EAAAF139410A1005C0601 /* NewPost.xib */,
 				F48EAA6B1391E979005C0601 /* NewPostController.h */,
 				F48EAA6C1391E979005C0601 /* NewPostController.m */,
@@ -722,8 +722,8 @@
 				F426C02513861DCC00004388 /* NSDate_iso8601.m in Sources */,
 				F4D08BED13883F0300A4C273 /* AMCollectionView.m in Sources */,
 				F4D08BEE13883F0300A4C273 /* AMCollectionViewItem.m in Sources */,
-				F4D08BF31388404C00A4C273 /* CollectionViewFeedItem.m in Sources */,
-				F4D08BF61388428100A4C273 /* CollectionViewFeed.m in Sources */,
+				F4D08BF31388404C00A4C273 /* CollectionViewItems.m in Sources */,
+				F4D08BF61388428100A4C273 /* CollectionViews.m in Sources */,
 				F454E218138B56F500CC8158 /* FeedViewController.m in Sources */,
 				F454E21B138CC06C00CC8158 /* NSArray_extras.m in Sources */,
 				F48EAA6813916037005C0601 /* UrlConnectionDelegate.m in Sources */,
