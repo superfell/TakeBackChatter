@@ -45,12 +45,7 @@
     [window setTitle:feedDataSource.defaultWindowTitle];
     [window setFrameAutosaveName:[NSString stringWithFormat:@"%@ / %@", feedDataSource.defaultWindowAutosaveName, @"FeedViewController"]];
     
-    [self.feedCollectionView setAllowsMultipleSelection:YES];
-	[self.feedCollectionView setRowHeight:105];
-	[self.feedCollectionView setDrawsBackground:YES];
-    [self.feedCollectionView setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
-                                                                       [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1.0],
-                                                                       nil]];
+    [self.feedCollectionView setDefaultProperties];
     
     [self.feedSelectionControl setSelectedSegment:[self.categorizer isTraining] ? 0 : 1];
     [window makeKeyAndOrderFront:self];

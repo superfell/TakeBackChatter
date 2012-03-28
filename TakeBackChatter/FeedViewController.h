@@ -14,11 +14,13 @@
 @interface FeedViewController : NSObject {
     CollectionViewFeed *feedCollectionView;
     FeedDataSource     *feedDataSource;
-    NSArray            *feedItems;
-    NSWindow           *window;
+
     NSSegmentedControl *feedSelectionControl;
     NSArray            *feedViewItems;
+    NSArray            *feedItems;
     NSObject           *loadNewer, *loadOlder;
+    
+    NSWindow           *window;
 }
 
 -(id)initWithDataSource:(FeedDataSource *)src;

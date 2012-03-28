@@ -18,12 +18,30 @@
 	return [[CollectionViewFeedItem alloc] initWithCollectionView:self representedObject:object];
 }
 
+-(void)setDefaultProperties {
+    [self setAllowsMultipleSelection:YES];
+	[self setRowHeight:105];
+	[self setDrawsBackground:YES];
+    [self setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
+                                                        [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1.0],
+                                                        nil]];
+}
+
 @end
 
 @implementation CollectionViewPeople 
 
 -(CollectionViewPersonItem *)newItemForRepresentedObject:(id)object {
     return [[CollectionViewPersonItem alloc] initWithCollectionView:self representedObject:object];
+}
+
+-(void)setDefaultProperties {
+    [self setAllowsMultipleSelection:NO];
+	[self setRowHeight:105];
+	[self setDrawsBackground:YES];
+    [self setBackgroundColors:[NSArray arrayWithObjects:[NSColor whiteColor], 
+                               [NSColor colorWithCalibratedRed:0.95 green:0.95 blue:0.95 alpha:1.0],
+                               nil]];
 }
 
 @end

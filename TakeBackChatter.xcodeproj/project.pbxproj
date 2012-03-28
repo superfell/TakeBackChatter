@@ -270,9 +270,9 @@
 		F4D08BEB13883F0300A4C273 /* AMCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCollectionViewItem.m; path = TakeBackChatter/AMCollectionViewItem.m; sourceTree = "<group>"; };
 		F4D08BEC13883F0300A4C273 /* AMCollectionViewItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCollectionViewItemProtocol.h; path = TakeBackChatter/AMCollectionViewItemProtocol.h; sourceTree = "<group>"; };
 		F4D08BEF13883FCA00A4C273 /* FeedItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedItem.xib; sourceTree = "<group>"; };
-		F4D08BF11388404C00A4C273 /* CollectionViewItems.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CollectionViewItems.h; sourceTree = "<group>"; };
+		F4D08BF11388404C00A4C273 /* CollectionViewItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewItems.h; sourceTree = "<group>"; };
 		F4D08BF21388404C00A4C273 /* CollectionViewItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewItems.m; sourceTree = "<group>"; };
-		F4D08BF41388428100A4C273 /* CollectionViews.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CollectionViews.h; sourceTree = "<group>"; };
+		F4D08BF41388428100A4C273 /* CollectionViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViews.h; sourceTree = "<group>"; };
 		F4D08BF51388428100A4C273 /* CollectionViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViews.m; sourceTree = "<group>"; };
 		F4DC901B13947478004A0E00 /* NSString_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSString_extras.h; path = TakeBackChatter/NSString_extras.h; sourceTree = "<group>"; };
 		F4DC901C13947478004A0E00 /* NSString_extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSString_extras.m; path = TakeBackChatter/NSString_extras.m; sourceTree = "<group>"; };

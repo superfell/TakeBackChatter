@@ -10,6 +10,9 @@
 
 @interface CollectionViewFeed : AMCollectionView {
 }
+
+-(void)setDefaultProperties;
+
 @end
 
 // Your representedObjects can implement this protocol, and we'll let them declare
@@ -21,4 +24,5 @@
 
 @interface CollectionViewPeople : AMCollectionView {
 }
+-(void)setDefaultProperties;
 @end
