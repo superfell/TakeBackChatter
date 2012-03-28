@@ -83,7 +83,7 @@
 
 -(id)initWithCollectionView:(AMCollectionView *)theCollectionView representedObject:(id)theObject {
     self = [super initWithCollectionView:theCollectionView representedObject:theObject];
-    // TODO [NSBundle loadNibNamed:@"Person" owner:self];
+    [NSBundle loadNibNamed:@"Person" owner:self];
     return self;
 }
 

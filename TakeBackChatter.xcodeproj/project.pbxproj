@@ -75,6 +75,7 @@
 		F499AD5513A076FD00B5A72A /* TrainingHelp.xib in Resources */ = {isa = PBXBuildFile; fileRef = F499AD5413A076FD00B5A72A /* TrainingHelp.xib */; };
 		F4A29DE8138EC0870037CD5E /* MoreOlder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A29DE7138EC0870037CD5E /* MoreOlder.xib */; };
 		F4A3EB801522AEC600B5059B /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3EB7F1522AEC600B5059B /* PeopleViewController.m */; };
+		F4A3EB821522B42900B5059B /* Person.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A3EB811522B42900B5059B /* Person.xib */; };
 		F4AC3B6913980479005FBBCF /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4AC3B6613980479005FBBCF /* Login.xib */; };
 		F4AC3B6A13980479005FBBCF /* ZKLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AC3B6813980479005FBBCF /* ZKLoginController.m */; };
 		F4AC3BA313986232005FBBCF /* NSString-Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AC3BA213986232005FBBCF /* NSString-Base64Extensions.m */; };
@@ -262,6 +263,7 @@
 		F4A29DE7138EC0870037CD5E /* MoreOlder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreOlder.xib; sourceTree = "<group>"; };
 		F4A3EB7E1522AEC600B5059B /* PeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeopleViewController.h; sourceTree = "<group>"; };
 		F4A3EB7F1522AEC600B5059B /* PeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
+		F4A3EB811522B42900B5059B /* Person.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Person.xib; sourceTree = "<group>"; };
 		F4AC3B6613980479005FBBCF /* Login.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
 		F4AC3B6713980479005FBBCF /* ZKLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLoginController.h; sourceTree = "<group>"; };
 		F4AC3B6813980479005FBBCF /* ZKLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLoginController.m; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				F454E21C138EB47600CC8158 /* MoreNewer.xib */,
 				F4A29DE7138EC0870037CD5E /* MoreOlder.xib */,
 				F499AD5413A076FD00B5A72A /* TrainingHelp.xib */,
+				F4A3EB811522B42900B5059B /* Person.xib */,
 				F4A3EB7E1522AEC600B5059B /* PeopleViewController.h */,
 				F4A3EB7F1522AEC600B5059B /* PeopleViewController.m */,
 				F454E216138B56F500CC8158 /* FeedViewController.h */,
@@ -675,6 +678,7 @@
 				F4AC3B6913980479005FBBCF /* Login.xib in Resources */,
 				F46039AB1398844F00C584BD /* dsa_pub.pem in Resources */,
 				F499AD5513A076FD00B5A72A /* TrainingHelp.xib in Resources */,
+				F4A3EB821522B42900B5059B /* Person.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

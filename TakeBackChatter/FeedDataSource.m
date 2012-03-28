@@ -64,12 +64,13 @@
 }
 
 -(void)fetchJsonPath:(NSString *)path done:(JsonUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain {
-    NSURL *url = [NSURL URLWithString:path relativeToURL:self.serverUrl];
+    NSURL *base = [NSURL URLWithString:@"/services/data/v24.0/" relativeToURL:self.serverUrl];
+    NSURL *url = [NSURL URLWithString:path relativeToURL:base];
     [self fetchJsonUrl:url done:doneBlock runOnMainThread:runOnMain];
 }
 
 -(void)fetchFeeds {
-    [self fetchJsonPath:@"/services/data/v24.0/chatter/feeds" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+    [self fetchJsonPath:@"chatter/feeds" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
         NSMutableArray *results = [NSMutableArray array];
         NSArray *jsonFeeds = [(NSDictionary *)jsonValue objectForKey:@"feeds"];
         Feed *myChatter = nil;
