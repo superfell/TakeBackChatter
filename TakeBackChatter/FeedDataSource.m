@@ -69,6 +69,32 @@
     [self fetchJsonUrl:url done:doneBlock runOnMainThread:runOnMain];
 }
 
+-(void)fetchImageUrl:(NSURL *)imageUrl done:(ImageUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain {
+    // Note that we run this entire block on the main thread because the NSURLConnections need to be started from the main thread
+    // (because they need a runloop)
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imageUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+        [req setValue:[NSString stringWithFormat:@"OAuth %@", self.sessionId] forHTTPHeaderField:@"Authorization"];
+        
+        CachingUrlConnectionDelegate *delegate = [CachingUrlConnectionDelegate 
+              urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err) {
+              if (err != nil) {
+                  NSLog(@"photoLoader: got error on url %@ %@", [imageUrl absoluteString], err);
+                  return;
+              }
+              NSImage *img = [[[NSImage alloc] initWithData:body] autorelease];
+              doneBlock(httpStatusCode, img);
+          } runOnMainThread:runOnMain];
+    [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
+    });
+}
+
+-(void)fetchImagePath:(NSString *)path done:(ImageUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain {
+    NSURL *base = [NSURL URLWithString:@"/services/data/v24.0/" relativeToURL:self.serverUrl];
+    NSURL *url = [NSURL URLWithString:path relativeToURL:base];
+    [self fetchImageUrl:url done:doneBlock runOnMainThread:runOnMain];
+}
+
 -(void)fetchFeeds {
     [self fetchJsonPath:@"chatter/feeds" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
         NSMutableArray *results = [NSMutableArray array];

@@ -63,3 +63,4 @@ typedef void (^JsonUrlCompletionBlock)(NSUInteger httpStatusCode, NSObject *json
 @interface CachingUrlConnectionDelegate : UrlConnectionDelegateWithBlock {
 }
 @end
+

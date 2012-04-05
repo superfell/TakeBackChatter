@@ -204,24 +204,9 @@ static NSDateFormatter *dateFormatter, *dateTimeFormatter;
 }
 
 -(void)fetchActorPhoto {
-    // Note that we run this entire block on the main thread because the NSURLConnections need to be started from the main thread
-    // (because they need a runloop)
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        NSURL *imgUrl = self.actorPhotoUrl;
-        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:imgUrl cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
-        [req setValue:[NSString stringWithFormat:@"OAuth %@", feedDataSource.sessionId] forHTTPHeaderField:@"Authorization"];
-            
-        CachingUrlConnectionDelegate *delegate = [CachingUrlConnectionDelegate 
-             urlDelegateWithBlock:^(NSUInteger httpStatusCode, NSHTTPURLResponse *response, NSData *body, NSError *err) {
-                  if (err != nil) {
-                      NSLog(@"photoLoader: got error on url %@ %@", [imgUrl absoluteString], err);
-                      return;
-                  }
-                  NSImage *img = [[[NSImage alloc] initWithData:body] autorelease];
-                 self.actorPhoto = img;
-             } runOnMainThread:YES];
-        [[[NSURLConnection alloc] initWithRequest:req delegate:delegate startImmediately:YES] autorelease];
-    });
+    [feedDataSource fetchImageUrl:self.actorPhotoUrl done:^(NSUInteger httpStatusCode, NSImage *image) {
+        self.actorPhoto = image;
+    } runOnMainThread:YES];
 }
 
 @end

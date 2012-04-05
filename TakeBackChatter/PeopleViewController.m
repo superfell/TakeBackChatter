@@ -24,8 +24,14 @@
     if (following == nil) {
         [dataSource fetchJsonPath:@"chatter/users/me/followers" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
             NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"followers"];
-            following = [sub retain];
-            NSLog(@"followers %@", following);
+            NSMutableArray *res = [NSMutableArray arrayWithCapacity:[sub count]];
+            for (NSDictionary *f in sub) {
+                NSDictionary *p = [f objectForKey:@"subscriber"];
+                Person *person = [[[Person alloc] initWithProperties:p source:dataSource] autorelease];
+                [res addObject:person];
+            }
+            
+            following = [res retain];
             [collectionView setContent:following];
         } runOnMainThread:YES];
     }
@@ -38,4 +44,30 @@
     [following release];
     [self following];
 }
+@end
+
+@implementation Person
+
+@synthesize actorPhoto;
+
+-(id)initWithProperties:(NSDictionary *)p source:(FeedDataSource *)src {
+    self = [super init];
+    props = [p retain];
+    [src fetchImagePath:[p valueForKeyPath:@"photo.smallPhotoUrl"] done:^(NSUInteger httpStatusCode, NSImage *image) {
+        self.actorPhoto = image;
+    } runOnMainThread:YES];
+    return self;
+}
+
+-(void)dealloc {
+    [props release];
+    [actorPhoto release];
+    [super dealloc];
+}
+
+-(id)valueForUndefinedKey:(NSString *)key {
+    id v =  [props valueForKey:key];
+    return v == [NSNull null] ? nil : v;
+}
+
 @end

@@ -103,7 +103,7 @@
 					<object class="NSTextField" id="20630340">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{72, 10}, {243, 46}}</string>
+						<string key="NSFrame">{{72, 10}, {243, 49}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="99806830"/>
@@ -241,39 +241,39 @@
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">12</int>
+					<int key="connectionID">50</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: representedObject.subscriber.name</string>
+						<string key="label">value: representedObject.name</string>
 						<reference key="source" ref="1012153632"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="1012153632"/>
 							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">value: representedObject.subscriber.name</string>
+							<string key="NSLabel">value: representedObject.name</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">representedObject.subscriber.name</string>
+							<string key="NSKeyPath">representedObject.name</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">41</int>
+					<int key="connectionID">49</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: representedObject.subscriber.title</string>
+						<string key="label">value: representedObject.title</string>
 						<reference key="source" ref="20630340"/>
 						<reference key="destination" ref="1001"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="20630340"/>
 							<reference key="NSDestination" ref="1001"/>
-							<string key="NSLabel">value: representedObject.subscriber.title</string>
+							<string key="NSLabel">value: representedObject.title</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">representedObject.subscriber.title</string>
+							<string key="NSKeyPath">representedObject.title</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">45</int>
+					<int key="connectionID">48</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -411,7 +411,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">45</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -13,6 +13,8 @@
 @class FeedItem;
 @class Feed;
 
+typedef void (^ImageUrlCompletionBlock)(NSUInteger httpStatusCode, NSImage *image);
+
 @interface FeedDataSource : NSObject {
     ZKSforceClient  *sforce;
     Feed            *feed;
@@ -37,6 +39,8 @@
 
 -(void)fetchJsonUrl:(NSURL *)url done:(JsonUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain;
 -(void)fetchJsonPath:(NSString *)path done:(JsonUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain;
+-(void)fetchImageUrl:(NSURL *)url done:(ImageUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain;
+-(void)fetchImagePath:(NSString *)path done:(ImageUrlCompletionBlock)doneBlock runOnMainThread:(BOOL)runOnMain;
 
 @property (readonly) NSString *defaultWindowTitle;
 @property (readonly) NSString *defaultWindowAutosaveName;

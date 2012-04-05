@@ -25,3 +25,14 @@
 @property (readonly) NSArray *following;
 
 @end
+
+@interface Person : NSObject {
+    NSDictionary    *props;
+    NSImage         *actorPhoto;
+}
+
+-(id)initWithProperties:(NSDictionary *)p source:(FeedDataSource *)src;
+
+@property (nonatomic, retain) NSImage   *actorPhoto;
+
+@end
