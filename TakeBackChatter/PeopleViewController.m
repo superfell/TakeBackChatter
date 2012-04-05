@@ -11,12 +11,14 @@
 
 @implementation PeopleViewController
 
-@synthesize collectionView, dataSource, following, followers;
+@synthesize followingCV, followersCV, dataSource, following, followers;
 
 -(void)dealloc {
     [dataSource release];
-    [collectionView release];
+    [followersCV release];
+    [followingCV release];
     [following release];
+    [followers release];
     [super dealloc];
 }
 
@@ -32,7 +34,7 @@
             }
             
             followers = [res retain];
-            [collectionView setContent:followers];
+            [followersCV setContent:followers];
         } runOnMainThread:YES];
     }
     return followers;
@@ -52,7 +54,7 @@
             }
             
             following = [res retain];
-            [collectionView setContent:following];
+            [followingCV setContent:following];
         } runOnMainThread:YES];
     }
     return followers;
@@ -64,7 +66,9 @@
     [following release];
     [followers release];
     [self following];
-    [collectionView setDefaultProperties];
+    [self followers];
+    [followingCV setDefaultProperties];
+    [followersCV setDefaultProperties];
 }
 
 @end
