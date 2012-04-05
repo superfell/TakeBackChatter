@@ -11,7 +11,7 @@
 
 @implementation PeopleViewController
 
-@synthesize collectionView, dataSource, following;
+@synthesize collectionView, dataSource, following, followers;
 
 -(void)dealloc {
     [dataSource release];
@@ -20,8 +20,8 @@
     [super dealloc];
 }
 
--(NSArray *)following {
-    if (following == nil) {
+-(NSArray *)followers {
+    if (followers == nil) {
         [dataSource fetchJsonPath:@"chatter/users/me/followers" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
             NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"followers"];
             NSMutableArray *res = [NSMutableArray arrayWithCapacity:[sub count]];
@@ -31,19 +31,42 @@
                 [res addObject:person];
             }
             
+            followers = [res retain];
+            [collectionView setContent:followers];
+        } runOnMainThread:YES];
+    }
+    return followers;
+}
+
+-(NSArray *)following {
+    if (following == nil) {
+        [dataSource fetchJsonPath:@"chatter/users/me/following" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+            NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"following"];
+            NSMutableArray *res = [NSMutableArray arrayWithCapacity:[sub count]];
+            for (NSDictionary *f in sub) {
+                NSDictionary *p = [f objectForKey:@"subject"];
+                if ([[p objectForKey:@"type"] isEqualToString:@"User"]) {
+                    Person *person = [[[Person alloc] initWithProperties:p source:dataSource] autorelease];
+                    [res addObject:person];
+                }
+            }
+            
             following = [res retain];
             [collectionView setContent:following];
         } runOnMainThread:YES];
     }
-    return following;
+    return followers;
 }
-
--(void)setDataSource:(FeedDataSource *)src  {
+  
+-(void)setDataSource:(FeedDataSource *)src {
     [dataSource autorelease];
     dataSource = [src retain];
     [following release];
+    [followers release];
     [self following];
+    [collectionView setDefaultProperties];
 }
+
 @end
 
 @implementation Person

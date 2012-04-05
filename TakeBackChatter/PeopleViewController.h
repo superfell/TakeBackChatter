@@ -14,7 +14,7 @@
     FeedDataSource          *dataSource;
     CollectionViewPeople    *collectionView;
     
-    NSArray                 *following;
+    NSArray                 *following, *followers;
 }
 
 
@@ -23,6 +23,7 @@
 @property (nonatomic, retain) FeedDataSource       *dataSource;
 
 @property (readonly) NSArray *following;
+@property (readonly) NSArray *followers;
 
 @end
 
