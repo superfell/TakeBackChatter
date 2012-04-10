@@ -11,7 +11,7 @@
 
 @implementation PeopleViewController
 
-@synthesize followingCV, followersCV, allCV, dataSource, following, followers, all;
+@synthesize followingCV, followersCV, allCV, dataSource;
 
 -(void)dealloc {
     [dataSource release];
@@ -24,85 +24,108 @@
     [super dealloc];
 }
 
--(NSArray *)followers {
-    if (followers == nil) {
-        [dataSource fetchJsonPath:@"chatter/users/me/followers" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
-            NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"followers"];
-            NSMutableArray *res = [NSMutableArray arrayWithCapacity:[sub count]];
-            for (NSDictionary *f in sub) {
-                NSDictionary *p = [f objectForKey:@"subscriber"];
-                Person *person = [[[Person alloc] initWithProperties:p source:dataSource] autorelease];
-                [res addObject:person];
-            }
-            
-            followers = [res retain];
-            [followersCV setContent:followers];
-        } runOnMainThread:YES];
-    }
-    return followers;
-}
-
--(NSArray *)following {
-    if (following == nil) {
-        [dataSource fetchJsonPath:@"chatter/users/me/following" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
-            NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"following"];
-            NSMutableArray *res = [NSMutableArray arrayWithCapacity:[sub count]];
-            for (NSDictionary *f in sub) {
-                NSDictionary *p = [f objectForKey:@"subject"];
-                if ([[p objectForKey:@"type"] isEqualToString:@"User"]) {
-                    Person *person = [[[Person alloc] initWithProperties:p source:dataSource] autorelease];
-                    [res addObject:person];
-                }
-            }
-            
-            following = [res retain];
-            [followingCV setContent:following];
-        } runOnMainThread:YES];
-    }
-    return followers;
-}
-
--(void)fetchUsers:(NSString *)searchTerm {
-    NSString *path = @"chatter/users";
-    if ([searchTerm length] >= 2) {
-        path = [NSString stringWithFormat:@"chatter/users?q=%@", [searchTerm stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    }
-    [dataSource fetchJsonPath:path done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
-        NSArray *users = [(NSDictionary *)jsonValue objectForKey:@"users"];
-        NSMutableArray *res = [NSMutableArray arrayWithCapacity:[users count]];
-        for (NSDictionary *u in users) {
-            Person *person = [[[Person alloc] initWithProperties:u source:dataSource] autorelease];
-            [res addObject:person];
-        }
-        all = [res retain];
-        [allCV setContent:all];
-        
-    } runOnMainThread:YES];
-}
-
 -(IBAction)searchPeople:(id)sender {
-    [all autorelease];
-    [self fetchUsers:[sender stringValue]];
-}
-
--(NSArray *)all {
-    if (all == nil) {
-        [self fetchUsers:nil];
-    }
-    return all;
+    [all performFetch:[sender stringValue]];
 }
 
 -(void)setDataSource:(FeedDataSource *)src {
     [dataSource autorelease];
     dataSource = [src retain];
-    [following release];
-    [followers release];
-    [self following];
-    [self followers];
-    [self all];
     [followingCV setDefaultProperties];
     [followersCV setDefaultProperties];
     [allCV setDefaultProperties];
+
+    all = [[PersonList alloc] initWithCollectionView:allCV basePath:@"chatter/users" source:src 
+            factory:^NSString *(NSUInteger httpStatusCode, NSObject *jsonValue, NSMutableArray *results) {
+                NSArray *users = [(NSDictionary *)jsonValue objectForKey:@"users"];
+                for (NSDictionary *u in users) {
+                    Person *person = [[[Person alloc] initWithProperties:u source:dataSource] autorelease];
+                    [results addObject:person];
+                }
+                return [(NSDictionary *)jsonValue objectForKey:@"nextPageUrl"];
+            }];
+    
+    followers = [[PersonList alloc] initWithCollectionView:followersCV basePath:@"chatter/users/me/followers" source:src 
+           factory:^NSString *(NSUInteger httpStatusCode, NSObject *jsonValue, NSMutableArray *results) {
+               NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"followers"];
+               for (NSDictionary *f in sub) {
+                   NSDictionary *p = [f objectForKey:@"subscriber"];
+                   Person *person = [[[Person alloc] initWithProperties:p source:dataSource] autorelease];
+                   [results addObject:person];
+               }
+               return [(NSDictionary *)jsonValue objectForKey:@"nextPageUrl"];               
+           }];
+    
+    following = [[PersonList alloc] initWithCollectionView:followingCV basePath:@"chatter/users/me/following" source:src
+           factory:^NSString *(NSUInteger httpStatusCode, NSObject *jsonValue, NSMutableArray *results) {
+               NSArray *sub = [(NSDictionary *)jsonValue objectForKey:@"following"];
+               for (NSDictionary *f in sub) {
+                   NSDictionary *p = [f objectForKey:@"subject"];
+                   if ([[p objectForKey:@"type"] isEqualToString:@"User"]) {
+                       Person *person = [[[Person alloc] initWithProperties:p source:dataSource] autorelease];
+                       [results addObject:person];
+                   }
+               }
+               return [(NSDictionary *)jsonValue objectForKey:@"nextPageUrl"];               
+           }];
+}
+
+@end
+
+@interface PersonList ()
+@property (nonatomic, retain, readwrite) NSArray *items;
+@property (retain) NSString *nextPageUrl;
+@property (copy) PersonFactory personFactoryBlock;
+@end
+
+@implementation PersonList
+
+@synthesize items, nextPageUrl, personFactoryBlock;
+
++(NSSet *)keyPathsForValuesAffectingHasNextPage {
+    return [NSSet setWithObject:@"nextPageUrl"];
+}
+
+-(id)initWithCollectionView:(CollectionViewPeople *)cv basePath:(NSString *)base source:(FeedDataSource *)source  factory:(PersonFactory)f {
+    self = [super init];
+    [self setPersonFactoryBlock:f];
+    collectionView = [cv retain];
+    dataSource = [source retain];
+    basePath = [base retain];
+    [self performFetch:nil];
+    return self;
+}
+
+-(void)dealloc {
+    [dataSource release];
+    [collectionView release];
+    [items release];
+    [basePath release];
+    [personFactoryBlock release];
+    [super dealloc];
+}
+
+-(void)performFetch:(NSString *)searchTerm {
+    NSString *path = basePath;
+    if ([searchTerm length] >= 2) {
+        path = [NSString stringWithFormat:@"%@?q=%@", basePath, [searchTerm stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [dataSource fetchJsonPath:path done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+        NSMutableArray *results = [NSMutableArray array];
+        NSString *nextPage = personFactoryBlock(httpStatusCode, jsonValue, results);
+        [self setItems:results];
+        [self setNextPageUrl:nextPage];
+        [collectionView setContent:items];
+        
+    } runOnMainThread:YES];
+}
+
+-(void)fetchNextPage {
+    
+}
+
+-(BOOL)hasNextPage {
+    return [nextPageUrl length] > 0;
 }
 
 @end
