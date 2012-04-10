@@ -76,7 +76,7 @@
 
 @interface PersonList ()
 @property (nonatomic, retain, readwrite) NSArray *items;
-@property (retain) NSString *nextPageUrl;
+@property (nonatomic, retain, readwrite) NSString *nextPageUrl;
 @property (copy) PersonFactory personFactoryBlock;
 @end
 
@@ -118,7 +118,7 @@
         NSMutableArray *results = [NSMutableArray array];
         NSString *nextPage = personFactoryBlock(httpStatusCode, jsonValue, results);
         [self setNextPageUrl:nextPage];
-        if (nextPage != nil)
+        if ([self hasNextPage])
             [results addObject:nextPageItem];
         [self setItems:results];
         [collectionView setContent:items];
@@ -136,6 +136,11 @@
 
 -(BOOL)hasNextPage {
     return [nextPageUrl length] > 0;
+}
+
+-(void)setNextPageUrl:(NSString *)p {
+    [nextPageUrl autorelease];
+    nextPageUrl = ((NSObject *)p) == [NSNull null] ? nil : [p retain];
 }
 
 @end
