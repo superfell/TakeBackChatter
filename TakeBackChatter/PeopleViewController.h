@@ -27,6 +27,8 @@
 @property (readonly) NSArray *followers;
 @property (readonly) NSArray *all;
 
+-(IBAction)searchPeople:(id)sender;
+
 @end
 
 @interface Person : NSObject {

@@ -62,19 +62,32 @@
     return followers;
 }
 
+-(void)fetchUsers:(NSString *)searchTerm {
+    NSString *path = @"chatter/users";
+    if ([searchTerm length] >= 2) {
+        path = [NSString stringWithFormat:@"chatter/users?q=%@", [searchTerm stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [dataSource fetchJsonPath:path done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+        NSArray *users = [(NSDictionary *)jsonValue objectForKey:@"users"];
+        NSMutableArray *res = [NSMutableArray arrayWithCapacity:[users count]];
+        for (NSDictionary *u in users) {
+            Person *person = [[[Person alloc] initWithProperties:u source:dataSource] autorelease];
+            [res addObject:person];
+        }
+        all = [res retain];
+        [allCV setContent:all];
+        
+    } runOnMainThread:YES];
+}
+
+-(IBAction)searchPeople:(id)sender {
+    [all autorelease];
+    [self fetchUsers:[sender stringValue]];
+}
+
 -(NSArray *)all {
     if (all == nil) {
-        [dataSource fetchJsonPath:@"chatter/users" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
-            NSArray *users = [(NSDictionary *)jsonValue objectForKey:@"users"];
-            NSMutableArray *res = [NSMutableArray arrayWithCapacity:[users count]];
-            for (NSDictionary *u in users) {
-                Person *person = [[[Person alloc] initWithProperties:u source:dataSource] autorelease];
-                [res addObject:person];
-            }
-            all = [res retain];
-            [allCV setContent:all];
-            
-        } runOnMainThread:YES];
+        [self fetchUsers:nil];
     }
     return all;
 }
