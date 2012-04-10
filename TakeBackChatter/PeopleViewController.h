@@ -6,11 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LoadMarkers.h"
 
 @class Person;
 @class PersonList;
 @class FeedDataSource;
 @class CollectionViewPeople;
+@class LoadOlder;
 
 @interface PeopleViewController : NSObject {
     FeedDataSource          *dataSource;
@@ -33,13 +35,14 @@
 // PersonFactory impls should map data into the results array, and return the nextPageUrl (if any) as the return value.
 typedef NSString * (^PersonFactory)(NSUInteger httpStatusCode, NSObject *jsonValue, NSMutableArray *results);
 
-@interface PersonList : NSObject {
+@interface PersonList : NSObject<LoadOlderDelegate> {
     PersonFactory           personFactoryBlock;
     FeedDataSource          *dataSource;
     CollectionViewPeople    *collectionView;
     NSArray                 *items;
     NSString                *basePath;
     NSString                *nextPageUrl;
+    LoadOlder               *nextPageItem;
 }
 
 -(id)initWithCollectionView:(CollectionViewPeople *)cv basePath:(NSString *)basePath source:(FeedDataSource *)dataSource factory:(PersonFactory)f;

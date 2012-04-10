@@ -6,9 +6,9 @@
 //
 
 #import "CollectionViewItems.h"
-#import "FeedViewController.h"
 #import "FeedItem.h"
 #import "FeedDataSource.h"
+#import "LoadMarkers.h"
 
 @implementation CollectionViewFeedItem
 
@@ -60,7 +60,7 @@
 }
 
 -(IBAction)loadNewer:(id)sender {
-    [[representedObject controller] loadNewerRows:sender];
+    [(NSObject<LoadNewerDelegate> *)[representedObject controller] loadNewerRows:sender];
 }
 
 @end
@@ -74,7 +74,7 @@
 }
 
 -(IBAction)loadOlder:(id)sender {
-    [[representedObject controller] loadOlderRows:sender];
+    [(NSObject<LoadOlderDelegate> *)[representedObject controller] loadOlderRows:sender];
 }
 
 @end

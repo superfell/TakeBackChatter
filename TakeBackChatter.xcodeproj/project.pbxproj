@@ -19,6 +19,7 @@
 		F46039A91398826C00C584BD /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F46039A71398821B00C584BD /* Sparkle.framework */; };
 		F46039AB1398844F00C584BD /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = F46039AA1398844F00C584BD /* dsa_pub.pem */; };
 		F46039DE13988DD200C584BD /* prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = F46039DD13988DD200C584BD /* prefs.m */; };
+		F485529D1533DED1000E6ED5 /* LoadMarkers.m in Sources */ = {isa = PBXBuildFile; fileRef = F485529C1533DED1000E6ED5 /* LoadMarkers.m */; };
 		F48AB8611384C66400BC9EF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F48AB8601384C66400BC9EF6 /* Cocoa.framework */; };
 		F48AB86B1384C66400BC9EF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F48AB8691384C66400BC9EF6 /* InfoPlist.strings */; };
 		F48AB86E1384C66400BC9EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F48AB86D1384C66400BC9EF6 /* main.m */; };
@@ -158,6 +159,8 @@
 		F46039AA1398844F00C584BD /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		F46039DC13988DD200C584BD /* prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prefs.h; sourceTree = "<group>"; };
 		F46039DD13988DD200C584BD /* prefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = prefs.m; sourceTree = "<group>"; };
+		F485529B1533DED1000E6ED5 /* LoadMarkers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMarkers.h; sourceTree = "<group>"; };
+		F485529C1533DED1000E6ED5 /* LoadMarkers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMarkers.m; sourceTree = "<group>"; };
 		F48AB85C1384C66400BC9EF6 /* TakeBackChatter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TakeBackChatter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48AB8601384C66400BC9EF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F48AB8631384C66400BC9EF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -423,6 +426,8 @@
 				F4D08BF21388404C00A4C273 /* CollectionViewItems.m */,
 				F4D08BF41388428100A4C273 /* CollectionViews.h */,
 				F4D08BF51388428100A4C273 /* CollectionViews.m */,
+				F485529B1533DED1000E6ED5 /* LoadMarkers.h */,
+				F485529C1533DED1000E6ED5 /* LoadMarkers.m */,
 				F48EAAAF139410A1005C0601 /* NewPost.xib */,
 				F48EAA6B1391E979005C0601 /* NewPostController.h */,
 				F48EAA6C1391E979005C0601 /* NewPostController.m */,
@@ -758,6 +763,7 @@
 				F4F4FDA9150876270088B18B /* FeedPage.m in Sources */,
 				F4F4FDAC1509AACE0088B18B /* Feed.m in Sources */,
 				F4A3EB801522AEC600B5059B /* PeopleViewController.m in Sources */,
+				F485529D1533DED1000E6ED5 /* LoadMarkers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

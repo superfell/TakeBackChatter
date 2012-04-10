@@ -6,13 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CollectionViews.h"
+#import "LoadMarkers.h"
 
 @class FeedDataSource;
 @class Categorizer;
 @class PeopleViewController;
 
-@interface FeedViewController : NSObject {
+@interface FeedViewController : NSObject<LoadNewerDelegate, LoadOlderDelegate> {
     CollectionViewFeed *feedCollectionView;
     FeedDataSource     *feedDataSource;
 
@@ -50,13 +50,3 @@
 
 @end
 
-@interface LoadNewer : NSObject<CollectionViewItemType> {
-    FeedViewController *controller; // weak ref
-}
--(id)initWithController:(FeedViewController *)c;
--(FeedViewController *)controller;
-@end
-
-@interface LoadOlder : LoadNewer {
-}
-@end

@@ -8,6 +8,8 @@
 #import "PeopleViewController.h"
 #import "FeedDataSource.h"
 #import "CollectionViews.h"
+#import "CollectionViewItems.h"
+#import "LoadMarkers.h"
 
 @implementation PeopleViewController
 
@@ -92,6 +94,7 @@
     collectionView = [cv retain];
     dataSource = [source retain];
     basePath = [base retain];
+    nextPageItem = [[LoadOlder alloc] initWithController:self];
     [self performFetch:nil];
     return self;
 }
@@ -102,6 +105,7 @@
     [items release];
     [basePath release];
     [personFactoryBlock release];
+    [nextPageItem release];
     [super dealloc];
 }
 
@@ -113,11 +117,17 @@
     [dataSource fetchJsonPath:path done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
         NSMutableArray *results = [NSMutableArray array];
         NSString *nextPage = personFactoryBlock(httpStatusCode, jsonValue, results);
-        [self setItems:results];
         [self setNextPageUrl:nextPage];
+        if (nextPage != nil)
+            [results addObject:nextPageItem];
+        [self setItems:results];
         [collectionView setContent:items];
         
     } runOnMainThread:YES];
+}
+
+-(void)loadOlderRows:(id)sender {
+    [self fetchNextPage];
 }
 
 -(void)fetchNextPage {

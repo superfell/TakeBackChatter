@@ -145,29 +145,3 @@
 }
 
 @end
-
-@implementation LoadNewer
-
--(id)initWithController:(FeedViewController *)c {
-    self = [super init];
-    controller = c;
-    return self;
-}
-
--(FeedViewController *)controller {
-    return controller;
-}
-
--(Class)classOfItemForCollectionView:(CollectionViewFeed *)cv {
-    return [CollectionViewLoadNewerItem class];
-}
-
-@end
-
-@implementation LoadOlder
-
--(Class)classOfItemForCollectionView:(CollectionViewFeed *)cv {
-    return [CollectionViewLoadOlderItem class];
-}
-
-@end

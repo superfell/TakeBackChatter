@@ -19,7 +19,7 @@
 // which ItemType class to use, the returned class should implement the standard
 // collectionItem initializer
 @protocol CollectionViewItemType <NSObject>
--(Class)classOfItemForCollectionView:(CollectionViewFeed *)cv;
+-(Class)classOfItemForCollectionView:(AMCollectionView *)cv;
 @end
 
 @interface CollectionViewPeople : AMCollectionView {
