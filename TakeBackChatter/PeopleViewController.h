@@ -12,18 +12,20 @@
 
 @interface PeopleViewController : NSObject {
     FeedDataSource          *dataSource;
-    CollectionViewPeople    *followingCV, *followersCV;
+    CollectionViewPeople    *followingCV, *followersCV, *allCV;
     NSArray                 *following, *followers;
 }
 
 
 @property (nonatomic, retain) IBOutlet CollectionViewPeople *followingCV;
 @property (nonatomic, retain) IBOutlet CollectionViewPeople *followersCV;
+@property (nonatomic, retain) IBOutlet CollectionViewPeople *allCV;
 
 @property (nonatomic, retain) FeedDataSource       *dataSource;
 
 @property (readonly) NSArray *following;
 @property (readonly) NSArray *followers;
+@property (readonly) NSArray *all;
 
 @end
 

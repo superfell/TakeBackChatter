@@ -11,14 +11,16 @@
 
 @implementation PeopleViewController
 
-@synthesize followingCV, followersCV, dataSource, following, followers;
+@synthesize followingCV, followersCV, allCV, dataSource, following, followers, all;
 
 -(void)dealloc {
     [dataSource release];
     [followersCV release];
     [followingCV release];
+    [allCV release];
     [following release];
     [followers release];
+    [all release];
     [super dealloc];
 }
 
@@ -59,7 +61,24 @@
     }
     return followers;
 }
-  
+
+-(NSArray *)all {
+    if (all == nil) {
+        [dataSource fetchJsonPath:@"chatter/users" done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+            NSArray *users = [(NSDictionary *)jsonValue objectForKey:@"users"];
+            NSMutableArray *res = [NSMutableArray arrayWithCapacity:[users count]];
+            for (NSDictionary *u in users) {
+                Person *person = [[[Person alloc] initWithProperties:u source:dataSource] autorelease];
+                [res addObject:person];
+            }
+            all = [res retain];
+            [allCV setContent:all];
+            
+        } runOnMainThread:YES];
+    }
+    return all;
+}
+
 -(void)setDataSource:(FeedDataSource *)src {
     [dataSource autorelease];
     dataSource = [src retain];
@@ -67,8 +86,10 @@
     [followers release];
     [self following];
     [self followers];
+    [self all];
     [followingCV setDefaultProperties];
     [followersCV setDefaultProperties];
+    [allCV setDefaultProperties];
 }
 
 @end
