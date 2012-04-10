@@ -131,7 +131,18 @@
 }
 
 -(void)fetchNextPage {
-    
+    [dataSource fetchJsonPath:nextPageUrl done:^(NSUInteger httpStatusCode, NSObject *jsonValue) {
+        NSMutableArray *results = [NSMutableArray arrayWithArray:items];
+        if ([results lastObject] == nextPageItem)
+            [results removeLastObject];
+        NSString *nextPage = personFactoryBlock(httpStatusCode, jsonValue, results);
+        [self setNextPageUrl:nextPage];
+        if ([self hasNextPage])
+            [results addObject:nextPageItem];
+        [self setItems:results];
+        [collectionView setContent:items];
+        
+    } runOnMainThread:YES];
 }
 
 -(BOOL)hasNextPage {
