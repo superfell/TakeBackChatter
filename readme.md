@@ -1,6 +1,8 @@
 # Take Back Chatter
 An OSX Chatter client that includes Bayesian Filtering for managing spam.
 
+## Not under active development
+
 # Building
 
 there are submodules to pull in dependencies, and one of those also has sub modules, so once you cloned the repo, you need
